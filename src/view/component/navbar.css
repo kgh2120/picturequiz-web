@@ -1,0 +1,37 @@
+.navbar{
+    display: flex;
+    height: 60px;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    justify-content: space-between;
+    font-family: 'Ubuntu', sans-serif;
+
+}
+.navbar_logo_area{
+    width: 120px;
+    background-color: var(--main);
+    padding: 20px;
+    text-align: center;
+    font-family: 'Nabla', cursive;
+}
+
+.navbar_list_area{
+    display: flex;
+
+    justify-content: flex-start;
+    width: 100%;
+    font-family: 'Noto Sans KR', sans-serif;;
+    align-items: center;
+}
+.navbar_list_area li{
+    list-style: none;
+    padding: 20px;
+}
+
+.navbar_user_area{
+    width: 120px;
+    padding: 20px;
+
+}
+.navbar_user_area_text{
+    margin-left: 15px;
+}
