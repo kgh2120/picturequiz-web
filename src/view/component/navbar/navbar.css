@@ -4,14 +4,16 @@
     border-bottom: 1px solid rgba(0,0,0,0.2);
     justify-content: space-between;
     font-family: 'Ubuntu', sans-serif;
-
+align-items: center;
 }
 .navbar_logo_area{
     width: 120px;
-    background-color: var(--main);
-    padding: 20px;
+
+    background-color: var(--sub);
+    padding: 10px;
     text-align: center;
     font-family: 'Nabla', cursive;
+    font-size: 20px;
 }
 
 .navbar_list_area{

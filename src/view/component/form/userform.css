@@ -1,0 +1,66 @@
+.userform_area{
+    margin: 100px auto 0;
+    width: 300px;
+    /*background-color: #DD9B25;*/
+    height: 1000px;
+}
+.userform_logo_area{
+    margin: 0px 70px;
+    /*background-color: #308C36;*/
+    width: 160px;
+    height: 160px;
+    font-family: 'Nabla', cursive;
+    font-size: 3em;
+    text-align: center;
+}
+.userform_logo_area p{
+    margin-top: 20px;
+}
+.userform_intro_area{
+    text-align: center;
+}
+.userform_intro_area div{
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-bottom: 10px;
+}
+.userform_intro_area h3{
+    font-family: 'Permanent Marker', cursive;
+}
+.userform_form_area{
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.userform_form_input{
+    border: 1px solid rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+    height: 30px;
+}
+.userform_form_login_btn{
+    border-radius: 5px;
+    background-color: var(--sub);
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    color: #FFFFFF;
+}
+.userform_form_login_btn:hover{
+    cursor: pointer;
+}
+
+.userform_form_signup_move_btn{
+    background-color: var(--main);
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.2);
+    height: 25px;
+}
+.userform_form_signup_move_btn:hover{
+    cursor: pointer;
+}
+.userform_admin_info{
+    margin-top: 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
+}

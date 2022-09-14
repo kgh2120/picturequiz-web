@@ -1,4 +1,6 @@
-@import "view/component/navbar.css";
+@import "reset.css";
 @import "variable.css";
 @import url('https://fonts.googleapis.com/css2?family=Nabla&family=Noto+Sans+KR&family=Permanent+Marker&family=Ubuntu:wght@400;500&display=swap');
 
+@import "view/component/navbar/navbar.css";
+@import "view/component/form/userform.css";
