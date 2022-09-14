@@ -3,7 +3,7 @@ import "./style.css"
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 import Main from "./view/main";
-import Login from "./view/Login";
+import Userform from "./view/userform";
 
 function App() {
   return (
@@ -11,7 +11,8 @@ function App() {
       <Router>
         <Routes>
           <Route path={"/"} element={<Main/>}/>
-            <Route path={"/login"} element={<Login/>}></Route>
+            <Route path={"/login"} element={<Userform _mode={"login"}/>}></Route>
+            <Route path={"/signUp"} element={<Userform _mode={"signUp"}/>}></Route>
         </Routes>
       </Router>
 
