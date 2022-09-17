@@ -6,6 +6,9 @@ import Main from "./view/main";
 import Userform from "./view/userform";
 
 function App() {
+    window.addEventListener("unload",() =>{
+        localStorage.removeItem("access-token")
+    })
   return (
     <div >
       <Router>

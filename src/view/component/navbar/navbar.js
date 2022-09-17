@@ -1,6 +1,12 @@
-
 import NavbarLoginOut from "./navbar-login-out";
+import {useState} from "react";
+
 export default function Navbar() {
+    const accessToken = localStorage.getItem("access-token")
+    const [logined,setLogined] = useState(accessToken !== null)
+
+
+
     return <nav className={"navbar"}>
         <div className={"navbar_logo_area"}>
 
@@ -12,6 +18,6 @@ export default function Navbar() {
             <li>안녕하세요</li>
             <li>안녕하세요</li>
         </div>
-        <NavbarLoginOut text={"Login"} to={"/login"}/>
+        <NavbarLoginOut _mode={logined} _setMode={setLogined}/>
     </nav>
 }
