@@ -1,7 +1,8 @@
-import Navbar from "./component/navbar/navbar";
+import My_Navbar from "./component/navbar/my_Navbar";
 import {useState} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {Button} from "react-bootstrap";
 
 export default function MyPage() {
 
@@ -34,7 +35,7 @@ export default function MyPage() {
 
 
     return<>
-        <Navbar/>
+        <My_Navbar/>
         <div className={"my-page-area"}>
             <div className={"my-page_info"}>
                 <span>회원 정보</span>
@@ -65,8 +66,8 @@ export default function MyPage() {
                 </div>
                 <div className={"my-page_content "}>
                     <div className={"my-page_content_button_area"}>
-                        <button className={"my-page_content_button  my-page_content_button_edit"}><Link to={"/my-profile/update"}>정보 변경</Link></button>
-                        <button className={"my-page_content_button my-page_content_button_delete"}>탈퇴하기</button>
+                        <Button href={"/my-profile/update"} variant={"warning"} className={"my-page_content_button  my-page_content_button_edit"}>정보 변경</Button>
+                        <Button variant={"danger"} className={"my-page_content_button my-page_content_button_delete"}>탈퇴하기</Button>
                     </div>
 
                 </div>
@@ -74,4 +75,4 @@ export default function MyPage() {
         </div>
 
     </>
-};
+}

@@ -1,8 +1,9 @@
-import Navbar from "./component/navbar/navbar";
+import My_Navbar from "./component/navbar/my_Navbar";
 import Form_logo from "./component/form/form_logo";
 import {useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {Button} from "react-bootstrap";
 
 
 export default function Userform({_mode}) {
@@ -58,11 +59,11 @@ export default function Userform({_mode}) {
 
 
     return <>
-        <Navbar/>
+        <My_Navbar/>
         <div className={"userform_area"}>
             <Form_logo/>
             <div className={"userform_intro_area"}>
-                <div><h3>Welcome To Picture-Quiz</h3></div>
+                <div><h4>Welcome To Picture-Quiz</h4></div>
                 {_mode === "login" ? (<div><span>로그인을 하여 퀴즈를 직접 만들어보세요</span></div>)
                     : null
                 }
@@ -80,12 +81,12 @@ export default function Userform({_mode}) {
                         <button onClick={login} className={"userform_form_input userform_form_login_btn"}
                                 role={"button"}>로그인
                         </button>
-                        <button className={"userform_form_signup_move_btn"}><Link to={"/signUp"}>계정 생성 </Link></button>
+                        <Button variant={"warning"} size={"sm"}  href={"/signUp"} className={"userform_form_signup_move_btn"}>계정 생성</Button>
                     </>
                     : <button onClick={signIn} className={"userform_form_input userform_form_login_btn"}
                               role={"button"}>회원가입</button>}
                 <div className={"userform_admin_info"}>
-                    <h4>운영자 문의 : kgh2120@gmail.com</h4>
+                    <h4 className={"userform_admin_info_text"}>운영자 문의 : kgh2120@gmail.com</h4>
                 </div>
 
             </div>
