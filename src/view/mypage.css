@@ -1,0 +1,62 @@
+.my-page-area{
+    margin : 30px 35px;
+}
+.my-page_info{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 18px;
+    border-bottom: 1px solid #002D04;
+    padding: 30px 30px;
+    font-weight: bold;
+    background-color: var(--sub);
+    color: var(--main);
+}
+.my-page_content_area{
+    background-color: var(--sub-back);
+
+}
+.my-page_content{
+
+    display: flex;
+    justify-content: center;
+    padding: 35px 0px;
+    align-items: center;
+    border-bottom: 1px dotted rgba(0,0,0,0.4);
+}
+.my-page_content_label{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+
+}
+.my-page_content_input{
+    margin-left: 60px;
+    width: 500px;
+    padding: 15px 20px;
+}
+
+.my-page_content_button_area{
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.my-page_content_button{
+    font-family: 'Noto Sans KR', sans-serif;
+    border: none;
+    width: 80px;
+    height: 35px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+.my-page_content_button:hover{
+    cursor: pointer;
+}
+.my-page_content_button_edit{
+    background-color: var(--main);
+}
+.my-page_content_button_delete{
+    color: #FFFFFF;
+    background-color: #ED5565;
+}
+.page_content_input_not_setting{
+    font-family: 'Noto Sans KR', sans-serif;
+}
