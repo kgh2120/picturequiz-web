@@ -13,15 +13,13 @@ export default function NavbarLoginOut({_mode, _setMode}) {
         navigate("/")
 
     }
-
-
     return<>
 
         {_mode ?
             <>
             <div className={"navbar_user_area"} >
                 <FontAwesomeIcon icon={faCircleInfo} />
-                <span   className={"navbar_user_area_info"}>내 정보</span>
+                <Link to={"/my-page"}><span className={"navbar_user_area_info"}>내 정보</span></Link>
             </div>
             <div className={"navbar_user_area"}>
                 <FontAwesomeIcon icon={faSignIn} />
