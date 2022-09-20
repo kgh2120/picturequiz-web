@@ -4,7 +4,7 @@ import axios from "axios";
 import Mypageinfoheader from "./component/mypage/mypageinfoheader";
 import Mypagebuttongroup from "./component/mypage/mypagebuttongroup";
 import Mypageinforead from "./component/mypage/mypageinforead";
-import Mypageinfoupdate from "./component/mypage/mypageinfoupdate";
+import MyPageInfoUpdate from "./component/mypage/myPageInfoUpdate";
 
 export default function MyPage({mode}) {
 
@@ -42,7 +42,8 @@ export default function MyPage({mode}) {
             <Mypageinfoheader text={infoText}/>
             {
                 mode !== "update" ? <Mypageinforead id={id} nickname={nickname} mail={mail}/> :
-                    <Mypageinfoupdate id={id} nickname={nickname} mail={mail}/>
+                    <MyPageInfoUpdate _id={id} _nickname={nickname} _mail={mail}
+                    _setNickname={setNickname}/>
             }
 
             <Mypagebuttongroup _mode={mode}/>

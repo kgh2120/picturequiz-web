@@ -1,10 +1,9 @@
-import {Button, Col, Form, Modal, Row} from "react-bootstrap";
-import {useState} from "react";
-import button from "bootstrap/js/src/button";
-import Modalbutton from "./modalbutton";
+import {Col, Row} from "react-bootstrap";
+import {useEffect, useState} from "react";
+import ModalButton from "./modalButton";
 
 
-export default function Mypageinfoupdate({id, nickname, mail}) {
+export default function MyPageInfoUpdate({_id, _nickname, _mail, _setNickname}) {
 
 
 
@@ -15,7 +14,7 @@ export default function Mypageinfoupdate({id, nickname, mail}) {
                     <span>아이디</span>
                 </Col>
                 <Col sm={3}>
-                    <span>{id}</span>
+                    <span>{_id}</span>
                 </Col>
             </Row>
         </div>
@@ -24,14 +23,14 @@ export default function Mypageinfoupdate({id, nickname, mail}) {
             <Col sm={3} className={"nav_text_korean"}>
                 <span>닉네임</span>
             </Col>
-            {nickname !== null ?
+            {_nickname !== null ?
                 <>
                 <Col sm={3}>
-                    <span>{nickname}</span>
+                    <span>{_nickname}</span>
                 </Col>
                 </> : <>
-                    <Col>
-                        <Modalbutton mode={"nickname"}/>
+                    <Col sm={3}>
+                        <ModalButton changeState={_setNickname} mode={"nickname"}/>
                     </Col>
                 </>
             }
@@ -41,14 +40,14 @@ export default function Mypageinfoupdate({id, nickname, mail}) {
             <Col sm={3} className={"nav_text_korean"}>
                 <span>이메일</span>
             </Col>
-            {mail !== null ?
+            {_mail !== null ?
                 <>
                     <Col sm={3}>
-                        <span>{mail}</span>
+                        <span>{_mail}</span>
                     </Col>
                 </> : <>
                     <Col sm={3}>
-                        <Modalbutton mode={"mail"}/>
+                        <ModalButton mode={"mail"}/>
                     </Col>
                 </>
             }
@@ -58,7 +57,7 @@ export default function Mypageinfoupdate({id, nickname, mail}) {
             <Col sm={3} className={"nav_text_korean"}>
                 <span>비밀번호</span></Col>
                     <Col sm={3}>
-                        <Modalbutton mode={"password"}/>
+                        <ModalButton mode={"password"}/>
                     </Col>
         </Row>
     </>
