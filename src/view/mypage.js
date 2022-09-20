@@ -4,6 +4,7 @@ import axios from "axios";
 import Mypageinfoheader from "./component/mypage/mypageinfoheader";
 import Mypagebuttongroup from "./component/mypage/mypagebuttongroup";
 import Mypageinforead from "./component/mypage/mypageinforead";
+import Mypageinfoupdate from "./component/mypage/mypageinfoupdate";
 
 export default function MyPage({mode}) {
 
@@ -39,7 +40,10 @@ export default function MyPage({mode}) {
         <My_Navbar/>
         <div className={"my-page-area"}>
             <Mypageinfoheader text={infoText}/>
-            <Mypageinforead id={id} nickname={nickname} mail={mail}/>
+            {
+                mode !== "update" ? <Mypageinforead id={id} nickname={nickname} mail={mail}/> :
+                    <Mypageinfoupdate id={id} nickname={nickname} mail={mail}/>
+            }
 
             <Mypagebuttongroup _mode={mode}/>
         </div>
