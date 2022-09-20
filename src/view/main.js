@@ -1,6 +1,6 @@
-import Navbar from "./component/navbar/navbar";
+import My_Navbar from "./component/navbar/my_Navbar";
 
 
 export default function Main(){
-    return <Navbar/>
+    return <My_Navbar/>
 }

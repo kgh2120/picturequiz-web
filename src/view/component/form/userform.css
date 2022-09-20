@@ -21,7 +21,8 @@
     font-family: 'Noto Sans KR', sans-serif;
     margin-bottom: 10px;
 }
-.userform_intro_area h3{
+.userform_intro_area h4{
+    font-size: 23px;
     font-family: 'Permanent Marker', cursive;
 }
 .userform_form_area{
@@ -49,10 +50,11 @@
 }
 
 .userform_form_signup_move_btn{
-    background-color: var(--main);
     border-radius: 5px;
     border: 1px solid rgba(0,0,0,0.2);
-    height: 25px;
+    /*height: 25px;*/
+    font-size: 16px;
+    color: #FFFFFF;
 }
 .userform_form_signup_move_btn:hover{
     cursor: pointer;
@@ -61,4 +63,9 @@
     margin-top: 15px;
     font-family: 'Noto Sans KR', sans-serif;
     text-align: center;
+
+}
+.userform_admin_info_text{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 16px;
 }

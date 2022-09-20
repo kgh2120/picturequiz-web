@@ -1,52 +1,16 @@
-.navbar {
-    display: flex;
-    height: 60px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    justify-content: space-between;
-    font-family: 'Ubuntu', sans-serif;
-    align-items: center;
-}
-
-.navbar_logo_area {
-    width: 120px;
-
+.nav_area{
     background-color: var(--sub);
-    padding: 10px;
-    text-align: center;
+    color: #FFFFFF;
+}
+.nav_logo{
     font-family: 'Nabla', cursive;
-    font-size: 20px;
 }
+.nav_userform_icon{
 
-.navbar_list_area {
-    display: flex;
-
-    justify-content: flex-start;
-    width: 100%;
-    font-family: 'Noto Sans KR', sans-serif;;
-    align-items: center;
-}
-
-.navbar_list_area li {
-    list-style: none;
-    padding: 20px;
-}
-
-.navbar_user_area {
-    width: 120px;
-    padding: 20px;
-}
-
-.navbar_user_area_info {
     margin-left: 15px;
-    font-family: 'Noto Sans KR', sans-serif;;
+    margin-right: 10px;
 }
 
-.navbar_user_area_info:hover {
-    cursor: pointer;
-}
-.navbar_user_area_text:hover{
-    cursor: pointer;
-}
-.navbar_user_area_text {
-    margin-left: 15px;
+.nav_text_korean{
+    font-family: 'Noto Sans KR', sans-serif;
 }

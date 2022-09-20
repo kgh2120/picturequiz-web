@@ -1,4 +1,4 @@
-import Navbar from "./component/navbar/navbar";
+import My_Navbar from "./component/navbar/my_Navbar";
 import {useState} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
@@ -34,7 +34,7 @@ export default function MyPage() {
 
 
     return<>
-        <Navbar/>
+        <My_Navbar/>
         <div className={"my-page-area"}>
             <div className={"my-page_info"}>
                 <span>회원 정보</span>
@@ -74,4 +74,4 @@ export default function MyPage() {
         </div>
 
     </>
-};
+}
