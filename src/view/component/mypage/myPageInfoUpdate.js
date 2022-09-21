@@ -3,7 +3,8 @@ import {useEffect, useState} from "react";
 import ModalButton from "./modalButton";
 
 
-export default function MyPageInfoUpdate({_id, _nickname, _mail, _setNickname}) {
+export default function MyPageInfoUpdate({_id, _nickname, _mail,
+                                             _setNickname, _setMail}) {
 
 
 
@@ -47,12 +48,11 @@ export default function MyPageInfoUpdate({_id, _nickname, _mail, _setNickname}) 
                     </Col>
                 </> : <>
                     <Col sm={3}>
-                        <ModalButton mode={"mail"}/>
+                        <ModalButton changeState={_setMail} mode={"mail"}/>
                     </Col>
                 </>
             }
         </Row>
-
         <Row className={"justify-content-md-center  my-page-update-info"}>
             <Col sm={3} className={"nav_text_korean"}>
                 <span>비밀번호</span></Col>

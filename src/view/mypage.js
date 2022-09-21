@@ -43,7 +43,7 @@ export default function MyPage({mode}) {
             {
                 mode !== "update" ? <Mypageinforead id={id} nickname={nickname} mail={mail}/> :
                     <MyPageInfoUpdate _id={id} _nickname={nickname} _mail={mail}
-                    _setNickname={setNickname}/>
+                    _setNickname={setNickname} _setMail={setMail}/>
             }
 
             <Mypagebuttongroup _mode={mode}/>
