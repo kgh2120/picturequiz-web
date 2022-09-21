@@ -14,7 +14,8 @@ function App() {
           <Route path={"/"} element={<Main/>}/>
             <Route path={"/login"} element={<Userform _mode={"login"}/>}></Route>
             <Route path={"/signUp"} element={<Userform _mode={"signUp"}/>}></Route>
-            <Route path={"/my-page"} element={<MyPage/>}></Route>
+            <Route path={"/my-page"} element={<MyPage mode={"read"}/>}></Route>
+          <Route path={"/my-page/update"} element={<MyPage mode={"update"}/>}></Route>
         </Routes>
       </Router>
 
