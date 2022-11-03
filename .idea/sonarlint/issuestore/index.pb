@@ -13,8 +13,6 @@ F
 src/reportWebVitals.js,1\c\1ce5e63ae1582ed0b425c46001299a07515efbf9
 T
 $src/view/component/navbar/navbar.css,8\6\861b260e50c41cb7d336a9921be7e632bdaa186e
-=
-src/style.css,1\9\199c81d8625cb1aaa85a72e49e4ad72a9fed6766
 <
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 T

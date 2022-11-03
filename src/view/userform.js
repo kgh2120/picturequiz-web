@@ -8,8 +8,8 @@ import {Button} from "react-bootstrap";
 
 export default function Userform({_mode}) {
 
-    const [id, setId] = useState();
-    const [pwd, setPwd] = useState();
+    const [id, setId] = useState("");
+    const [pwd, setPwd] = useState("");
 
     function changeId(event) {
         setId(event.target.value)
@@ -47,9 +47,10 @@ export default function Userform({_mode}) {
                 loginId: id,
                 password: pwd
             }).then(() => {
-            alert("회원가입이 완료되었습니다. - 로그인 페이지로 이동합니다.")
             clearInput();
-            navigate("/login")
+            alert("회원가입이 완료되었습니다. - 로그인 페이지로 이동합니다.")
+
+            navigate("/")
         }).catch(error => {
             console.log(error)
         })
