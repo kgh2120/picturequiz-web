@@ -45,6 +45,7 @@ export default function MyPageInfoUpdate({_id, _nickname, _mail,
                 <>
                     <Col sm={3}>
                         <span>{_mail}</span>
+                        <ModalButton changeState={_setMail} mode={"mail"}/>
                     </Col>
                 </> : <>
                     <Col sm={3}>
