@@ -1,0 +1,14 @@
+.tag_area{
+    display: flex;
+}
+.tag{
+    display: flex;
+    background-color: aqua;
+    border-radius: 5px;
+    align-items: center;
+    font-size: 10px;
+    margin-right: 5px;
+}
+.tag:hover{
+    cursor: pointer;
+}
