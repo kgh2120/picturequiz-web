@@ -1,0 +1,7 @@
+.row-cus{
+    display: flex;
+    justify-content: space-between;
+}
+.w-45{
+    width: 45%;
+}
