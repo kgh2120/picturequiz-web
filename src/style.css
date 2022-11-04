@@ -5,4 +5,5 @@
 @import "view/component/navbar/navbar.css";
 @import "view/component/form/userform.css";
 @import "view/mypage.css";
-@import "view/component/quiz/tag.css";
+@import "view/component/quiz/quiz-list/tag.css";
+@import "view/component/quiz/quiz-add/quiz-add.css";

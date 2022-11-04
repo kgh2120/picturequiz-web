@@ -1,0 +1,27 @@
+input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.uploader {
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 400px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.big-icon {
+    font-size: 3rem;
+}
+
+.upload-box {
+    width: 500px;
+}
+.flex-box{
+    display: flex;
+}
