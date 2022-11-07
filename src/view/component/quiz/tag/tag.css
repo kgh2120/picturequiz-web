@@ -12,3 +12,8 @@
 .tag:hover{
     cursor: pointer;
 }
+
+
+.tag_icon{
+    margin-left: 5px;
+}
