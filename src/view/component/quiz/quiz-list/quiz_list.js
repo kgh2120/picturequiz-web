@@ -9,7 +9,7 @@ export default function QuizList() {
             <Row>
             {/*    center로 만드는 것은 나중에 기능이 완성되고 채워 ㄴ허어 봐야 알듯*/}
             {/*    map으로 quiz_block 생성하기 */}
-                <QuizBlock characterName={} tags={}></QuizBlock>
+            {/*    <QuizBlock characterName={} tags={}></QuizBlock>*/}
             </Row>
         </Container>
 

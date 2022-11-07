@@ -25,3 +25,9 @@ input[type="file"] {
 .flex-box{
     display: flex;
 }
+
+@media (max-width: 576px){
+    .upload-box {
+        width: 100%;
+    }
+}

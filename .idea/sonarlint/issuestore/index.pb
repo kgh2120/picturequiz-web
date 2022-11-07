@@ -21,3 +21,11 @@ A
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
 C
 src/view/mypage.css,3\5\357fdab9a502a19aa0631c52b317b7b83d27f16a
+<
+package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
+^
+.src/view/component/quiz/quiz-play/quiz-play.js,9\0\90a325cab34b2e54f1eb644e85b0c557d2282d2d
+B
+src/view/mypage.js,9\3\930c47faecf81563877842e7fad4716c00fd4692
+@
+src/view/main.js,f\3\f3f289125c75619e8c40a49320a8cfd965ebf695
