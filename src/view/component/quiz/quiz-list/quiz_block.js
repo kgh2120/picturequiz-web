@@ -1,6 +1,6 @@
 
 import {Card, Button} from "react-bootstrap";
-import Tag from "./tag";
+import Tag from "../tag/tag";
 export default function QuizBlock({
     characterName, tags, quiz_id, img_url
                                   })
