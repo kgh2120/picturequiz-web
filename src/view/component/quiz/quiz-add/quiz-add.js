@@ -8,6 +8,7 @@ import My_Navbar from "../../navbar/my_Navbar";
 import SearchResult from "./search_result";
 import {forEach} from "react-bootstrap/ElementChildren";
 import {isElementOfType} from "react-dom/test-utils";
+import SearchTagList from "../quiz-list/search_tag_list";
 
 
 export default function QuizAdd() {
@@ -15,8 +16,10 @@ export default function QuizAdd() {
     const [character_name, setCharacter_name] = useState();
 
     const [search_result, setSearchResult] = useState([])
-    const [character,setCharacter] = useState();
+    const [character, setCharacter] = useState();
 
+    const [tags, setTags] = useState([]);
+    const [tagName, setTagName] = useState("");
 
     const searchCharacter = (event) => {
         let data = event.target.value;
@@ -24,14 +27,37 @@ export default function QuizAdd() {
         console.log(data);
         axios.get(`http://localhost:8080/character?name=${data}`)
             .then(response => {
-                if(response.data.length != 0)
+                if (response.data.length != 0)
                     setSearchResult(response.data);
-                if(data==="" || data===" ")
+                if (data === "" || data === " ")
                     setSearchResult([]);
             })
     }
 
-    const logSelectedMenu = (event) =>{
+    const changeTagName = (event) => {
+        setTagName(event.target.value)
+    }
+
+    const search = async (event) => {
+        // setTagName(event.target.value)
+        if (window.event.keyCode === 13) {
+            try {
+                let response = await axios.get(`http://localhost:8080/tag?name=${event.target.value}`);
+                setTags([...tags, response.data]);
+                setTagName("");
+            } catch (err) {
+                if (err.response.status === 404) {
+                    let response = await axios.post(`http://localhost:8080/tag`, {
+                        name: event.target.value
+                    })
+                    setTags([...tags, response.data]);
+                    setTagName("");
+                }
+            }
+        }
+    }
+
+    const logSelectedMenu = (event) => {
 
         let parsed = JSON.parse(event);
         setCharacter(parsed);
@@ -57,21 +83,17 @@ export default function QuizAdd() {
                     <div>
                         <div className={"character_box"}>
                             <Dropdown onSelect={logSelectedMenu}>
-                                <Dropdown.Toggle  as={Form.Control} onChange={searchCharacter} value={character_name}
+                                <Dropdown.Toggle as={Form.Control} onChange={searchCharacter} value={character_name}
                                                  type="text" placeholder="캐릭터 이름을 입력하세요"
                                 />
                                 <SearchResult r={search_result}></SearchResult>
                             </Dropdown>
 
-                            <Form.Control type="text" placeholder="태그를 입력하세요"/>
+                            <Form.Control onChange={changeTagName} onKeyUp={search} value={tagName} type="text"
+                                          placeholder="태그를 추가하세요"/>
                         </div>
-                        <div className="flex-box">
-                            {/* js로 태그가 추가 되면 태그 버튼을 추가하는 식으로 설정하기.*/}
-                            {/*<button className="btn btn-success tag">태그1</button>*/}
-                            {/*<button className="btn btn-success tag">태그2</button>*/}
-                            {/*<button className="btn btn-success tag">태그3</button>*/}
-                            {/*<button className="btn btn-success tag">태그3</button>*/}
-                            {/*<button className="btn btn-success tag">태그3</button>*/}
+                        <div>
+                            <SearchTagList _setTags={setTags} _tags={tags}></SearchTagList>
                         </div>
                         <div className="row-cus">
                             <Button variant={"success"} className="w-50">등록하기</Button>
