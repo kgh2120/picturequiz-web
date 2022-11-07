@@ -19,7 +19,6 @@ export default function SearchBlock() {
     const searchCharacter = (event) => {
         let data = event.target.value;
         setCharacter_name(data);
-        console.log(data);
         axios.get(`http://localhost:8080/character?name=${data}`)
             .then(response => {
                 if (response.data.length != 0)
@@ -33,12 +32,9 @@ export default function SearchBlock() {
     const search = async (event) => {
         // setTagName(event.target.value)
         if (window.event.keyCode === 13) {
-            alert(event.target.value)
             try {
                 let response = await axios.get(`http://localhost:8080/tag?name=${event.target.value}`);
                 setTags([...tags, response.data]);
-                console.log(response.data);
-                console.log(tags);
                 setTagName("");
             } catch (err){
                 if (err.response.status === 404) {
@@ -46,13 +42,9 @@ export default function SearchBlock() {
                                         name: event.target.value
                                     })
                     setTags([...tags, response.data]);
-                    console.log(response.data);
-                    console.log(tags);
                     setTagName("");
                 }
             }
-
-
         }
     }
 
@@ -63,7 +55,6 @@ export default function SearchBlock() {
     const logSelectedMenu = (event) => {
         let parsed = JSON.parse(event);
         setCharacter(parsed);
-        console.log(character)
         setCharacter_name(parsed.name);
 
     }
@@ -84,11 +75,10 @@ export default function SearchBlock() {
                     <Form.Control onChange={changeTagName} onKeyUp={search} value={tagName} type="text"
                                   className="col-auto" placeholder="태그 추가"/>
                 </Col>
-                <SearchTagList _tags={tags}></SearchTagList>
+                <SearchTagList _setTags={setTags} _tags={tags}></SearchTagList>
             </Row>
 
             <Row className="row row-cols-auto">
-                {/*캐릭터 이름 입력하기*/}
                 <Col className="col-10">
                     <Dropdown onSelect={logSelectedMenu}>
                         <Dropdown.Toggle as={Form.Control} onChange={searchCharacter} value={character_name}

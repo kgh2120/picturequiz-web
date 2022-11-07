@@ -1,11 +1,13 @@
 import SearchTag from "./search_tag";
+import {useEffect, useState} from "react";
 
-export default function SearchTagList({_tags}) {
+export default function SearchTagList({_tags,_setTags}) {
+
     return <>
         {
             _tags.map(tag =>
                 <>
-                    <SearchTag name={tag.name}></SearchTag>
+                    <SearchTag _tags={_tags} _deleteTags={_setTags}  name={tag.name}></SearchTag>
                 </>
             )
         }

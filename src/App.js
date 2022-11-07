@@ -15,6 +15,7 @@ function App() {
       <Router>
         <Routes>
           <Route path={"/"} element={<Main_quiz_list/>}/>
+          <Route path={"/add"} element={<QuizAdd/>}/>
             <Route path={"/login"} element={<Userform _mode={"login"}/>}></Route>
             <Route path={"/signUp"} element={<Userform _mode={"signUp"}/>}></Route>
             <Route path={"/my-page"} element={<MyPage mode={"read"}/>}></Route>
