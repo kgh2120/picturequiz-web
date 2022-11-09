@@ -2,13 +2,13 @@ import {Container, Button, Row, Col, Form} from "react-bootstrap";
 import SearchTag from "./search_tag";
 import Dropdown from "react-bootstrap/Dropdown";
 import SearchResult from "../quiz-add/search_result";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import SearchTagList from "./search_tag_list";
 import {searchCharacter, searchTag} from "../../../../function/fn_search";
-import {baseAxios} from "../../../../function/global/axios-config";
+import {baseAxios, tokenAxios} from "../../../../function/global/axios-config";
 
-export default function SearchBlock() {
+export default function SearchBlock({_setQuiz}) {
 
     const [character_name, setCharacter_name] = useState();
 
@@ -37,13 +37,25 @@ export default function SearchBlock() {
     }
 
     const searchCondition = {
-        orderCondition : "RECENT"
+        orderCondition : "POPULAR"
     }
+    useEffect(() => {
+        tokenAxios.post("/quiz", searchCondition)
+            .then(response => {
+                console.log(response)
+
+                const result = {
+                    quizzes : response.data.quizzes,
+                    nextPageNum : response.data.nextPageNum,
+                    hasNext : response.data.hasNext
+                }
+                _setQuiz(result);
+            })
+
+    },[])
+
     //
-    // baseAxios.post("/quiz", searchCondition)
-    //     .then(response => {
-    //         console.log(response)
-    //     })
+
 
 
     return <>
@@ -74,7 +86,7 @@ export default function SearchBlock() {
                     </Dropdown>
                 </Col>
                 <Col className="col-2">
-                    <Button variant={"success"}>
+                    <Button variant={"success"} className={"small-font-btn"}>
                         검색
                     </Button>
                 </Col>

@@ -5,3 +5,60 @@
 .w-45{
     width: 45%;
 }
+.card_area{
+    margin-right: 5px;
+    width: calc(25% - 5px);
+}
+.card_block{
+
+    height: 300px;
+}
+.card_img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+
+
+/*sm*/
+@media (min-width: 576px){
+    .block_btn_area {
+        font-size: 13px;
+    }
+    .card_area{
+        margin-right: 5px;
+        width: calc(50% - 5px);
+    }
+}
+/*md*/
+@media (min-width: 768px) {
+    .block_btn_area {
+        font-size: 13px;
+    }
+
+    .card_area {
+        margin-right: 5px;
+        width: calc(33% - 5px);
+    }
+}
+/*lg*/
+@media (min-width: 992px){
+    .block_btn_area {
+        font-size: 13px;
+    }
+    .card_area{
+        margin-right: 5px;
+        width: calc(25% - 5px);
+    }
+}
+@media (max-width: 576px){
+    .block_btn_area {
+        font-size: 13px;
+    }
+    .card_area{
+        margin-right: 5px;
+        width: calc(50% - 5px);
+    }
+}

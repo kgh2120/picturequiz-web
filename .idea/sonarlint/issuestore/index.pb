@@ -15,5 +15,3 @@ C
 src/view/mypage.css,3\5\357fdab9a502a19aa0631c52b317b7b83d27f16a
 <
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
-S
-#src/view/component/quiz/tag/tag.css,0\7\0748fb8a993e7c5a08b7acaed57959a12b0c802c
