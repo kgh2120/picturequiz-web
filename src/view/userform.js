@@ -61,7 +61,7 @@ export default function Userform({_mode}) {
 
 
     return <>
-
+        <My_Navbar></My_Navbar>
         <div className={"userform_area"}>
             <Form_logo/>
             <div className={"userform_intro_area"}>

@@ -14,7 +14,6 @@ import My_Navbar from "./view/component/navbar/my_Navbar";
 function App() {
   return (
     <div >
-    <My_Navbar></My_Navbar>
       <Router>
         <Routes>
           <Route path={"/"} element={<Main_quiz_list/>}/>

@@ -38,6 +38,8 @@ export default function MyPage({mode}) {
 
 
     return <>
+        <My_Navbar></My_Navbar>
+
         <div className={"my-page-area"}>
             <Mypageinfoheader text={infoText}/>
             {

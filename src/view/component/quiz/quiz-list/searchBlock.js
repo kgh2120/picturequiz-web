@@ -6,6 +6,7 @@ import {useState} from "react";
 import axios from "axios";
 import SearchTagList from "./search_tag_list";
 import {searchCharacter, searchTag} from "../../../../function/fn_search";
+import {baseAxios} from "../../../../function/global/axios-config";
 
 export default function SearchBlock() {
 
@@ -33,8 +34,16 @@ export default function SearchBlock() {
         let parsed = JSON.parse(event);
         setCharacter(parsed);
         setCharacter_name(parsed.name);
-
     }
+
+    const searchCondition = {
+        orderCondition : "RECENT"
+    }
+    //
+    // baseAxios.post("/quiz", searchCondition)
+    //     .then(response => {
+    //         console.log(response)
+    //     })
 
 
     return <>

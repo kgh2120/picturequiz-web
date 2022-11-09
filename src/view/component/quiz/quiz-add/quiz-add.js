@@ -110,7 +110,7 @@ export default function QuizAdd() {
     }
 
     return <>
-
+        <My_Navbar></My_Navbar>
         <Container>
 
             <div>
