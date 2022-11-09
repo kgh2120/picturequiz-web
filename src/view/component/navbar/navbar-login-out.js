@@ -7,7 +7,6 @@ export default function NavbarLoginOut({_mode, _setMode}) {
     const navigate = useNavigate();
 
     function logout(){
-        alert("하이?")
         localStorage.removeItem("access-token")
         _setMode(false)
         navigate("/")

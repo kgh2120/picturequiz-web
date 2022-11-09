@@ -5,6 +5,7 @@ import Mypageinfoheader from "./component/mypage/mypageinfoheader";
 import Mypagebuttongroup from "./component/mypage/mypagebuttongroup";
 import Mypageinforead from "./component/mypage/mypageinforead";
 import MyPageInfoUpdate from "./component/mypage/myPageInfoUpdate";
+import {baseAxios} from "../function/global/axios-config";
 
 export default function MyPage({mode}) {
 
@@ -19,7 +20,7 @@ export default function MyPage({mode}) {
 
     async function loading() {
 
-        return await axios.get("http://localhost:8080/my-profile",
+        return await baseAxios.get("http://localhost:8080/my-profile",
             {
                 headers: {
                     "Authorization": `Bearer ${token}`
@@ -37,7 +38,6 @@ export default function MyPage({mode}) {
 
 
     return <>
-        <My_Navbar/>
         <div className={"my-page-area"}>
             <Mypageinfoheader text={infoText}/>
             {

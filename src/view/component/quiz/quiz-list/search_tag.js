@@ -10,7 +10,7 @@ export default function SearchTag({name, _deleteTags, _tags}) {
     }
 
     return <>
-        <Button onClick={setDeletename} variant={"light"} size={"sm"} className="col-auto m-1" value={name}>
+        <Button onClick={setDeletename} variant={"light"} size={"sm"} className=" col-auto m-1 " value={name}>
             <span>{name}</span><FontAwesomeIcon className={"tag_icon"} icon={faMinusSquare}></FontAwesomeIcon>
         </Button></>
 };

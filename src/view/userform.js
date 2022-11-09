@@ -4,6 +4,7 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {Button} from "react-bootstrap";
+import {baseAxios} from "../function/global/axios-config";
 
 
 export default function Userform({_mode}) {
@@ -25,7 +26,7 @@ export default function Userform({_mode}) {
     const navigate = useNavigate();
 
     async function login() {
-        await axios.post("http://localhost:8080/login",
+        await baseAxios.post("/login",
             {
                 loginId: id,
                 password: pwd
@@ -42,13 +43,13 @@ export default function Userform({_mode}) {
     }
 
     async function signIn() {
-        const response = await axios.post("http://localhost:8080/signUp",
+        const response = await baseAxios.post("/signUp",
             {
                 loginId: id,
                 password: pwd
             }).then(() => {
             clearInput();
-            alert("회원가입이 완료되었습니다. - 로그인 페이지로 이동합니다.")
+            alert("회원가입이 완료되었습니다.")
 
             navigate("/")
         }).catch(error => {
@@ -60,7 +61,7 @@ export default function Userform({_mode}) {
 
 
     return <>
-        <My_Navbar/>
+
         <div className={"userform_area"}>
             <Form_logo/>
             <div className={"userform_intro_area"}>

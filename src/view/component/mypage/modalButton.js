@@ -1,7 +1,7 @@
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import axios from "axios";
-
+import {baseAxios} from "../../../function/global/axios-config";
 
 export default function ModalButton({mode, changeState}) {
 
@@ -36,7 +36,7 @@ export default function ModalButton({mode, changeState}) {
 
     function isNicknameDuplicate() {
         const newNickname = document.getElementById("input_nickname_dup").value;
-        axios.get(`http://localhost:8080/my-profile/nickname?nickname=${newNickname}`, {
+        baseAxios.get(`/my-profile/nickname?nickname=${newNickname}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -56,7 +56,7 @@ export default function ModalButton({mode, changeState}) {
     function changeNickname() {
         const newNickname = document.getElementById("input_nickname_dup").value;
         console.log(newNickname)
-        axios.patch(`http://localhost:8080/my-profile/nickname`, {
+        baseAxios.patch(`/my-profile/nickname`, {
             nickname: newNickname,
         }, {
             headers: {
@@ -89,7 +89,7 @@ export default function ModalButton({mode, changeState}) {
     function sendMail() {
         const mailAddress = document.getElementById("input_email").value;
 
-        axios.post("http://localhost:8080/my-profile/send-mail", {
+        baseAxios.post("/my-profile/send-mail", {
             email: mailAddress
         }, {
             headers: {
@@ -110,7 +110,7 @@ export default function ModalButton({mode, changeState}) {
 
         let code = document.getElementById('input_auth_key').value;
         console.log(code)
-        axios.patch("http://localhost:8080/my-profile/verify-code",{
+        baseAxios.patch("/my-profile/verify-code",{
             email : mailAddress,
             code : code
         },{

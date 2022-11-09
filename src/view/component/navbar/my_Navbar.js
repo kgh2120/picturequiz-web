@@ -11,6 +11,9 @@ export default function My_Navbar() {
     const accessToken = localStorage.getItem("access-token")
     const [logined,setLogined] = useState(accessToken !== null)
 
+    function logout(){
+        localStorage.removeItem("access-token")
+    }
 
     return  <Navbar className={"nav_area"} bg="green" expand="lg" >
         <Container >
@@ -28,7 +31,7 @@ export default function My_Navbar() {
                             <span className={"nav_text_korean "}>내 정보 보기</span>
                         </Nav.Link>
 
-                        <Nav.Link className={"text-white"} href={"/logout"}>
+                        <Nav.Link className={"text-white"} onClick={logout}>
                             <FontAwesomeIcon className={"nav_userform_icon"} icon={faRightToBracket}></FontAwesomeIcon>
                             <span>LogOut</span>
                         </Nav.Link>
