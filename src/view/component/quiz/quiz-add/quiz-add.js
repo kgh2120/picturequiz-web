@@ -133,12 +133,14 @@ export default function QuizAdd() {
     return <>
         <My_Navbar></My_Navbar>
         <Container>
+
             <div>
-                <h4>퀴즈 등록하기</h4>
-            </div>
-            <div>
+
                 <input type="file" id={"input_upload"} onChange={changeUploadBoxImage} accept='image/*'/>
                 <div className="upload-box  m-0 m-auto">
+                    <div className={"quiz_add_header"}>
+                        <h4>퀴즈 등록하기</h4>
+                    </div>
                     <div className="uploader" onClick={uploadImage}>
                         <div>
                             <FontAwesomeIcon id={"upload_icon"} icon={faUpload}
