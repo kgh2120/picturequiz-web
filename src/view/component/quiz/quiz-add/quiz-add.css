@@ -6,13 +6,17 @@ input[type="file"] {
     overflow: hidden;
     border: 0;
 }
-
+.quiz_add_header{
+    margin: 20px 0px;
+}
 .uploader {
+
     background-color: rgba(0, 0, 0, 0.2);
     height: 400px;
     align-items: center;
     display: flex;
     justify-content: center;
+    cursor: pointer;
 }
 
 .big-icon {
@@ -21,14 +25,22 @@ input[type="file"] {
 
 .upload-box {
     width: 500px;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 .flex-box{
     display: flex;
 
+}
+.thumnail{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 @media (max-width: 576px){
     .upload-box {
         width: 100%;
     }
+
 }
+

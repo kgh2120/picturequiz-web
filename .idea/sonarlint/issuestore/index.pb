@@ -25,7 +25,16 @@ C
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 ^
 .src/view/component/quiz/quiz-play/quiz-play.js,9\0\90a325cab34b2e54f1eb644e85b0c557d2282d2d
-B
-src/view/mypage.js,9\3\930c47faecf81563877842e7fad4716c00fd4692
 @
 src/view/main.js,f\3\f3f289125c75619e8c40a49320a8cfd965ebf695
+d
+4src/view/component/quiz/quiz-list/search_tag_list.js,5\f\5f69d97514881016059246b172a6cd05991f8d32
+_
+/src/view/component/quiz/quiz-list/search_tag.js,2\9\29fcf15c4b64772584ee609e2853485e0f132c41
+S
+#src/view/component/quiz/tag/tag.css,0\7\0748fb8a993e7c5a08b7acaed57959a12b0c802c
+:
+
+src/App.js,1\e\1e43fa63aecd2127be034b3fb9d4caa172275714
+`
+0src/view/component/quiz/quiz-list/searchBlock.js,a\f\af1dcb604c48f4c226437076920d5e63a3da46a3
