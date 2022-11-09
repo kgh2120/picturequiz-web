@@ -13,7 +13,7 @@ import SearchTagList from "../quiz-list/search_tag_list";
 
 export default function QuizAdd() {
 
-    const [character_name, setCharacter_name] = useState();
+    const [character_name, setCharacter_name] = useState("");
 
     const [search_result, setSearchResult] = useState([])
     const [character, setCharacter] = useState();
@@ -38,7 +38,7 @@ export default function QuizAdd() {
         setTagName(event.target.value)
     }
 
-    const search = async (event) => {
+    const searchTag = async (event) => {
         // setTagName(event.target.value)
         if (window.event.keyCode === 13) {
             try {
@@ -66,6 +66,70 @@ export default function QuizAdd() {
 
     }
 
+    const registerQuiz = () => {
+        let fileInput = document.getElementById("input_upload");
+        const file = fileInput.files[0];
+
+
+        if (file === undefined || character === undefined) {
+            alert("업로드 할 사진과, 캐릭터를 선택해주세요");
+            return;
+        }
+
+
+        const body = {
+            characterId: character.characterId,
+            tagNames: tags.map(t => t.name)
+        };
+
+        let formData = new FormData();
+        formData.append("image", file);
+        const blob = new Blob([JSON.stringify(body)], {type: "application/json"});
+        formData.append("quiz", blob);
+
+        const token = localStorage.getItem("access-token");
+        axios.post("http://localhost:8080/quiz/add",
+            formData
+            , {
+                headers: {
+                    "content-type": "multipart/form-data",
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        ).then(response => {
+            moveToMain();
+        })
+    }
+
+    const uploadImage = () => {
+        let file = document.getElementById("input_upload");
+        file.click();
+    }
+
+    const changeUploadBoxImage = (e) => {
+        var reader = new FileReader();
+        reader.onload = (e) => {
+            var img = document.createElement("img");
+            img.setAttribute("src", e.target.result);
+            img.setAttribute("class", "thumnail");
+            document.getElementById("upload_icon").setAttribute("style", "display : none");
+            let beforeImg = document.querySelector(".uploader img");
+
+            let box = document.querySelector("div.uploader");
+            try {
+                box.removeChild(beforeImg);
+            } catch (err) {
+            }
+            box.appendChild(img);
+        }
+
+        reader.readAsDataURL(e.target.files[0]);
+    }
+
+    const moveToMain = () => {
+        window.location.replace("/");
+    }
+
     return <>
         <My_Navbar></My_Navbar>
         <Container>
@@ -73,11 +137,12 @@ export default function QuizAdd() {
                 <h4>퀴즈 등록하기</h4>
             </div>
             <div>
-                <input type="file"/>
+                <input type="file" id={"input_upload"} onChange={changeUploadBoxImage} accept='image/*'/>
                 <div className="upload-box  m-0 m-auto">
-                    <div className="uploader">
+                    <div className="uploader" onClick={uploadImage}>
                         <div>
-                            <FontAwesomeIcon icon={faUpload} className="btn big-icon"></FontAwesomeIcon>
+                            <FontAwesomeIcon id={"upload_icon"} icon={faUpload}
+                                             className="btn big-icon"></FontAwesomeIcon>
                         </div>
                     </div>
                     <div>
@@ -89,15 +154,15 @@ export default function QuizAdd() {
                                 <SearchResult r={search_result}></SearchResult>
                             </Dropdown>
 
-                            <Form.Control onChange={changeTagName} onKeyUp={search} value={tagName} type="text"
+                            <Form.Control onChange={changeTagName} onKeyUp={searchTag} value={tagName} type="text"
                                           placeholder="태그를 추가하세요"/>
                         </div>
                         <div>
                             <SearchTagList _setTags={setTags} _tags={tags}></SearchTagList>
                         </div>
                         <div className="row-cus">
-                            <Button variant={"success"} className="w-50">등록하기</Button>
-                            <Button variant={"danger"} className="w-50">취소하기</Button>
+                            <Button onClick={registerQuiz} variant={"success"} className="w-50">등록하기</Button>
+                            <Button onClick={moveToMain} variant={"danger"} className="w-50">취소하기</Button>
                         </div>
                     </div>
                 </div>
