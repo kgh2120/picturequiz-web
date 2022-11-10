@@ -9,6 +9,8 @@ import SearchResult from "./search_result";
 import {forEach} from "react-bootstrap/ElementChildren";
 import {isElementOfType} from "react-dom/test-utils";
 import SearchTagList from "../quiz-list/search_tag_list";
+import {searchCharacter, searchTag} from "../../../../function/fn_search";
+import {baseAxios} from "../../../../function/global/axios-config";
 
 
 export default function QuizAdd() {
@@ -21,40 +23,17 @@ export default function QuizAdd() {
     const [tags, setTags] = useState([]);
     const [tagName, setTagName] = useState("");
 
-    const searchCharacter = (event) => {
-        let data = event.target.value;
-        setCharacter_name(data);
-        console.log(data);
-        axios.get(`http://localhost:8080/character?name=${data}`)
-            .then(response => {
-                if (response.data.length != 0)
-                    setSearchResult(response.data);
-                if (data === "" || data === " ")
-                    setSearchResult([]);
-            })
+    const searchCharacterEvent = (event) => {
+        searchCharacter(event,setCharacter_name,setSearchResult);
     }
+
+    const searchTagEvent = (event) => {
+        searchTag(event,setTags,setTagName,tags);
+    }
+
 
     const changeTagName = (event) => {
         setTagName(event.target.value)
-    }
-
-    const searchTag = async (event) => {
-        // setTagName(event.target.value)
-        if (window.event.keyCode === 13) {
-            try {
-                let response = await axios.get(`http://localhost:8080/tag?name=${event.target.value}`);
-                setTags([...tags, response.data]);
-                setTagName("");
-            } catch (err) {
-                if (err.response.status === 404) {
-                    let response = await axios.post(`http://localhost:8080/tag`, {
-                        name: event.target.value
-                    })
-                    setTags([...tags, response.data]);
-                    setTagName("");
-                }
-            }
-        }
     }
 
     const logSelectedMenu = (event) => {
@@ -88,7 +67,7 @@ export default function QuizAdd() {
         formData.append("quiz", blob);
 
         const token = localStorage.getItem("access-token");
-        axios.post("http://localhost:8080/quiz/add",
+        baseAxios.post("/quiz/add",
             formData
             , {
                 headers: {
@@ -150,13 +129,13 @@ export default function QuizAdd() {
                     <div>
                         <div className={"character_box"}>
                             <Dropdown onSelect={logSelectedMenu}>
-                                <Dropdown.Toggle as={Form.Control} onChange={searchCharacter} value={character_name}
+                                <Dropdown.Toggle as={Form.Control} onChange={searchCharacterEvent} value={character_name}
                                                  type="text" placeholder="캐릭터 이름을 입력하세요"
                                 />
                                 <SearchResult r={search_result}></SearchResult>
                             </Dropdown>
 
-                            <Form.Control onChange={changeTagName} onKeyUp={searchTag} value={tagName} type="text"
+                            <Form.Control onChange={changeTagName} onKeyUp={searchTagEvent} value={tagName} type="text"
                                           placeholder="태그를 추가하세요"/>
                         </div>
                         <div>

@@ -8,6 +8,8 @@ import MyPage from "./view/mypage";
 import QuizPlay from "./view/component/quiz/quiz-play/quiz-play";
 import QuizAdd from "./view/component/quiz/quiz-add/quiz-add";
 import Main_quiz_list from "./view/component/quiz/quiz-list/main_quiz_list";
+import {Navbar} from "react-bootstrap";
+import My_Navbar from "./view/component/navbar/my_Navbar";
 
 function App() {
   return (

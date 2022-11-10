@@ -5,12 +5,19 @@ import Navbar from 'react-bootstrap/Navbar';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRightToBracket} from "@fortawesome/free-solid-svg-icons/faRightToBracket";
 import {faCircleInfo} from "@fortawesome/free-solid-svg-icons";
+import {useNavigate} from "react-router-dom";
 
 export default function My_Navbar() {
 
     const accessToken = localStorage.getItem("access-token")
     const [logined,setLogined] = useState(accessToken !== null)
+    const navigate = useNavigate();
 
+    function logout(){
+        localStorage.removeItem("access-token")
+        setLogined(false);
+        navigate("/");
+    }
 
     return  <Navbar className={"nav_area"} bg="green" expand="lg" >
         <Container >
@@ -28,7 +35,7 @@ export default function My_Navbar() {
                             <span className={"nav_text_korean "}>내 정보 보기</span>
                         </Nav.Link>
 
-                        <Nav.Link className={"text-white"} href={"/logout"}>
+                        <Nav.Link className={"text-white"} onClick={logout}>
                             <FontAwesomeIcon className={"nav_userform_icon"} icon={faRightToBracket}></FontAwesomeIcon>
                             <span>LogOut</span>
                         </Nav.Link>
