@@ -7,23 +7,17 @@ import {useState} from "react";
 
 export default function Main_quiz_list(){
 
-    let quizData = {
-        quizId : "",
-        pictureUrl:"",
-        authorNickname:"",
-        characterName:"",
-        tagNames:[]
-    }
+    const [currentPageNum, setCurrentPageNum] = useState(0)
 
     const [quiz, setQuiz] = useState({
-        quizzes : [quizData],
+        quizzes : [],
         nextPageNum : 0,
         hasNext : true
     })
 
     return <>
         <My_Navbar></My_Navbar>
-        <SearchBlock _setQuiz={setQuiz}></SearchBlock>
+        <SearchBlock _setQuiz={setQuiz} _pageNum={currentPageNum} _setPageNum={setCurrentPageNum}></SearchBlock>
         <QuizList _quiz={quiz}></QuizList>
 
     </>

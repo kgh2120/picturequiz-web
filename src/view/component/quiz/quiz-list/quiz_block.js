@@ -23,7 +23,6 @@ export default function QuizBlock({characterName, tags, quiz_id, img_url}) {
                         tags.map(t =>{
                         return <Tag key={t} name={t}></Tag>
                     })}
-
                 </div>
                 <div className="block_btn_area row-cus"><Button variant={"success"} href="#" className="block_btn_area w-45 ">시작하기</Button>
                     <Button variant={"warning"} href="#" className="block_btn_area w-45">커뮤니티</Button>
