@@ -6,4 +6,28 @@
 }
 .quiz_img{
     height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.answer_box{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.answer_header{
+    display: flex;
+    justify-content: center;
+}
+
+.answer_title{
+    text-align: center;
+
+    font-weight: bold;
+}
+.answer_body{
+    font-size: 2rem;
+
+    font-weight: bold;
+    text-align: center;
+}
+.answer_footer{
+    justify-content: space-between;
 }
