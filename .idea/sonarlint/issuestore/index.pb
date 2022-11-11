@@ -21,10 +21,6 @@ $src/view/component/form/form_logo.js,2\e\2eb00385a054d1414113df929d5bb4516f7f2
 .src/view/component/mypage/mypagebuttongroup.js,8\b\8b1d7e279db56d97a698d18d46588b3ee86ddb96
 [
 +src/view/component/mypage/mypageinforead.js,8\f\8fb3f657ea778ba99385f37992e15a726cc39abb
-]
--src/view/component/mypage/myPageInfoUpdate.js,2\f\2f0c5f1c4bd9f7c6b492e1d31a118d6a14fc1cdc
-X
-(src/view/component/mypage/modalButton.js,a\7\a7f4008339f9f6012c17855dbff66d86c4549ba6
 _
 /src/view/component/quiz/quiz-list/search_tag.js,2\9\29fcf15c4b64772584ee609e2853485e0f132c41
 d
@@ -35,8 +31,6 @@ L
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
 ]
 -src/view/component/navbar/navbar-login-out.js,b\4\b41b08a23023f7e7d0d0ecbc0f1107c6f28ddc4e
-D
-src/view/userform.js,3\0\3019b742b6349c520e47683c8b12f9dd890746dc
 _
 /src/view/component/quiz/quiz-list/quiz-list.css,8\c\8cea33210db321195dea69c978538c5673cca4eb
 =
