@@ -24,8 +24,9 @@ export default function QuizPlay() {
     const loadImage = (stateId) =>{
         tokenAxios.post(`/quiz/${stateId}`)
             .then(response =>{
+                console.log(response.data)
                 setUrl(response.data.url);
-                setCharacterName(response.data.chracterName);
+                setCharacterName(response.data.characterName);
             })
     }
 

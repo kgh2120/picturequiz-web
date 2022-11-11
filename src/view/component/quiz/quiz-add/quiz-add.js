@@ -5,7 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useState} from "react";
 import axios from "axios";
 import My_Navbar from "../../navbar/my_Navbar";
-import SearchResult from "./search_result";
+import CharacterSearchResult from "./character_search_result";
 import {forEach} from "react-bootstrap/ElementChildren";
 import {isElementOfType} from "react-dom/test-utils";
 import SearchTagList from "../quiz-list/search_tag_list";
@@ -132,7 +132,7 @@ export default function QuizAdd() {
                                 <Dropdown.Toggle as={Form.Control} onChange={searchCharacterEvent} value={character_name}
                                                  type="text" placeholder="캐릭터 이름을 입력하세요"
                                 />
-                                <SearchResult r={search_result}></SearchResult>
+                                <CharacterSearchResult r={search_result}></CharacterSearchResult>
                             </Dropdown>
 
                             <Form.Control onChange={changeTagName} onKeyUp={searchTagEvent} value={tagName} type="text"

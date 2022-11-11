@@ -62,3 +62,13 @@
         width: calc(50% - 5px);
     }
 }
+
+@media (max-width: 500px){
+    .block_btn_area {
+        font-size: 12px;
+    }
+    .card_area{
+        margin-right: 5px;
+        width: calc(50% - 5px);
+    }
+}
