@@ -1,12 +1,12 @@
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
-import SearchResult from "../quiz-add/search_result";
+import CharacterSearchResult from "../quiz-add/character_search_result";
 import {useEffect, useState} from "react";
 import SearchTagList from "./search_tag_list";
 import {searchCharacter, searchTag} from "../../../../function/fn_search";
 import {baseAxios, tokenAxios} from "../../../../function/global/axios-config";
 
-export default function SearchBlock({_setQuiz, _pageNum, _setPageNum}) {
+export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
 
     const [character_name, setCharacter_name] = useState();
 
@@ -39,7 +39,7 @@ export default function SearchBlock({_setQuiz, _pageNum, _setPageNum}) {
         orderCondition: "POPULAR"
     }
     useEffect(() => {
-        tokenAxios.post("/quiz", defaultSearchCondition)
+        baseAxios.post("/quiz", defaultSearchCondition)
             .then(response => {
                 console.log(response)
 
@@ -57,14 +57,40 @@ export default function SearchBlock({_setQuiz, _pageNum, _setPageNum}) {
 
     const changeOrderStateToPopular = () => {
         setOrderState("POPULAR");
+        const searchOrderCondition = {
+            orderCondition: "POPULAR"
+        }
+        baseAxios.post("/quiz", searchOrderCondition)
+            .then(response => {
+                console.log(response)
+
+                const result = {
+                    quizzes: response.data.quizzes,
+                    nextPageNum: response.data.nextPageNum,
+                    hasNext: response.data.hasNext
+                }
+                _setQuiz(result);
+            })
     }
     const changeOrderStateToRecent = () => {
         setOrderState("RECENT");
+        const searchOrderCondition = {
+            orderCondition: "RECENT"
+        }
+        baseAxios.post("/quiz", searchOrderCondition)
+            .then(response => {
+                console.log(response)
+
+                const result = {
+                    quizzes: response.data.quizzes,
+                    nextPageNum: response.data.nextPageNum,
+                    hasNext: response.data.hasNext
+                }
+                _setQuiz(result);
+            })
     }
 
     const searchQuiz = () =>{
-        //TODO backend security 변경 후 tokenAxios -> baseAxios로 변경하기
-
         let searchCondition = {
             orderCondition : orderState,
             answerName : character === undefined ? null : character.name,
@@ -72,7 +98,7 @@ export default function SearchBlock({_setQuiz, _pageNum, _setPageNum}) {
             pageNum : _pageNum, // TODO pageNum 받아서 넘겨야 할 듯
         }
 
-        tokenAxios.post("/quiz", searchCondition)
+        baseAxios.post("/quiz", searchCondition)
             .then(response => {
                 console.log(response)
 
@@ -88,7 +114,7 @@ export default function SearchBlock({_setQuiz, _pageNum, _setPageNum}) {
     return <>
         <Container className={"search_container"}>
             <Row className=" row row-cols-6 row-cols-lg-auto">
-                <Col className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-5">
+                <Col className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
 
                     {orderState === "POPULAR" ? <>
                         <Button onClick={changeOrderStateToPopular} variant={"success"}>
@@ -114,15 +140,15 @@ export default function SearchBlock({_setQuiz, _pageNum, _setPageNum}) {
             </Row>
 
             <Row className="mt-3 row row-cols-auto">
-                <Col className="col-10">
+                <Col className="col-9">
                     <Dropdown onSelect={logSelectedMenu}>
                         <Dropdown.Toggle as={Form.Control} onChange={searchCharacterEvent} value={character_name}
-                                         type="text" placeholder="캐릭터 이름을 입력하세요"
+                                        type="text" placeholder="캐릭터 이름을 입력하세요"
                         />
-                        <SearchResult r={search_result}></SearchResult>
+                        <CharacterSearchResult r={search_result}></CharacterSearchResult>
                     </Dropdown>
                 </Col>
-                <Col className="col-2">
+                <Col className="col-3">
                     <Button onClick={searchQuiz} variant={"success"} className={"small-font-btn"}>
                         검색
                     </Button>

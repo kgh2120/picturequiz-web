@@ -15,7 +15,6 @@ export const searchCharacter = (event, setCharacter_name, setSearchResult) => {
 
 
 export const searchTag = async (event, setTags, setTagName, tags) => {
-    // setTagName(event.target.value)
     if (window.event.keyCode === 13) {
         try {
             let response = await baseAxios.get(`/tag?name=${event.target.value}`);

@@ -14,3 +14,9 @@
 .nav_text_korean{
     font-family: 'Noto Sans KR', sans-serif;
 }
+.cus-nav{
+    color: #FFFFFF;
+}
+.cus-nav:hover{
+    color: var(--main);
+}

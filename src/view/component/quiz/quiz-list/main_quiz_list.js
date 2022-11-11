@@ -1,5 +1,5 @@
 import QuizList from "./quiz_list";
-import SearchBlock from "./searchBlock";
+import QuizSearchBlock from "./quizSearchBlock";
 import My_Navbar from "../../navbar/my_Navbar";
 import {useState} from "react";
 
@@ -17,7 +17,7 @@ export default function Main_quiz_list(){
 
     return <>
         <My_Navbar></My_Navbar>
-        <SearchBlock _setQuiz={setQuiz} _pageNum={currentPageNum} _setPageNum={setCurrentPageNum}></SearchBlock>
+        <QuizSearchBlock _setQuiz={setQuiz} _pageNum={currentPageNum} _setPageNum={setCurrentPageNum}></QuizSearchBlock>
         <QuizList _quiz={quiz}></QuizList>
 
     </>

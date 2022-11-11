@@ -11,11 +11,12 @@ function App() {
       <Router>
         <Routes>
           <Route path={"/"} element={<Main_quiz_list/>}/>
-          <Route path={"/quiz/add"} element={<QuizAdd/>}/>
             <Route path={"/login"} element={<Userform _mode={"login"}/>}></Route>
             <Route path={"/signUp"} element={<Userform _mode={"signUp"}/>}></Route>
             <Route path={"/my-page"} element={<MyPage mode={"read"}/>}></Route>
           <Route path={"/my-page/update"} element={<MyPage mode={"update"}/>}></Route>
+          <Route path={"/quiz/add"} element={<QuizAdd/>}/>
+          <Route path={"/quiz/my"} element={<QuizAdd/>}/>
           <Route path={"/quiz/play"} element={<QuizPlay/>}></Route>
         </Routes>
       </Router>
