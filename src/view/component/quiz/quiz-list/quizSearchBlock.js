@@ -114,7 +114,7 @@ export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
     return <>
         <Container className={"search_container"}>
             <Row className=" row row-cols-6 row-cols-lg-auto">
-                <Col className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-5">
+                <Col className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
 
                     {orderState === "POPULAR" ? <>
                         <Button onClick={changeOrderStateToPopular} variant={"success"}>

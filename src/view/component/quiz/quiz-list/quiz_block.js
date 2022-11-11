@@ -19,8 +19,8 @@ export default function QuizBlock({characterName, tags, quiz_id, img_url}) {
     return <>
 
 
-        <Card className={" card_area"}>
-            <div className={" card_block"}>
+        <Card className={"card_area"}>
+            <div className={"card_block"}>
                 <Card.Img className={"card_img"} variant={"top"}
                           src={img_url}
                           alt="..."/>
@@ -36,7 +36,8 @@ export default function QuizBlock({characterName, tags, quiz_id, img_url}) {
                         return <Tag key={t} name={t}></Tag>
                     })}
                 </div>
-                <div className="block_btn_area row-cus"><Button onClick={play_quiz} variant={"success"} href="#" className="block_btn_area w-45 ">시작하기</Button>
+                <div className="block_btn_area row-cus">
+                    <Button onClick={play_quiz} variant={"success"} href="#" className="block_btn_area w-45 ">시작하기</Button>
                     <Button variant={"warning"} href="#" className="block_btn_area w-45">커뮤니티</Button>
                 </div>
             </Card.Body>
