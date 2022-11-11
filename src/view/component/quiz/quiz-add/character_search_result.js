@@ -1,6 +1,6 @@
 import Dropdown from "react-bootstrap/Dropdown";
 
-export default function SearchResult({r}) {
+export default function CharacterSearchResult({r}) {
 
 
     return <>
