@@ -25,8 +25,6 @@ _
 /src/view/component/quiz/quiz-list/search_tag.js,2\9\29fcf15c4b64772584ee609e2853485e0f132c41
 d
 4src/view/component/quiz/quiz-list/search_tag_list.js,5\f\5f69d97514881016059246b172a6cd05991f8d32
-L
-src/function/global/token.js,6\9\69fcf69abb2a529f9d09a934d4d2927299bf53cf
 <
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
 ]

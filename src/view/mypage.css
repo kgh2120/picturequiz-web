@@ -17,6 +17,12 @@
 .my_info_id_black{
     visibility: hidden;
 }
+.tooltip-arrow{
+    --bs-tooltip-bg:red;
+}
+.tooltip-inner{
+    background-color: red;
+}
 @media (max-width: 500px) {
     .my_info_box{
         width: 100%;
@@ -24,4 +30,16 @@
     .my_info_item_btn{
         font-size: 10px;
     }
+    .modal_mobile_input{
+        width: 70%;
+    }
+    .modal_mobile_btn{
+        width: 30%;
+    }
+}
+
+.mail_auth_box{
+
+    display: flex;
+    align-items: center;
 }
