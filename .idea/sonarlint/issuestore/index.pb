@@ -7,8 +7,6 @@
 src/reset.css,2\5\25a3ca7072ec2a5e8c55b4253ba62ab41bdf1c89
 F
 src/reportWebVitals.js,1\c\1ce5e63ae1582ed0b425c46001299a07515efbf9
-T
-$src/view/component/navbar/navbar.css,8\6\861b260e50c41cb7d336a9921be7e632bdaa186e
 A
 package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47
 C
@@ -29,8 +27,6 @@ $src/view/component/form/form_logo.js,2\e\2eb00385a054d1414113df929d5bb4516f7f2
 +src/view/component/mypage/mypageinforead.js,8\f\8fb3f657ea778ba99385f37992e15a726cc39abb
 ]
 -src/view/component/mypage/myPageInfoUpdate.js,2\f\2f0c5f1c4bd9f7c6b492e1d31a118d6a14fc1cdc
-a
-1src/view/component/quiz/quiz-list/my_quiz_list.js,1\2\12c86ea21a48091a500d87ac1f2f90080491970c
 I
 src/function/fn_search.js,c\1\c1dc5f29aaedce562cc14c0a9cbda9c1986c32bf
 X
@@ -45,8 +41,6 @@ L
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
 ]
 -src/view/component/navbar/navbar-login-out.js,b\4\b41b08a23023f7e7d0d0ecbc0f1107c6f28ddc4e
-V
-&src/view/component/navbar/my_Navbar.js,3\1\316d238f0fb6ee177710156ac5483e385ddc3c29
 D
 src/view/userform.js,3\0\3019b742b6349c520e47683c8b12f9dd890746dc
 \
