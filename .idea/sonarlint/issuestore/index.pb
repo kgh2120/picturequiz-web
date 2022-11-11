@@ -22,8 +22,6 @@ $src/view/component/form/userform.css,7\7\77c4b1c2aa7f9310c6245bd282c28bdc62ea6
 T
 $src/view/component/form/form_logo.js,2\e\2eb00385a054d1414113df929d5bb4516f7f28e0
 ^
-.src/view/component/quiz/quiz-play/quiz-play.js,9\0\90a325cab34b2e54f1eb644e85b0c557d2282d2d
-^
 .src/view/component/mypage/mypagebuttongroup.js,8\b\8b1d7e279db56d97a698d18d46588b3ee86ddb96
 ]
 -src/view/component/mypage/mypageinfoheader.js,e\8\e8151d1b88addbafa8d756852fc276828466d57e
@@ -47,9 +45,6 @@ L
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
 ]
 -src/view/component/navbar/navbar-login-out.js,b\4\b41b08a23023f7e7d0d0ecbc0f1107c6f28ddc4e
-:
-
-src/App.js,1\e\1e43fa63aecd2127be034b3fb9d4caa172275714
 V
 &src/view/component/navbar/my_Navbar.js,3\1\316d238f0fb6ee177710156ac5483e385ddc3c29
 D
@@ -58,3 +53,25 @@ D
 ,src/view/component/quiz/quiz-add/quiz-add.js,8\2\82191e1ecb705896ce740c149b1cd3dc3e7ab573
 B
 src/view/mypage.js,9\3\930c47faecf81563877842e7fad4716c00fd4692
+_
+/src/view/component/quiz/quiz-list/quiz-list.css,8\c\8cea33210db321195dea69c978538c5673cca4eb
+=
+src/style.css,1\9\199c81d8625cb1aaa85a72e49e4ad72a9fed6766
+a
+1src/view/component/quiz/quiz-list/searchBlock.css,d\d\dd7b9d32f75b1c956e49fad3838ba7cc5caa02d2
+a
+1src/view/component/quiz/quiz-add/search_result.js,9\9\99b392714a91f29575a03b1a2e38bfa7e766eb8b
+S
+#src/function/global/axios-config.js,a\c\ac8f3f3f3a25c7ca9724dffabb73cbc4878b4334
+]
+-src/view/component/quiz/quiz-add/quiz-add.css,2\b\2b5fd9765a25ec595bf41ff3c80d955924249e4e
+R
+"src/view/component/quiz/tag/tag.js,0\1\0197e93b47d30fba89dae1c1826d30b8779df444
+`
+0src/view/component/quiz/quiz-list/searchBlock.js,a\f\af1dcb604c48f4c226437076920d5e63a3da46a3
+^
+.src/view/component/quiz/quiz-list/quiz_list.js,f\e\fe0ba458027e80c5cdff41919cff631e55359309
+c
+3src/view/component/quiz/quiz-list/main_quiz_list.js,a\7\a7ff3c88405d9a2ef39467aca70d339d692daa08
+S
+#src/view/component/quiz/tag/tag.css,0\7\0748fb8a993e7c5a08b7acaed57959a12b0c802c

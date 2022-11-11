@@ -1,7 +1,19 @@
 
 import {Card, Button} from "react-bootstrap";
 import Tag from "../tag/tag";
+import {useNavigate} from "react-router-dom";
 export default function QuizBlock({characterName, tags, quiz_id, img_url}) {
+
+    const navigate = useNavigate();
+
+    const play_quiz = () => {
+
+        navigate('/quiz/play',{
+            state : {
+                id : quiz_id
+            }
+        })
+    }
 
 
     return <>
@@ -24,7 +36,7 @@ export default function QuizBlock({characterName, tags, quiz_id, img_url}) {
                         return <Tag key={t} name={t}></Tag>
                     })}
                 </div>
-                <div className="block_btn_area row-cus"><Button variant={"success"} href="#" className="block_btn_area w-45 ">시작하기</Button>
+                <div className="block_btn_area row-cus"><Button onClick={play_quiz} variant={"success"} href="#" className="block_btn_area w-45 ">시작하기</Button>
                     <Button variant={"warning"} href="#" className="block_btn_area w-45">커뮤니티</Button>
                 </div>
             </Card.Body>
