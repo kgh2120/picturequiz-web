@@ -24,6 +24,12 @@ export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
         searchTag(event, setTags, setTagName, tags);
     }
 
+    const clearSearchCondition = () => {
+        setCharacter_name("");
+        setSearchResult([]);
+        setTags([]);
+        setTagName("");
+    }
 
     const changeTagName = (event) => {
         setTagName(event.target.value)
@@ -90,25 +96,28 @@ export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
             })
     }
 
-    const searchQuiz = () =>{
+    const searchQuiz = () => {
         let searchCondition = {
-            orderCondition : orderState,
-            answerName : character === undefined ? null : character.name,
-            tagNames : tags.map(t => t.name),
-            pageNum : _pageNum, // TODO pageNum 받아서 넘겨야 할 듯
+            orderCondition: orderState,
+            answerName: character === undefined ? null : character.name,
+            tagNames: tags.map(t => t.name),
+            pageNum: _pageNum, // TODO pageNum 받아서 넘겨야 할 듯
         }
 
         baseAxios.post("/quiz", searchCondition)
             .then(response => {
                 console.log(response)
-
                 const result = {
                     quizzes: response.data.quizzes,
                     nextPageNum: response.data.nextPageNum,
                     hasNext: response.data.hasNext
                 }
                 _setQuiz(result);
-            })
+                clearSearchCondition();
+            }).catch(err => {
+            alert("검색 결과가 없습니다.");
+            clearSearchCondition();
+        })
     }
 
     return <>
@@ -143,7 +152,7 @@ export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
                 <Col className="col-9">
                     <Dropdown onSelect={logSelectedMenu}>
                         <Dropdown.Toggle as={Form.Control} onChange={searchCharacterEvent} value={character_name}
-                                        type="text" placeholder="캐릭터 이름을 입력하세요"
+                                         type="text" placeholder="캐릭터 이름을 입력하세요"
                         />
                         <CharacterSearchResult r={search_result}></CharacterSearchResult>
                     </Dropdown>

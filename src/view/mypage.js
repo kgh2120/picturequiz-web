@@ -1,12 +1,7 @@
 import My_Navbar from "./component/navbar/my_Navbar";
 import {useEffect, useState} from "react";
-import axios from "axios";
-import Mypageinfoheader from "./component/mypage/mypageinfoheader";
-import Mypagebuttongroup from "./component/mypage/mypagebuttongroup";
-import Mypageinforead from "./component/mypage/mypageinforead";
-import MyPageInfoUpdate from "./component/mypage/myPageInfoUpdate";
-import {baseAxios, tokenAxios} from "../function/global/axios-config";
-import {Card, Button, ListGroup, Col, Modal} from "react-bootstrap";
+import {tokenAxios} from "../function/global/axios-config";
+import {Button, Card, ListGroup, Modal} from "react-bootstrap";
 import ModalButton from "./component/mypage/modalButton";
 import {useNavigate} from "react-router-dom";
 import {deleteToken} from "../function/global/token";
