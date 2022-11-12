@@ -24,12 +24,14 @@ export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
         searchTag(event, setTags, setTagName, tags);
     }
 
+
     const clearSearchCondition = () => {
         setCharacter_name("");
         setSearchResult([]);
         setTags([]);
         setTagName("");
     }
+
 
     const changeTagName = (event) => {
         setTagName(event.target.value)

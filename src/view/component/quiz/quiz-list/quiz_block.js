@@ -33,7 +33,7 @@ export default function QuizBlock({characterName, tags, quiz_id, img_url}) {
                     {
                         tags === undefined ? null :
                         tags.map(t =>{
-                        return <Tag key={t} name={t}></Tag>
+                        return <Tag key={t.name} _tag={t}></Tag>
                     })}
                 </div>
                 <div className="block_btn_area row-cus">

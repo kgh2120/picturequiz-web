@@ -14,7 +14,7 @@ export default function QuizList({_quiz}) {
                 {
                     _quiz.quizzes === undefined ? null :
                     _quiz.quizzes.map(q => {
-                       return <QuizBlock characterName={q.characterName} tags={q.tagNames} img_url={q.pictureUrl}
+                       return <QuizBlock characterName={q.characterName} tags={q.tags} img_url={q.pictureUrl}
                                    quiz_id={q.quizId}
                         ></QuizBlock>
                     })

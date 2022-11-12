@@ -1,7 +1,5 @@
-import {faMinusSquare} from "@fortawesome/free-regular-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+export default function Tag({_tag}){
 
-export default function Tag({name}){
-    return <><div className="tag tag_font">{name}</div>
+    return <><div className="tag tag_font" style={{backgroundColor : _tag.color}}>{_tag.name}</div>
         </>
 }
