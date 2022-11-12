@@ -21,18 +21,12 @@ $src/view/component/form/form_logo.js,2\e\2eb00385a054d1414113df929d5bb4516f7f2
 .src/view/component/mypage/mypagebuttongroup.js,8\b\8b1d7e279db56d97a698d18d46588b3ee86ddb96
 [
 +src/view/component/mypage/mypageinforead.js,8\f\8fb3f657ea778ba99385f37992e15a726cc39abb
-_
-/src/view/component/quiz/quiz-list/search_tag.js,2\9\29fcf15c4b64772584ee609e2853485e0f132c41
-d
-4src/view/component/quiz/quiz-list/search_tag_list.js,5\f\5f69d97514881016059246b172a6cd05991f8d32
 <
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
 ]
 -src/view/component/navbar/navbar-login-out.js,b\4\b41b08a23023f7e7d0d0ecbc0f1107c6f28ddc4e
 =
 src/style.css,1\9\199c81d8625cb1aaa85a72e49e4ad72a9fed6766
-R
-"src/view/component/quiz/tag/tag.js,0\1\0197e93b47d30fba89dae1c1826d30b8779df444
 S
 #src/view/component/quiz/tag/tag.css,0\7\0748fb8a993e7c5a08b7acaed57959a12b0c802c
 a
@@ -49,16 +43,12 @@ k
 ;src/view/component/quiz/quiz-add/character_search_result.js,0\0\008d21ec10479ceb9da3bcde6d1c980ea34a8caf
 T
 $src/view/component/navbar/navbar.css,8\6\861b260e50c41cb7d336a9921be7e632bdaa186e
-I
-src/function/fn_search.js,c\1\c1dc5f29aaedce562cc14c0a9cbda9c1986c32bf
 ^
 .src/view/component/quiz/quiz-play/quiz-play.js,9\0\90a325cab34b2e54f1eb644e85b0c557d2282d2d
 a
 1src/view/component/quiz/quiz-list/searchBlock.css,d\d\dd7b9d32f75b1c956e49fad3838ba7cc5caa02d2
 `
 0src/view/component/quiz/quiz-list/quiz_block.css,3\b\3b44513ee4708260ea7868bc053f4435de8551a5
-_
-/src/view/component/quiz/quiz-list/quiz_block.js,a\9\a941ab5d750350d0571bdec97f728c1b50523ee9
 D
 src/view/userform.js,3\0\3019b742b6349c520e47683c8b12f9dd890746dc
 ]
