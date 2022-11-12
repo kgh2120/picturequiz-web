@@ -7,7 +7,7 @@ export default function SearchTagList({_tags,_setTags}) {
         {
             _tags.map(tag =>
                 <>
-                    <SearchTag  _tags={_tags} _deleteTags={_setTags}  _tag={tag}></SearchTag>
+                    <SearchTag  _tags={_tags} _deleteTags={_setTags}  name={tag.name}></SearchTag>
                 </>
             )
         }
