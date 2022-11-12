@@ -1,10 +1,10 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import Userform from "./view/userform";
-import MyPage from "./view/mypage";
-import QuizPlay from "./view/component/quiz/quiz-play/quiz-play";
-import QuizAdd from "./view/component/quiz/quiz-add/quiz-add";
-import Main_quiz_list from "./view/component/quiz/quiz-list/main_quiz_list";
-import MyQuizList from "./view/component/quiz/quiz-list/my_quiz_list";
+import Userform from "./pages/userform";
+import MyPage from "./pages/mypage";
+import QuizPlay from "./component/quiz/quiz-play/quiz-play";
+import QuizAdd from "./component/quiz/quiz-add/quiz-add";
+import Main_quiz_list from "./component/quiz/quiz-list/main_quiz_list";
+import MyQuizList from "./component/quiz/quiz-list/my_quiz_list";
 
 function App() {
   return (

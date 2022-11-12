@@ -1,4 +1,4 @@
-import My_Navbar from "./component/navbar/my_Navbar";
+import My_Navbar from "../component/navbar/my_Navbar";
 
 
 export default function Main(){

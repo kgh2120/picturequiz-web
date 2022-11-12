@@ -1,10 +1,10 @@
-import My_Navbar from "./component/navbar/my_Navbar";
-import Form_logo from "./component/form/form_logo";
+import My_Navbar from "../component/navbar/my_Navbar";
+import Form_logo from "../component/form/form_logo";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {Button} from "react-bootstrap";
-import {baseAxios} from "../function/global/axios-config";
+import {baseAxios} from "../utils/global/axios-config";
 
 
 export default function Userform({_mode}) {

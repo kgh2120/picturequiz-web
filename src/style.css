@@ -2,13 +2,13 @@
 @import "variable.css";
 @import url('https://fonts.googleapis.com/css2?family=Nabla&family=Noto+Sans+KR&family=Permanent+Marker&family=Ubuntu:wght@400;500&display=swap');
 
-@import "view/component/navbar/navbar.css";
-@import "view/component/form/userform.css";
-@import "view/mypage.css";
-@import "view/component/quiz/tag/tag.css";
-@import "view/component/quiz/quiz-add/quiz-add.css";
-@import "view/component/quiz/quiz-add/character_search.css";
-@import "view/component/quiz/quiz-play/quiz-play.css";
-@import "view/component/quiz/quiz-list/searchBlock.css";
-@import "view/component/quiz/quiz-list/quiz-list.css";
-@import "view/component/quiz/quiz-list/quiz_block.css";
+@import "component/navbar/navbar.css";
+@import "component/form/userform.css";
+@import "pages/mypage.css";
+@import "component/quiz/tag/tag.css";
+@import "component/quiz/quiz-add/quiz-add.css";
+@import "component/quiz/quiz-add/character_search.css";
+@import "component/quiz/quiz-play/quiz-play.css";
+@import "component/quiz/quiz-list/searchBlock.css";
+@import "component/quiz/quiz-list/quiz-list.css";
+@import "component/quiz/quiz-list/quiz_block.css";

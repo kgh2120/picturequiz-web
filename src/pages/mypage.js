@@ -1,10 +1,10 @@
-import My_Navbar from "./component/navbar/my_Navbar";
+import My_Navbar from "../component/navbar/my_Navbar";
 import {useEffect, useState} from "react";
-import {tokenAxios} from "../function/global/axios-config";
+import {tokenAxios} from "../utils/global/axios-config";
 import {Button, Card, ListGroup, Modal} from "react-bootstrap";
-import ModalButton from "./component/mypage/modalButton";
+import ModalButton from "../component/mypage/modalButton";
 import {useNavigate} from "react-router-dom";
-import {deleteToken} from "../function/global/token";
+import {deleteToken} from "../utils/global/token";
 
 export default function MyPage({mode}) {
 

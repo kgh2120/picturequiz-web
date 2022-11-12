@@ -9,8 +9,8 @@ import CharacterSearchResult from "./character_search_result";
 import {forEach} from "react-bootstrap/ElementChildren";
 import {isElementOfType} from "react-dom/test-utils";
 import SearchTagList from "../quiz-list/search_tag_list";
-import {searchCharacter, searchTag} from "../../../../function/fn_search";
-import {baseAxios} from "../../../../function/global/axios-config";
+import {searchCharacter, searchTag} from "../../../utils/fn_search";
+import {baseAxios} from "../../../utils/global/axios-config";
 
 
 export default function QuizAdd() {

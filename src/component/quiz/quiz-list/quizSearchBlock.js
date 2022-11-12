@@ -3,8 +3,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import CharacterSearchResult from "../quiz-add/character_search_result";
 import {useEffect, useState} from "react";
 import SearchTagList from "./search_tag_list";
-import {searchCharacter, searchTag} from "../../../../function/fn_search";
-import {baseAxios, tokenAxios} from "../../../../function/global/axios-config";
+import {searchCharacter, searchTag} from "../../../utils/fn_search";
+import {baseAxios, tokenAxios} from "../../../utils/global/axios-config";
 
 export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
 

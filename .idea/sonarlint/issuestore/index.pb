@@ -7,8 +7,6 @@
 src/reset.css,2\5\25a3ca7072ec2a5e8c55b4253ba62ab41bdf1c89
 F
 src/reportWebVitals.js,1\c\1ce5e63ae1582ed0b425c46001299a07515efbf9
-A
-package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47
 <
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 @
@@ -25,8 +23,6 @@ $src/view/component/form/form_logo.js,2\e\2eb00385a054d1414113df929d5bb4516f7f2
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
 ]
 -src/view/component/navbar/navbar-login-out.js,b\4\b41b08a23023f7e7d0d0ecbc0f1107c6f28ddc4e
-=
-src/style.css,1\9\199c81d8625cb1aaa85a72e49e4ad72a9fed6766
 S
 #src/view/component/quiz/tag/tag.css,0\7\0748fb8a993e7c5a08b7acaed57959a12b0c802c
 a
@@ -49,7 +45,23 @@ a
 1src/view/component/quiz/quiz-list/searchBlock.css,d\d\dd7b9d32f75b1c956e49fad3838ba7cc5caa02d2
 `
 0src/view/component/quiz/quiz-list/quiz_block.css,3\b\3b44513ee4708260ea7868bc053f4435de8551a5
-D
-src/view/userform.js,3\0\3019b742b6349c520e47683c8b12f9dd890746dc
 ]
 -src/view/component/mypage/mypageinfoheader.js,e\8\e8151d1b88addbafa8d756852fc276828466d57e
+L
+src/function/global/token.js,6\9\69fcf69abb2a529f9d09a934d4d2927299bf53cf
+]
+-src/view/component/mypage/myPageInfoUpdate.js,2\f\2f0c5f1c4bd9f7c6b492e1d31a118d6a14fc1cdc
+X
+(src/view/component/mypage/modalButton.js,a\7\a7f4008339f9f6012c17855dbff66d86c4549ba6
+C
+src/view/mypage.css,3\5\357fdab9a502a19aa0631c52b317b7b83d27f16a
+\
+,src/view/component/quiz/quiz-add/quiz-add.js,8\2\82191e1ecb705896ce740c149b1cd3dc3e7ab573
+]
+-src/view/component/quiz/quiz-add/quiz-add.css,2\b\2b5fd9765a25ec595bf41ff3c80d955924249e4e
+_
+/src/view/component/quiz/quiz-list/quiz-list.css,8\c\8cea33210db321195dea69c978538c5673cca4eb
+B
+src/view/mypage.js,9\3\930c47faecf81563877842e7fad4716c00fd4692
+a
+1src/view/component/quiz/quiz-list/my_quiz_list.js,1\2\12c86ea21a48091a500d87ac1f2f90080491970c

@@ -1,7 +1,7 @@
 import {Button, Col, Form, Modal, Overlay, Row, Tooltip} from "react-bootstrap";
 import {useEffect, useRef, useState} from "react";
 import axios from "axios";
-import {baseAxios, tokenAxios} from "../../../function/global/axios-config";
+import {baseAxios, tokenAxios} from "../../utils/global/axios-config";
 
 export default function ModalButton({mode, changeState}) {
 
