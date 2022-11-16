@@ -1,10 +1,14 @@
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import CharacterSearchResult from "../quiz-add/character_search_result";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import SearchTagList from "./search_tag_list";
 import {searchCharacter, searchTag} from "../../../utils/fn_search";
 import {baseAxios, tokenAxios} from "../../../utils/global/axios-config";
+import CharacterSearchForm from "../quiz-add/character_search_form";
+import TagSearchForm from "../quiz-add/tag_search_form";
+import {ErrorMessage, INVALID_TAG_MESSAGE, INVALID_TAGSIZE_MESSAGE} from "../../error/error-message";
+import {validateTagName} from "../../../utils/global/validate";
 
 export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
 
@@ -15,13 +19,15 @@ export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
     const [tags, setTags] = useState([]);
     const [tagName, setTagName] = useState("");
     const [orderState, setOrderState] = useState("POPULAR")
+    const [tagErrorShow, setTagErrorShow] = useState(false)
+    const [tagErrorMessage, setTagErrorMessage] = useState("");
 
     const searchCharacterEvent = (event) => {
         searchCharacter(event, setCharacter_name, setSearchResult);
     }
 
     const searchTagEvent = (event) => {
-        searchTag(event, setTags, setTagName, tags);
+        searchTag(event, setTags, setTagName, tags,setTagErrorShow,setTagErrorMessage);
     }
 
 
@@ -31,6 +37,8 @@ export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
         setTags([]);
         setTagName("");
     }
+
+
 
 
     const changeTagName = (event) => {
@@ -144,20 +152,22 @@ export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
 
                 </Col>
                 <Col className="col-6">
-                    <Form.Control onChange={changeTagName} onKeyUp={searchTagEvent} value={tagName} type="text"
-                                  className="col-auto" placeholder="태그 추가"/>
+                    <TagSearchForm changeTagName={changeTagName}
+                                   searchTagEvent={searchTagEvent}
+                                   tagName={tagName}
+                    _tagErrorShow={tagErrorShow} _tagErrorMessage={tagErrorMessage}/>
+
                 </Col>
                 <SearchTagList _setTags={setTags} _tags={tags}></SearchTagList>
             </Row>
 
             <Row className="mt-3 row row-cols-auto">
                 <Col className="col-9">
-                    <Dropdown onSelect={logSelectedMenu}>
-                        <Dropdown.Toggle as={Form.Control} onChange={searchCharacterEvent} value={character_name}
-                                         type="text" placeholder="캐릭터 이름을 입력하세요"
-                        />
-                        <CharacterSearchResult r={search_result}></CharacterSearchResult>
-                    </Dropdown>
+                    <CharacterSearchForm
+                        _character_name={character_name}
+                        _logSelectedMenu={logSelectedMenu}
+                        _search_result={search_result}
+                        _searchCharacterEvent={searchCharacterEvent}/>
                 </Col>
                 <Col className="col-3">
                     <Button onClick={searchQuiz} variant={"success"} className={"small-font-btn"}>

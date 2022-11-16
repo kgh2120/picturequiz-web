@@ -1,16 +1,14 @@
-import {Container, Button, Form, Col, Navbar} from "react-bootstrap";
-import Dropdown from 'react-bootstrap/Dropdown'
+import {Button, Container, Form} from "react-bootstrap";
 import {faUpload} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useState} from "react";
-import axios from "axios";
 import My_Navbar from "../../navbar/my_Navbar";
-import CharacterSearchResult from "./character_search_result";
-import {forEach} from "react-bootstrap/ElementChildren";
-import {isElementOfType} from "react-dom/test-utils";
+
 import SearchTagList from "../quiz-list/search_tag_list";
 import {searchCharacter, searchTag} from "../../../utils/fn_search";
 import {baseAxios} from "../../../utils/global/axios-config";
+import CharacterSearchForm from "./character_search_form";
+import TagSearchForm from "./tag_search_form";
 
 
 export default function QuizAdd() {
@@ -22,13 +20,15 @@ export default function QuizAdd() {
 
     const [tags, setTags] = useState([]);
     const [tagName, setTagName] = useState("");
+    const [tagErrorShow, setTagErrorShow] = useState(false)
+    const [tagErrorMessage, setTagErrorMessage] = useState("");
 
     const searchCharacterEvent = (event) => {
-        searchCharacter(event,setCharacter_name,setSearchResult);
+        searchCharacter(event, setCharacter_name, setSearchResult);
     }
 
     const searchTagEvent = (event) => {
-        searchTag(event,setTags,setTagName,tags);
+        searchTag(event, setTags, setTagName, tags,setTagErrorShow,setTagErrorMessage);
     }
 
 
@@ -86,9 +86,9 @@ export default function QuizAdd() {
     }
 
     const changeUploadBoxImage = (e) => {
-        var reader = new FileReader();
+        const reader = new FileReader();
         reader.onload = (e) => {
-            var img = document.createElement("img");
+            const img = document.createElement("img");
             img.setAttribute("src", e.target.result);
             img.setAttribute("class", "thumnail");
             document.getElementById("upload_icon").setAttribute("style", "display : none");
@@ -128,15 +128,17 @@ export default function QuizAdd() {
                     </div>
                     <div>
                         <div className={"character_box"}>
-                            <Dropdown onSelect={logSelectedMenu}>
-                                <Dropdown.Toggle as={Form.Control} onChange={searchCharacterEvent} value={character_name}
-                                                 type="text" placeholder="캐릭터 이름을 입력하세요"
-                                />
-                                <CharacterSearchResult r={search_result}></CharacterSearchResult>
-                            </Dropdown>
 
-                            <Form.Control onChange={changeTagName} onKeyUp={searchTagEvent} value={tagName} type="text"
-                                          placeholder="태그를 추가하세요"/>
+                            <CharacterSearchForm
+                                _character_name={character_name}
+                                _logSelectedMenu={logSelectedMenu}
+                                _search_result={search_result}
+                                _searchCharacterEvent={searchCharacterEvent}/>
+
+                            <TagSearchForm changeTagName={changeTagName}
+                                           searchTagEvent={searchTagEvent}
+                                           tagName={tagName}
+                                           _tagErrorShow={tagErrorShow} _tagErrorMessage={tagErrorMessage}/>
                         </div>
                         <div>
                             <SearchTagList _setTags={setTags} _tags={tags}></SearchTagList>
@@ -152,4 +154,4 @@ export default function QuizAdd() {
 
 
     </>
-};
+}
