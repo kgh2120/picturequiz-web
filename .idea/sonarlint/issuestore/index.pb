@@ -7,12 +7,8 @@
 src/reset.css,2\5\25a3ca7072ec2a5e8c55b4253ba62ab41bdf1c89
 F
 src/reportWebVitals.js,1\c\1ce5e63ae1582ed0b425c46001299a07515efbf9
-<
-package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 @
 src/variable.css,0\0\0058cb62536695088724f519595d554077d5a1d9
-A
-package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47
 `
 0src/component/quiz/quiz-add/character_search.css,b\6\b6304587d034819c08be989a0f23ca0be29fccf3
 Z
@@ -43,8 +39,6 @@ Q
 !src/component/navbar/my_Navbar.js,b\6\b60acc3a23a0489fc96a51f289287805b69677c1
 \
 ,src/component/quiz/quiz-list/my_quiz_list.js,2\5\25c9b26939dd56fecf65d1ed8e808de299334133
-C
-src/pages/mypage.js,a\4\a4ddbc659af4b96ec46974de6280246be9d4df0f
 X
 (src/component/navbar/navbar-login-out.js,e\b\ebb9b39a04942f3f47fb86084ef80a1e9cb7437e
 Z
@@ -59,8 +53,6 @@ M
 src/component/quiz/tag/tag.js,8\1\81eb2eab951ef2a10d4697912530b9107443fd07
 M
 src/utils/global/tag-color.js,a\4\a426ed9c58de8ddab88d7d5944c07187b4ecf91b
-I
-src/utils/global/token.js,c\1\c1c17f2e89e18a3c72bbb92762db50d96dbc2d1d
 Y
 )src/component/quiz/quiz-play/quiz-play.js,e\a\ea18fbe96534a7d1f53a16e41de14ee5c65c3594
 f

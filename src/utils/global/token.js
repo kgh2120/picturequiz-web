@@ -1,4 +1,4 @@
 export const deleteToken = () =>{
-    localStorage.removeItem("access-token");
-    localStorage.removeItem("refresh-token");
+    localStorage.clear();
 }
+export const isLogined = () => localStorage.getItem("access-token");
