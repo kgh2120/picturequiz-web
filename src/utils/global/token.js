@@ -4,9 +4,10 @@ export const deleteToken = () =>{
     sessionStorage.removeItem("access-token")
     localStorage.removeItem("refresh-token");
 }
+export const getRefreshToken = () =>localStorage.getItem("refresh-token");
+
 
 export const getAccessToken = () =>{
-    console.log(sessionStorage.getItem("access-token"))
     return sessionStorage.getItem("access-token")
 }
 
@@ -17,8 +18,9 @@ export const saveTokens = (access,refresh) =>{
 
 export const autoLogin = () => {
     baseAxios.post("/refresh",{
-        refreshToken: getAccessToken()
+        refreshToken: getRefreshToken()
     }).then((res)=>{
         saveTokens(res.headers["access-token"], res.headers["refresh-token"])
+        window.location.reload();
     })
 }
