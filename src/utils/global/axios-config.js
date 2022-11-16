@@ -10,6 +10,6 @@ export const baseAxios =  axios.create({
 export const tokenAxios = axios.create({
     baseURL: 'http://localhost:8080',
     headers : {
-        "Authorization" : `Bearer ${localStorage.getItem("access-token")}`
+        "Authorization" : `Bearer ${sessionStorage.getItem("access-token")}`
     }
 })

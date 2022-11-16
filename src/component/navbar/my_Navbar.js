@@ -6,15 +6,14 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRightToBracket} from "@fortawesome/free-solid-svg-icons/faRightToBracket";
 import {faCircleInfo} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
+import {deleteToken, getAccessToken} from "../../utils/global/token";
 
 export default function My_Navbar() {
-
-    const accessToken = localStorage.getItem("access-token")
-    const [logined,setLogined] = useState(accessToken !== null)
+    const [logined,setLogined] = useState(getAccessToken() !== null)
     const navigate = useNavigate();
 
     function logout(){
-        localStorage.removeItem("access-token")
+        deleteToken();
         setLogined(false);
         navigate("/");
     }

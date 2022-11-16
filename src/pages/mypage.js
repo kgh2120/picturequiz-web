@@ -16,9 +16,6 @@ export default function MyPage({mode}) {
     const [mail, setMail] = useState();
     const [show, setShow] = useState(false);
     const navigate = useNavigate()
-
-    const token = localStorage.getItem("access-token");
-
     useEffect(() => {
         loading().then(res => {
             console.log(res.data)
