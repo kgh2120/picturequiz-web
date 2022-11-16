@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getAccessToken} from "./token";
+import {getAccessToken, saveTokens} from "./token";
 
 
 export const baseAxios =  axios.create({
@@ -11,6 +11,6 @@ export const baseAxios =  axios.create({
 export const tokenAxios = axios.create({
     baseURL: 'http://localhost:8080',
     headers : {
-        "Authorization" : `Bearer ${getAccessToken()}`
+        "Authorization" : `Bearer ${getAccessToken}`
     }
 })

@@ -1,7 +1,8 @@
 import QuizList from "./quiz_list";
 import QuizSearchBlock from "./quizSearchBlock";
 import My_Navbar from "../../navbar/my_Navbar";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {autoLogin, getAccessToken} from "../../../utils/global/token";
 
 
 
@@ -14,6 +15,11 @@ export default function Main_quiz_list(){
         nextPageNum : 0,
         hasNext : true
     })
+
+    // useEffect(() => {
+    //     if(!getAccessToken())
+    //         autoLogin();
+    // },[])
 
     return <>
         <My_Navbar></My_Navbar>
