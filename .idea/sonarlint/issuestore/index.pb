@@ -39,12 +39,6 @@ O
 src/component/form/form_logo.js,2\0\2061ecb6bfbaa4a9cda6b5cbb42b68d71942de34
 A
 src/pages/main.js,f\0\f0f61222e530390fdbb5f8a7244c1e155e9667f8
-Q
-!src/component/navbar/my_Navbar.js,b\6\b60acc3a23a0489fc96a51f289287805b69677c1
-\
-,src/component/quiz/quiz-list/my_quiz_list.js,2\5\25c9b26939dd56fecf65d1ed8e808de299334133
-C
-src/pages/mypage.js,a\4\a4ddbc659af4b96ec46974de6280246be9d4df0f
 X
 (src/component/navbar/navbar-login-out.js,e\b\ebb9b39a04942f3f47fb86084ef80a1e9cb7437e
 Z
@@ -59,8 +53,6 @@ M
 src/component/quiz/tag/tag.js,8\1\81eb2eab951ef2a10d4697912530b9107443fd07
 M
 src/utils/global/tag-color.js,a\4\a426ed9c58de8ddab88d7d5944c07187b4ecf91b
-I
-src/utils/global/token.js,c\1\c1c17f2e89e18a3c72bbb92762db50d96dbc2d1d
 Y
 )src/component/quiz/quiz-play/quiz-play.js,e\a\ea18fbe96534a7d1f53a16e41de14ee5c65c3594
 f

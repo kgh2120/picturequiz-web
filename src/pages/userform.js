@@ -6,6 +6,7 @@ import {Button} from "react-bootstrap";
 import {baseAxios} from "../utils/global/axios-config";
 import {validateId, validatePassword} from "../utils/global/validate";
 import {ErrorMessage, INVALID_ID_MESSAGE, INVALID_PWD_MESSAGE} from "../component/error/error-message";
+import {saveTokens} from "../utils/global/token";
 
 
 export default function Userform({_mode}) {
@@ -15,23 +16,25 @@ export default function Userform({_mode}) {
     const [showIdErrorMessage, setShowIdErrorMessage] = useState(false)
     const [showPwdErrorMessage, setShowPwdErrorMessage] = useState(false)
 
-    const target_id =useRef(null)
-    const target_pwd =useRef(null)
+    const target_id = useRef(null)
+    const target_pwd = useRef(null)
 
     function changeId(event) {
         setId(event.target.value)
         setShowIdErrorMessage(!validateId(event.target.value));
-        if(!validateId(event.target.value)){
-            setTimeout(() => setShowIdErrorMessage(false),1000);
+        if (!validateId(event.target.value)) {
+            setTimeout(() => setShowIdErrorMessage(false), 1000);
         }
     }
+
     function changePwd(event) {
         setPwd(event.target.value)
         setShowPwdErrorMessage(!validatePassword(event.target.value));
-        if(!validatePassword(event.target.value)){
-            setTimeout(() => setShowPwdErrorMessage(false),1000);
+        if (!validatePassword(event.target.value)) {
+            setTimeout(() => setShowPwdErrorMessage(false), 1000);
         }
     }
+
     function clearInput() {
         setId("");
         setPwd("");
@@ -46,10 +49,9 @@ export default function Userform({_mode}) {
                 password: pwd
             })
             .then((res) => {
-            localStorage.setItem("access-token",res.headers["access-token"])
-            localStorage.setItem("refresh-token",res.headers["access-token"])
-            navigate("/")
-        })
+                saveTokens(res.headers["access-token"], res.headers["refresh-token"])
+                navigate("/")
+            })
             .catch(error => {
                 console.log(error)
                 alert(error.response.data.errorMessage)
@@ -73,7 +75,6 @@ export default function Userform({_mode}) {
     }
 
 
-
     return <>
         <My_Navbar></My_Navbar>
         <div className={"userform_area"}>
@@ -88,19 +89,24 @@ export default function Userform({_mode}) {
             </div>
             <div className={"userform_form_area"}>
 
-                    <input ref={target_id} onChange={changeId} id={"userform_input_id"} className={"userform_form_input"} type={"text"}
-                           placeholder={"로그인 아이디"}/>
-                <ErrorMessage place={"right"} show={showIdErrorMessage} setShow={setShowIdErrorMessage} target={target_id} message={INVALID_ID_MESSAGE}/>
+                <input ref={target_id} onChange={changeId} id={"userform_input_id"} className={"userform_form_input"}
+                       type={"text"}
+                       placeholder={"로그인 아이디"}/>
+                <ErrorMessage place={"right"} show={showIdErrorMessage} setShow={setShowIdErrorMessage}
+                              target={target_id} message={INVALID_ID_MESSAGE}/>
 
-                <input ref={target_pwd} onChange={changePwd} id={"userform_input_pwd"} className={"userform_form_input"} type={"password"}
+                <input ref={target_pwd} onChange={changePwd} id={"userform_input_pwd"} className={"userform_form_input"}
+                       type={"password"}
                        placeholder={"비밀번호"}/>
-                <ErrorMessage place={"right"} setShow={setShowPwdErrorMessage} show={showPwdErrorMessage} target={target_pwd} message={INVALID_PWD_MESSAGE} />
+                <ErrorMessage place={"right"} setShow={setShowPwdErrorMessage} show={showPwdErrorMessage}
+                              target={target_pwd} message={INVALID_PWD_MESSAGE}/>
                 {_mode === "login" ?
                     <>
                         <button onClick={login} className={"userform_form_input userform_form_login_btn"}
                                 role={"button"}>로그인
                         </button>
-                        <Button variant={"warning"} size={"sm"}  href={"/signUp"} className={"userform_form_signup_move_btn"}>계정 생성</Button>
+                        <Button variant={"warning"} size={"sm"} href={"/signUp"}
+                                className={"userform_form_signup_move_btn"}>계정 생성</Button>
                     </>
                     : <button onClick={signIn} className={"userform_form_input userform_form_login_btn"}
                               role={"button"}>회원가입</button>}
