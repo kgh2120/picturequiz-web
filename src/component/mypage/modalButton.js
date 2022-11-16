@@ -1,7 +1,13 @@
 import {Button, Col, Form, Modal, Overlay, Row, Tooltip} from "react-bootstrap";
 import {useEffect, useRef, useState} from "react";
-import axios from "axios";
-import {baseAxios, tokenAxios} from "../../../function/global/axios-config";
+import {baseAxios, tokenAxios} from "../../utils/global/axios-config";
+import {
+    ErrorMessage,
+    INVALID_MAIL_MESSAGE,
+    INVALID_NICKNAME_MESSAGE,
+    INVALID_PWD_MESSAGE
+} from "../error/error-message";
+import {validateEmail, validateId, validateNickname, validatePassword} from "../../utils/global/validate";
 
 export default function ModalButton({mode, changeState}) {
 
@@ -14,6 +20,16 @@ export default function ModalButton({mode, changeState}) {
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
     const [errorMessage, setErrorMessage] = useState("");
+    const [showNickname, setShowNickname] = useState(false);
+    const [currentPwdShow, setCurrentPwdShow] = useState(false)
+    const [newPwdShow, setNewPwdShow] = useState(false)
+    const [checkPwdShow, setCheckPwdShow] = useState(false)
+    const [checkMailShow, setCheckMailShow] = useState(false)
+    const mailTarget = useRef(null);
+    const currentPwdTarget = useRef(null)
+    const newPwdTarget = useRef(null)
+    const checkPwdTarget = useRef(null)
+    const nicknameTarget = useRef(null)
     const target = useRef(null);
 
     useEffect(() => {
@@ -98,11 +114,11 @@ export default function ModalButton({mode, changeState}) {
             return;
         } else {
             const body = {
-                currentPassword : currentPwd,
-                newPassword : newPwd
+                currentPassword: currentPwd,
+                newPassword: newPwd
             }
-            tokenAxios.patch("/my-profile/password",body)
-                .then(()=>{
+            tokenAxios.patch("/my-profile/password", body)
+                .then(() => {
                     alert("비밀번호가 변경되었습니다.");
                     handleClosePasswordBtn()
                 }).catch(err => {
@@ -210,10 +226,43 @@ export default function ModalButton({mode, changeState}) {
         setChangeNicknameDisabled(true);
     }
 
-    const checkPasswordBtnUsable = () => {
-        let currentPwd = document.getElementById("input_password_current").value;
-        let newPwd = document.getElementById("input_password_new").value;
-        let checkPwd = document.getElementById("input_password_new_check").value;
+    const handleNicknameValidate = (event)=>{
+        const value = event.target.value;
+        if (!validateNickname(value)) {
+            setShowNickname(true);
+            setTimeout(() => setShowNickname(false),1000);
+        }
+        }
+
+
+    const checkPasswordBtnUsable = (event) => {
+        let current = document.getElementById("input_password_current");
+        let currentPwd = current.value;
+        let newPwdInput = document.getElementById("input_password_new");
+        let newPwd = newPwdInput.value;
+        let checked = document.getElementById("input_password_new_check");
+        let checkPwd = checked.value;
+
+        const input = event.target;
+        if (input == current) {
+            setCurrentPwdShow(!validatePassword(currentPwd));
+            if(!validatePassword(event.target.value)){
+                setTimeout(() => setCurrentPwdShow(false),1000);
+            }
+        }
+        if (input == newPwdInput) {
+            setNewPwdShow(!validatePassword(newPwd));
+            if(!validatePassword(event.target.value)){
+                setTimeout(() => setNewPwdShow(false),1000);
+            }
+        }
+
+        if(input == checked) {
+            setCheckPwdShow(!validatePassword(checkPwd));
+            if(!validatePassword(event.target.value)){
+                setTimeout(() => setCheckPwdShow(false),1000);
+            }
+        }
         if (currentPwd === "" || newPwd === "" || checkPwd === "") {
             return;
         } else {
@@ -231,6 +280,13 @@ export default function ModalButton({mode, changeState}) {
 
     const [show, setShow] = useState(false);
     const [tooltipShow, setTooltipShow] = useState(false)
+    const isValidateMailInput = (event) =>{
+        const value = event.target.value
+        if(!validateEmail(value)) {
+            setCheckMailShow(true);
+            setTimeout(() => setCheckMailShow(false),1000);
+        }
+}
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -259,7 +315,10 @@ export default function ModalButton({mode, changeState}) {
                                         type="text"
                                         placeholder="nickname"
                                         id={"input_nickname_dup"}
+                                        ref={nicknameTarget}
+                                        onKeyUp={handleNicknameValidate}
                                     />
+                                    <ErrorMessage show={showNickname} target={nicknameTarget} message={INVALID_NICKNAME_MESSAGE} />
                                 </Col>
                                 <Col sm={4} className={"modal_mobile_btn"}>
                                     <Button ref={target} onClick={isNicknameDuplicate} variant={"warning"}>검사</Button>
@@ -292,11 +351,8 @@ export default function ModalButton({mode, changeState}) {
                             <Form.Label>인증 메일</Form.Label>
                             <Row>
                                 <Col sm={8} className={"modal_mobile_input"}>
-                                    <Form.Control
-                                        type="email"
-                                        placeholder="이메일 주소"
-                                        id={"input_email"}
-                                    />
+                                    <Form.Control type="email" placeholder="이메일 주소" id={"input_email"} onKeyUp={isValidateMailInput} ref = {mailTarget}/>
+                                    <ErrorMessage show={checkMailShow} target={mailTarget} message={INVALID_MAIL_MESSAGE}/>
                                 </Col>
                                 <Col sm={4} className={"modal_mobile_btn"}>
                                     <Button variant={"warning"} onClick={sendMail}>전송</Button>
@@ -342,19 +398,28 @@ export default function ModalButton({mode, changeState}) {
                                           type="password"
                                           placeholder="현재 비밀번호"
                                           id={"input_password_current"}
+                                          ref={currentPwdTarget}
                             />
+                            <ErrorMessage show={currentPwdShow} target={currentPwdTarget}
+                                          place={"right"} message={INVALID_PWD_MESSAGE}/>
                             <Form.Label>새 비밀번호</Form.Label>
                             <Form.Control onKeyUp={checkPasswordBtnUsable}
                                           type="password"
                                           placeholder="새 비밀번호"
                                           id={"input_password_new"}
+                                          ref={newPwdTarget}
                             />
+                            <ErrorMessage show={newPwdShow} target={newPwdTarget}
+                                          place={"right"} message={INVALID_PWD_MESSAGE}/>
                             <Form.Label>새 비밀번호 확인</Form.Label>
                             <Form.Control onKeyUp={checkPasswordBtnUsable}
                                           type="password"
                                           placeholder="새 비밀번호 확인"
                                           id={"input_password_new_check"}
+                                          ref={checkPwdTarget}
                             />
+                            <ErrorMessage show={checkPwdShow} target={checkPwdTarget}
+                                          place={"right"} message={INVALID_PWD_MESSAGE}/>
 
                         </Modal.Body>
                         <Modal.Footer>

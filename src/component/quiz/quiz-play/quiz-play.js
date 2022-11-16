@@ -1,7 +1,7 @@
 import My_Navbar from "../../navbar/my_Navbar";
 import {useLocation} from "react-router";
 import {useEffect, useState} from "react";
-import {baseAxios, tokenAxios} from "../../../../function/global/axios-config";
+import {baseAxios, tokenAxios} from "../../../utils/global/axios-config";
 import AnswerModal from "./answer-modal";
 import Container from "react-bootstrap/Container";
 export default function QuizPlay() {

@@ -1,22 +1,36 @@
-import My_Navbar from "./component/navbar/my_Navbar";
-import Form_logo from "./component/form/form_logo";
-import {useState} from "react";
+import My_Navbar from "../component/navbar/my_Navbar";
+import Form_logo from "../component/form/form_logo";
+import {useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
 import {Button} from "react-bootstrap";
-import {baseAxios} from "../function/global/axios-config";
+import {baseAxios} from "../utils/global/axios-config";
+import {validateId, validatePassword} from "../utils/global/validate";
+import {ErrorMessage, INVALID_ID_MESSAGE, INVALID_PWD_MESSAGE} from "../component/error/error-message";
 
 
 export default function Userform({_mode}) {
 
     const [id, setId] = useState("");
     const [pwd, setPwd] = useState("");
+    const [showIdErrorMessage, setShowIdErrorMessage] = useState(false)
+    const [showPwdErrorMessage, setShowPwdErrorMessage] = useState(false)
+
+    const target_id =useRef(null)
+    const target_pwd =useRef(null)
 
     function changeId(event) {
         setId(event.target.value)
+        setShowIdErrorMessage(!validateId(event.target.value));
+        if(!validateId(event.target.value)){
+            setTimeout(() => setShowIdErrorMessage(false),1000);
+        }
     }
     function changePwd(event) {
         setPwd(event.target.value)
+        setShowPwdErrorMessage(!validatePassword(event.target.value));
+        if(!validatePassword(event.target.value)){
+            setTimeout(() => setShowPwdErrorMessage(false),1000);
+        }
     }
     function clearInput() {
         setId("");
@@ -73,11 +87,14 @@ export default function Userform({_mode}) {
 
             </div>
             <div className={"userform_form_area"}>
-                <input onChange={changeId} id={"userform_input_id"} className={"userform_form_input"} type={"text"}
-                       placeholder={"로그인 아이디"}/>
-                <input onChange={changePwd} id={"userform_input_pwd"} className={"userform_form_input"} type={"password"}
-                       placeholder={"비밀번호"}/>
 
+                    <input ref={target_id} onChange={changeId} id={"userform_input_id"} className={"userform_form_input"} type={"text"}
+                           placeholder={"로그인 아이디"}/>
+                <ErrorMessage place={"right"} show={showIdErrorMessage} setShow={setShowIdErrorMessage} target={target_id} message={INVALID_ID_MESSAGE}/>
+
+                <input ref={target_pwd} onChange={changePwd} id={"userform_input_pwd"} className={"userform_form_input"} type={"password"}
+                       placeholder={"비밀번호"}/>
+                <ErrorMessage place={"right"} setShow={setShowPwdErrorMessage} show={showPwdErrorMessage} target={target_pwd} message={INVALID_PWD_MESSAGE} />
                 {_mode === "login" ?
                     <>
                         <button onClick={login} className={"userform_form_input userform_form_login_btn"}

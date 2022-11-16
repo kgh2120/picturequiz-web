@@ -1,5 +1,5 @@
 import QuizList from "./quiz_list";
-import {tokenAxios} from "../../../../function/global/axios-config";
+import {tokenAxios} from "../../../utils/global/axios-config";
 import {useEffect, useState} from "react";
 import My_Navbar from "../../navbar/my_Navbar";
 import Container from "react-bootstrap/Container";
