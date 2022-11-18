@@ -1,1 +1,0 @@
-# picturequiz-web
