@@ -14,18 +14,14 @@ import {getAccessToken} from "../../../utils/global/token";
 
 export default function QuizAdd() {
 
-    const [character_name, setCharacter_name] = useState("");
-
-    const [search_result, setSearchResult] = useState([])
-    const [character, setCharacter] = useState();
-
+    const [characterName, setCharacterName] = useState("");
     const [tags, setTags] = useState([]);
     const [tagName, setTagName] = useState("");
     const [tagErrorShow, setTagErrorShow] = useState(false)
     const [tagErrorMessage, setTagErrorMessage] = useState("");
 
     const searchCharacterEvent = (event) => {
-        searchCharacter(event, setCharacter_name, setSearchResult);
+        setCharacterName(event.target.value);
     }
 
     const searchTagEvent = (event) => {
@@ -36,29 +32,19 @@ export default function QuizAdd() {
     const changeTagName = (event) => {
         setTagName(event.target.value)
     }
-
-    const logSelectedMenu = (event) => {
-
-        let parsed = JSON.parse(event);
-        setCharacter(parsed);
-        console.log(character)
-        setCharacter_name(parsed.name);
-
-    }
-
     const registerQuiz = () => {
         let fileInput = document.getElementById("input_upload");
         const file = fileInput.files[0];
 
 
-        if (file === undefined || character === undefined) {
+        if (file === undefined || characterName === "") {
             alert("업로드 할 사진과, 캐릭터를 선택해주세요");
             return;
         }
 
 
         const body = {
-            characterId: character.characterId,
+            characterName,
             tagNames: tags.map(t => t.name)
         };
 
@@ -131,9 +117,7 @@ export default function QuizAdd() {
                         <div className={"character_box"}>
 
                             <CharacterSearchForm
-                                _character_name={character_name}
-                                _logSelectedMenu={logSelectedMenu}
-                                _search_result={search_result}
+                                _character_name={characterName}
                                 _searchCharacterEvent={searchCharacterEvent}/>
 
                             <TagSearchForm changeTagName={changeTagName}
