@@ -9,6 +9,7 @@ import {searchCharacter, searchTag} from "../../../utils/fn_search";
 import {baseAxios} from "../../../utils/global/axios-config";
 import CharacterSearchForm from "./character_search_form";
 import TagSearchForm from "./tag_search_form";
+import {getAccessToken} from "../../../utils/global/token";
 
 
 export default function QuizAdd() {
@@ -66,13 +67,13 @@ export default function QuizAdd() {
         const blob = new Blob([JSON.stringify(body)], {type: "application/json"});
         formData.append("quiz", blob);
 
-        const token = localStorage.getItem("access-token");
+
         baseAxios.post("/quiz/add",
             formData
             , {
                 headers: {
                     "content-type": "multipart/form-data",
-                    "Authorization": `Bearer ${token}`
+                    "Authorization": `Bearer ${getAccessToken()}`
                 }
             }
         ).then(response => {

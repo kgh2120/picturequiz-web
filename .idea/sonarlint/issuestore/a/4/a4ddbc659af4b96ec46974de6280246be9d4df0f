@@ -1,0 +1,5 @@
+
+Zjavascript:S1481"9Remove the declaration of the unused 'infoText' variable.(©ÖÇ¸üÿÿÿÿ
+Wjavascript:S1854"6Remove this useless assignment to variable "infoText".(©ÖÇ¸üÿÿÿÿ
+Gjavascript:S4326"+Redundant use of `await` on a return value.(´ä’ü
+yjavascript:S1172*"]Remove the unused function parameter "res" or rename it to "_res" to make intention explicit.(öÍçÍ

@@ -1,17 +1,17 @@
 import {Button, Col, Form, Modal, Overlay, Row, Tooltip} from "react-bootstrap";
 import {useEffect, useRef, useState} from "react";
-import {baseAxios, tokenAxios} from "../../utils/global/axios-config";
+import {tokenAxios} from "../../utils/global/axios-config";
 import {
     ErrorMessage,
     INVALID_MAIL_MESSAGE,
     INVALID_NICKNAME_MESSAGE,
     INVALID_PWD_MESSAGE
 } from "../error/error-message";
-import {validateEmail, validateId, validateNickname, validatePassword} from "../../utils/global/validate";
+import {validateEmail, validateNickname, validatePassword} from "../../utils/global/validate";
 
 export default function ModalButton({mode, changeState}) {
 
-    const token = localStorage.getItem("access-token");
+
 
     const [changeNicknameDisabled, setChangeNicknameDisabled] = useState(true);
     const [changePasswordDisabled, setChangePasswordDisabled] = useState(true);
@@ -58,11 +58,7 @@ export default function ModalButton({mode, changeState}) {
     function isNicknameDuplicate() {
         setTooltipShow(false)
         const newNickname = document.getElementById("input_nickname_dup").value;
-        baseAxios.get(`/my-profile/nickname?nickname=${newNickname}`, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        }).then(res => {
+        tokenAxios.get(`/my-profile/nickname?nickname=${newNickname}`, ).then(res => {
             const btn = document.getElementById("nickname_update_submit_btn");
             setTooltipShow(true)
             if (res.data === false) {
@@ -79,13 +75,9 @@ export default function ModalButton({mode, changeState}) {
     function changeNickname() {
         const newNickname = document.getElementById("input_nickname_dup").value;
         console.log(newNickname)
-        baseAxios.patch(`/my-profile/nickname`, {
+        tokenAxios.patch(`/my-profile/nickname`, {
             nickname: newNickname,
-        }, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        }).then(res => {
+        }, ).then(res => {
             console.log(res);
             changeState(newNickname)
             setChangeNicknameDisabled(true);
@@ -136,13 +128,9 @@ export default function ModalButton({mode, changeState}) {
         const input_email = document.getElementById("input_email");
         const mailAddress = input_email.value;
 
-        baseAxios.post("/my-profile/send-mail", {
+        tokenAxios.post("/my-profile/send-mail", {
             email: mailAddress
-        }, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        }).then(res => {
+        }, ).then(res => {
             document.getElementById("auth_key_area").style.display = "flex";
             setTimerOps(true);
             input_email.readOnly = true;
@@ -156,14 +144,10 @@ export default function ModalButton({mode, changeState}) {
         const mailAddress = document.getElementById("input_email").value;
 
         let code = document.getElementById('input_auth_key').value;
-        baseAxios.patch("/my-profile/verify-code", {
+        tokenAxios.patch("/my-profile/verify-code", {
             email: mailAddress,
             code: code
-        }, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        }).then((res) => {
+        }, ).then((res) => {
             changeState(mailAddress);
             setTimerOps(false);
             alert("인증 메일이 등록되었습니다.");
