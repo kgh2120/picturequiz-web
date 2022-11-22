@@ -1,49 +1,19 @@
 .tag_area{
     display: flex;
+    flex-wrap: wrap;
+
 }
 .tag{
     display: flex;
-    background-color: aqua;
     border-radius: 5px;
     align-items: center;
     margin-right: 5px;
     margin-bottom: 5px;
+    height: 20px;
 }
 .tag:hover{
     cursor: pointer;
 }
 .tag_icon{
     margin-left: 5px;
-}
-/*sm*/
-@media (min-width: 576px){
-    .tag_font{
-       font-size: 12px;
-    }
-    .tag_area{
-        display: flex;
-        height: 20px;
-    }
-}
-/*md*/
-@media (min-width: 768px) {
-}
-/*lg*/
-@media (min-width: 992px){
-    .tag_font{
-        font-size: 13px;
-    }
-    .tag_area{
-        display: flex;
-        height: 20px;
-    }
-}
-@media (max-width: 576px){
-    .tag_font{
-        font-size: 10px;
-    }
-    .tag_area{
-        display: flex;
-        height: 20px;
-    }
 }
