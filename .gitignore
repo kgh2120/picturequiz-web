@@ -24,4 +24,4 @@ yarn-error.log*
 
 /src/utils/global/axios-config.js
 
-.idea/**
+/.idea
