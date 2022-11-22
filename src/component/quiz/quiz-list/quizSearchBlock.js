@@ -12,10 +12,9 @@ import {validateTagName} from "../../../utils/global/validate";
 
 export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
 
-    const [character_name, setCharacter_name] = useState();
+    const [characterName, setCharacterName] = useState("");
 
-    const [search_result, setSearchResult] = useState([])
-    const [character, setCharacter] = useState();
+
     const [tags, setTags] = useState([]);
     const [tagName, setTagName] = useState("");
     const [orderState, setOrderState] = useState("POPULAR")
@@ -23,7 +22,7 @@ export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
     const [tagErrorMessage, setTagErrorMessage] = useState("");
 
     const searchCharacterEvent = (event) => {
-        searchCharacter(event, setCharacter_name, setSearchResult);
+        setCharacterName(event.target.value)
     }
 
     const searchTagEvent = (event) => {
@@ -32,8 +31,7 @@ export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
 
 
     const clearSearchCondition = () => {
-        setCharacter_name("");
-        setSearchResult([]);
+        setCharacterName("");
         setTags([]);
         setTagName("");
     }
@@ -43,12 +41,6 @@ export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
 
     const changeTagName = (event) => {
         setTagName(event.target.value)
-    }
-
-    const logSelectedMenu = (event) => {
-        let parsed = JSON.parse(event);
-        setCharacter(parsed);
-        setCharacter_name(parsed.name);
     }
 
     const defaultSearchCondition = {
@@ -65,7 +57,7 @@ export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
                     hasNext: response.data.hasNext
                 }
                 _setQuiz(result);
-            })
+            }).catch(err=>console.log(err))
 
     }, [])
 
@@ -109,7 +101,7 @@ export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
     const searchQuiz = () => {
         let searchCondition = {
             orderCondition: orderState,
-            answerName: character === undefined ? null : character.name,
+            answerName: characterName,
             tagNames: tags.map(t => t.name),
             pageNum: _pageNum, // TODO pageNum 받아서 넘겨야 할 듯
         }
@@ -164,9 +156,7 @@ export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
             <Row className="mt-3 row row-cols-auto">
                 <Col className="col-9">
                     <CharacterSearchForm
-                        _character_name={character_name}
-                        _logSelectedMenu={logSelectedMenu}
-                        _search_result={search_result}
+                        _character_name={characterName}
                         _searchCharacterEvent={searchCharacterEvent}/>
                 </Col>
                 <Col className="col-3">
