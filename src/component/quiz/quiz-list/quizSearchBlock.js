@@ -1,126 +1,58 @@
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import Dropdown from "react-bootstrap/Dropdown";
-import CharacterSearchResult from "../quiz-add/character_search_result";
-import {useEffect, useRef, useState} from "react";
+import {Button, Col, Container, Row} from "react-bootstrap";
+import {useEffect, useState} from "react";
 import SearchTagList from "./search_tag_list";
-import {searchCharacter, searchTag} from "../../../utils/fn_search";
-import {baseAxios, tokenAxios} from "../../../utils/global/axios-config";
+import {searchTag} from "../../../utils/fn_search";
+import {baseAxios} from "../../../utils/global/axios-config";
 import CharacterSearchForm from "../quiz-add/character_search_form";
 import TagSearchForm from "../quiz-add/tag_search_form";
-import {ErrorMessage, INVALID_TAG_MESSAGE, INVALID_TAGSIZE_MESSAGE} from "../../error/error-message";
-import {validateTagName} from "../../../utils/global/validate";
 
-export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
+export default function QuizSearchBlock({_setSearchCondition}) {
 
     const [characterName, setCharacterName] = useState("");
-
-
     const [tags, setTags] = useState([]);
     const [tagName, setTagName] = useState("");
     const [orderState, setOrderState] = useState("POPULAR")
     const [tagErrorShow, setTagErrorShow] = useState(false)
     const [tagErrorMessage, setTagErrorMessage] = useState("");
-
+    //생존
     const searchCharacterEvent = (event) => {
         setCharacterName(event.target.value)
     }
-
+    //생존
     const searchTagEvent = (event) => {
         searchTag(event, setTags, setTagName, tags,setTagErrorShow,setTagErrorMessage);
     }
-
-
+    //생존
     const clearSearchCondition = () => {
         setCharacterName("");
         setTags([]);
         setTagName("");
     }
-
-
-
-
+    //생존
     const changeTagName = (event) => {
         setTagName(event.target.value)
     }
-
-    const defaultSearchCondition = {
-        orderCondition: "POPULAR"
-    }
-    useEffect(() => {
-        baseAxios.post("/quiz", defaultSearchCondition)
-            .then(response => {
-                console.log(response)
-
-                const result = {
-                    quizzes: response.data.quizzes,
-                    nextPageNum: response.data.nextPageNum,
-                    hasNext: response.data.hasNext
-                }
-                _setQuiz(result);
-            }).catch(err=>console.log(err))
-
-    }, [])
-
-    //
-
     const changeOrderStateToPopular = () => {
         setOrderState("POPULAR");
-        const searchOrderCondition = {
-            orderCondition: "POPULAR"
-        }
-        baseAxios.post("/quiz", searchOrderCondition)
-            .then(response => {
-                console.log(response)
-
-                const result = {
-                    quizzes: response.data.quizzes,
-                    nextPageNum: response.data.nextPageNum,
-                    hasNext: response.data.hasNext
-                }
-                _setQuiz(result);
-            })
+        _setSearchCondition(prevCondition =>{
+            return{...prevCondition, orderCondition: "POPULAR"}
+        })
     }
     const changeOrderStateToRecent = () => {
         setOrderState("RECENT");
-        const searchOrderCondition = {
-            orderCondition: "RECENT"
-        }
-        baseAxios.post("/quiz", searchOrderCondition)
-            .then(response => {
-                console.log(response)
-
-                const result = {
-                    quizzes: response.data.quizzes,
-                    nextPageNum: response.data.nextPageNum,
-                    hasNext: response.data.hasNext
-                }
-                _setQuiz(result);
-            })
-    }
-
-    const searchQuiz = () => {
-        let searchCondition = {
-            orderCondition: orderState,
-            answerName: characterName,
-            tagNames: tags.map(t => t.name),
-            pageNum: _pageNum, // TODO pageNum 받아서 넘겨야 할 듯
-        }
-
-        baseAxios.post("/quiz", searchCondition)
-            .then(response => {
-                console.log(response)
-                const result = {
-                    quizzes: response.data.quizzes,
-                    nextPageNum: response.data.nextPageNum,
-                    hasNext: response.data.hasNext
-                }
-                _setQuiz(result);
-                clearSearchCondition();
-            }).catch(err => {
-            alert("검색 결과가 없습니다.");
-            clearSearchCondition();
+        _setSearchCondition(prevCondition =>{
+            return{...prevCondition, orderCondition: "RECENT"}
         })
     }
+    // 거의 삭제
+    // searchCondition을 state들로 바꿔주고, 그 다음에 여기서 유지하는 state를 초기화 시켜주기.
+    const changeSearchCondition = () => {
+        _setSearchCondition(prev => {
+            return {...prev, answerName: characterName, tagNames : tags.map(t => t.name), pageNum : 0}
+        })
+        clearSearchCondition();
+    }
+
 
     return <>
         <Container className={"search_container"}>
@@ -160,7 +92,7 @@ export default function QuizSearchBlock({_setQuiz, _pageNum, _setPageNum}) {
                         _searchCharacterEvent={searchCharacterEvent}/>
                 </Col>
                 <Col className="col-3">
-                    <Button onClick={searchQuiz} variant={"success"} className={"small-font-btn"}>
+                    <Button onClick={changeSearchCondition} variant={"success"} className={"small-font-btn"}>
                         검색
                     </Button>
                 </Col>

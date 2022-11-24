@@ -1,12 +1,27 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import QuizBlock from "./quiz_block";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import {useInView} from "react-intersection-observer";
+import {baseAxios} from "../../../utils/global/axios-config";
 
 // api 연동할 때 들어오는 값 타입 확인해 봐야 할 듯.
-export default function QuizList({_quiz}) {
-    console.log(_quiz)
+export default function QuizList({_quiz , _setQuiz}) {
 
+    const [searchCondition, setSearchCondition]= useState(Object)
+
+    const [ref, inView] = useInView();
+
+    useEffect(() => {
+        if (inView && _quiz.hasNext) {
+
+        }
+    },[inView, _quiz.hasNext]
+)
+
+    const searchMore = () =>{
+        baseAxios()
+    }
 
     return <>
         <Container className={"quiz_list_container"}>
@@ -20,6 +35,7 @@ export default function QuizList({_quiz}) {
                     })
                 }
             </Row>
+            <p ref={ref}></p>
         </Container>
 
     </>
