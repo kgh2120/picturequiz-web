@@ -4,53 +4,79 @@ import My_Navbar from "../../navbar/my_Navbar";
 import {useEffect, useState} from "react";
 import {autoLogin, getAccessToken, getRefreshToken} from "../../../utils/global/token";
 import {baseAxios} from "../../../utils/global/axios-config";
+import {useInView} from "react-intersection-observer";
 
 
+export default function Main_quiz_list() {
 
-export default function Main_quiz_list(){
-
-    const [currentPageNum, setCurrentPageNum] = useState(0)
-    const[searchCondition, setSearchCondition] = useState({
-        pageNum : 0,
-        answerName : "",
-        orderCondition : "POPULAR",
-        tagNames : []
+    const [nextPageNum, setnextPageNum] = useState(0)
+    const [hasNext, setHasNext] = useState();
+    const [ref, inView] = useInView()
+    const [loading, setLoading] = useState(false);
+    const [searchCondition, setSearchCondition] = useState({
+        pageNum: 0,
+        answerName: "",
+        orderCondition: "POPULAR",
+        tagNames: []
     });
-    const [quiz, setQuiz] = useState({
-        quizzes : [],
-        nextPageNum : 0,
-        hasNext : true
-    })
+    const [quiz, setQuiz] = useState([])
+
+
+    const searchQuiz = () => {
+        setLoading(true)
+        baseAxios.post("/quiz", searchCondition)
+            .then(response => {
+                if(response.data.hasNext)
+                    response.data.quizzes.pop();
+                setQuiz(prev => [response.data.quizzes]);
+                setnextPageNum(response.data.nextPageNum);
+                setHasNext(response.data.hasNext);
+            }).catch(err => {
+            alert("검색 결과가 없습니다.");
+        })
+        setLoading(false)
+    }
+
     useEffect(() => {
         if (!getAccessToken() && getRefreshToken()) {
             autoLogin();
         }
     }, [])
+    useEffect(() => {
+        searchQuiz()
+    }, [searchCondition])
 
-    const searchQuiz = () => {
-        console.log(searchCondition)
-        baseAxios.post("/quiz", searchCondition)
+    const searchMore = () => {
+        setLoading(true)
+        const moreCondition = {
+            pageNum: nextPageNum,
+            answerName: searchCondition.answerName,
+            orderCondition: searchCondition.orderCondition,
+            tagNames: searchCondition.tagNames
+        }
+        baseAxios.post("/quiz", moreCondition)
             .then(response => {
-                console.log(response)
-                const result = {
-                    quizzes: response.data.quizzes,
-                    nextPageNum: response.data.nextPageNum,
-                    hasNext: response.data.hasNext,
-                }
-                setQuiz(result);
+                if(response.data.hasNext)
+                    response.data.quizzes.pop();
+                setQuiz(prev => [...prev, response.data.quizzes]);
+                setnextPageNum(response.data.nextPageNum);
+                setHasNext(response.data.hasNext);
             }).catch(err => {
             alert("검색 결과가 없습니다.");
         })
+        setLoading(false)
     }
 
     useEffect(() => {
-        searchQuiz()
-    },[searchCondition])
+        if (inView && !loading && hasNext) {
+            searchMore()
+        }
+    }, [inView])
 
     return <>
         <My_Navbar></My_Navbar>
         <QuizSearchBlock _setSearchCondition={setSearchCondition}></QuizSearchBlock>
-        <QuizList _quiz={quiz} _setQuiz={setQuiz}></QuizList>
+        <QuizList _ref={ref} _quiz={quiz}></QuizList>
 
     </>
 }
