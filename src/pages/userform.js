@@ -7,6 +7,8 @@ import {baseAxios} from "../utils/global/axios-config";
 import {validateId, validatePassword} from "../utils/global/validate";
 import {ErrorMessage, INVALID_ID_MESSAGE, INVALID_PWD_MESSAGE} from "../component/error/error-message";
 import {saveTokens} from "../utils/global/token";
+import FindIdModal from "../component/form/find-id-modal";
+import TemporaryPasswordModal from "../component/form/temporary-password-modal";
 
 
 export default function Userform({_mode}) {
@@ -15,6 +17,15 @@ export default function Userform({_mode}) {
     const [pwd, setPwd] = useState("");
     const [showIdErrorMessage, setShowIdErrorMessage] = useState(false)
     const [showPwdErrorMessage, setShowPwdErrorMessage] = useState(false)
+    const [showFindIdModal, setShowFindIdModal] = useState(false);
+    const [showTempPwModal, setShowTempPwModal] = useState(false);
+
+    const handleFindIdModal = () => {
+        setShowFindIdModal(true);
+    }
+    const handleTempPwModal = () => {
+        setShowTempPwModal(true);
+    }
 
     const target_id = useRef(null)
     const target_pwd = useRef(null)
@@ -102,13 +113,20 @@ export default function Userform({_mode}) {
                               target={target_pwd} message={INVALID_PWD_MESSAGE}/>
                 {_mode === "login" ?
                     <>
-                        <button onClick={login} className={"userform_form_input userform_form_login_btn"}
+                        <button onClick={login} className={"userform_form_input userform_form_login_btn find_btn"}
                                 role={"button"}>로그인
                         </button>
                         <Button variant={"warning"} size={"sm"} href={"/signUp"}
                                 className={"userform_form_signup_move_btn"}>계정 생성</Button>
+                        <div className={"userform_form_input flex-box justify-content-center userform_find_area"}>
+                            <div className={" find_id_area find_btn"} onClick={handleFindIdModal}>아이디 찾기</div>
+                            <span className={"userform_slicer"}>/</span>
+                            <div className={"w-45 find_btn"} onClick={handleTempPwModal}>임시 비밀번호 발급</div>
+                        </div>
+                        <FindIdModal _show={showFindIdModal} _setShow={setShowFindIdModal}/>
+                        <TemporaryPasswordModal _show={showTempPwModal} _setShow={setShowTempPwModal}/>
                     </>
-                    : <button onClick={signIn} className={"userform_form_input userform_form_login_btn"}
+                    : <button onClick={signIn} className={"userform_form_input userform_form_login_btn find_btn"}
                               role={"button"}>회원가입</button>}
                 <div className={"userform_admin_info"}>
                     <h4 className={"userform_admin_info_text"}>운영자 문의 : kgh2120@gmail.com</h4>

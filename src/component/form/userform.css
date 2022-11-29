@@ -11,6 +11,20 @@
     font-size: 3em;
     text-align: center;
 }
+.text_korean{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.cus_label{
+    font-weight: bold;
+    font-size: 18px;
+}
+.main_btn{
+    background-color: var(--main);
+    color : black;
+    border: 1px solid var(--main);
+}
+
+
 .userform_logo_area p{
     margin-top: 20px;
 }
@@ -45,10 +59,43 @@
     border: none;
     color: #FFFFFF;
 }
+
+.userform_find_area{
+    margin-top: 20px;
+    border-radius: 5px;
+    background-color: var(--bs-secondary);
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    color: #FFFFFF;
+    align-items: center;
+}
+.userform_find_area:hover{
+    cursor: pointer;
+}
+.userform_slicer{
+    margin: 0px 15px;
+}
+.find_id_area{
+    text-align: end;
+}
 .userform_form_login_btn:hover{
     cursor: pointer;
 }
-
+.w-80{
+    width: 80% !important;
+}
+.find_id_error_area{
+    display: none;
+    justify-content: center;
+    color:var(--incorrect-message)
+}
+.find_correct_message{
+    color: var(--correct-message)
+}
+.find_id_response_area{
+    display: none;
+}
 .userform_form_signup_move_btn{
     border-radius: 5px;
     border: 1px solid rgba(0,0,0,0.2);
@@ -68,4 +115,16 @@
 .userform_admin_info_text{
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
+}
+
+.modal_title_center{
+    position: absolute;
+    left:40%
+}
+.modal_title_center_temp_pw{
+    position: absolute;
+    left: 33%
+}
+.find_btn:hover{
+    color: var(--main)
 }

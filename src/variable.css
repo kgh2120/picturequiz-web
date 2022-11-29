@@ -1,6 +1,9 @@
 :root{
     --main: #FFE863;
     --sub: #008C5D;
-    --sub-back:#008C5D28
-
+    --sub-back:#008C5D28;
+    --cancle-btn: #FF5858;
+    --background: #F1F1F1;
+    --correct-message : #56AC77;
+    --incorrect-message : #FB4667;
 }
