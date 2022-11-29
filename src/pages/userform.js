@@ -9,6 +9,7 @@ import {ErrorMessage, INVALID_ID_MESSAGE, INVALID_PWD_MESSAGE} from "../componen
 import {saveTokens} from "../utils/global/token";
 import FindIdModal from "../component/form/find-id-modal";
 import TemporaryPasswordModal from "../component/form/temporary-password-modal";
+import {handleError} from "../utils/global/exception/global-exception-handler";
 
 
 export default function Userform({_mode}) {
@@ -54,35 +55,42 @@ export default function Userform({_mode}) {
     const navigate = useNavigate();
 
     async function login() {
-        await baseAxios.post("/login",
-            {
-                loginId: id,
-                password: pwd
-            })
-            .then((res) => {
-                saveTokens(res.headers["access-token"], res.headers["refresh-token"])
-                navigate("/")
-            })
-            .catch(error => {
-                console.log(error)
-                alert(error.response.data.errorMessage)
-            })
+        if(validatePassword(pwd) && validateId(id)){
+            await baseAxios.post("/login",
+                {
+                    loginId: id,
+                    password: pwd
+                })
+                .then((res) => {
+                    saveTokens(res.headers["access-token"], res.headers["refresh-token"])
+                    navigate("/")
+                })
+                .catch(error => {
+                    console.log(error)
+                    handleError(error);
+                })
+        }else{
+            alert("입력하신 ID, 비밀번호를 확인해주세요")
+        }
     }
 
     async function signIn() {
-        const response = await baseAxios.post("/signUp",
-            {
-                loginId: id,
-                password: pwd
-            }).then(() => {
-            clearInput();
-            alert("회원가입이 완료되었습니다.")
+        if(validatePassword(pwd) && validateId(id)){
+            const response = await baseAxios.post("/signUp",
+                {
+                    loginId: id,
+                    password: pwd
+                }).then(() => {
+                clearInput();
+                alert("회원가입이 완료되었습니다.")
 
-            navigate("/")
-        }).catch(error => {
-            console.log(error)
-        })
-        console.log(response)
+                navigate("/")
+            }).catch(error => {
+                handleError(error);
+            })
+        }else{
+            alert("입력하신 ID, 비밀번호를 확인해주세요")
+        }
     }
 
 

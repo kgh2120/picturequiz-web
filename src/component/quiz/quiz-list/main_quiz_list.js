@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {autoLogin, getAccessToken, getRefreshToken} from "../../../utils/global/token";
 import {baseAxios} from "../../../utils/global/axios-config";
 import {useInView} from "react-intersection-observer";
+import {handleError} from "../../../utils/global/exception/global-exception-handler";
 
 
 export default function Main_quiz_list() {
@@ -32,7 +33,8 @@ export default function Main_quiz_list() {
                 setnextPageNum(response.data.nextPageNum);
                 setHasNext(response.data.hasNext);
             }).catch(err => {
-            alert("검색 결과가 없습니다.");
+                console.error(err)
+                handleError(err)
         })
         setLoading(false)
     }
