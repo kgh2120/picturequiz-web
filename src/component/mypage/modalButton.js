@@ -8,9 +8,9 @@ import {
     INVALID_PWD_MESSAGE
 } from "../error/error-message";
 import {validateEmail, validateNickname, validatePassword} from "../../utils/global/validate";
+import {handleConnectionError, handleError} from "../../utils/global/exception/global-exception-handler";
 
 export default function ModalButton({mode, changeState}) {
-
 
 
     const [changeNicknameDisabled, setChangeNicknameDisabled] = useState(true);
@@ -58,30 +58,35 @@ export default function ModalButton({mode, changeState}) {
     function isNicknameDuplicate() {
         setTooltipShow(false)
         const newNickname = document.getElementById("input_nickname_dup").value;
-        tokenAxios.get(`/my-profile/nickname?nickname=${newNickname}`, ).then(res => {
-            const btn = document.getElementById("nickname_update_submit_btn");
-            setTooltipShow(true)
-            if (res.data === false) {
-                document.getElementById("input_nickname_dup").readOnly = true;
-                setChangeNicknameDisabled(false);
-                setErrorMessage("사용 가능한 닉네임입니다.");
-            } else {
-                setErrorMessage("사용 불가능한 닉네임입니다.");
-                btn.disabled = true;
-            }
-        })
+
+        if (validateNickname(newNickname)) {
+            tokenAxios.get(`/my-profile/nickname?nickname=${newNickname}`,).then(res => {
+                const btn = document.getElementById("nickname_update_submit_btn");
+                setTooltipShow(true)
+                if (res.data === false) {
+                    document.getElementById("input_nickname_dup").readOnly = true;
+                    setChangeNicknameDisabled(false);
+                    setErrorMessage("사용 가능한 닉네임입니다.");
+                } else {
+                    setErrorMessage("사용 불가능한 닉네임입니다.");
+                    btn.disabled = true;
+                }
+            }).catch(err => handleError(err));
+        } else {
+            alert("조건에 맞춰 닉네임을 입력해주세요")
+        }
     }
 
     function changeNickname() {
         const newNickname = document.getElementById("input_nickname_dup").value;
-        console.log(newNickname)
         tokenAxios.patch(`/my-profile/nickname`, {
             nickname: newNickname,
-        }, ).then(res => {
-            console.log(res);
+        },).then(res => {
             changeState(newNickname)
             setChangeNicknameDisabled(true);
             handleClose();
+        }).catch(err => {
+            handleError(err);
         })
     }
 
@@ -114,10 +119,11 @@ export default function ModalButton({mode, changeState}) {
                     alert("비밀번호가 변경되었습니다.");
                     handleClosePasswordBtn()
                 }).catch(err => {
-                console.log(err)
                 if (err.response.status === 409) {
                     setTooltipShow(true)
                     setErrorMessage(err.response.data.errorMessage);
+                } else {
+                    handleConnectionError(err)
                 }
             })
 
@@ -128,15 +134,23 @@ export default function ModalButton({mode, changeState}) {
         const input_email = document.getElementById("input_email");
         const mailAddress = input_email.value;
 
-        tokenAxios.post("/my-profile/send-mail", {
-            email: mailAddress
-        }, ).then(res => {
-            document.getElementById("auth_key_area").style.display = "flex";
-            setTimerOps(true);
-            input_email.readOnly = true;
-            setMinutes(5);
-            setSeconds(0);
-        })
+        if (validateEmail(mailAddress)) {
+            tokenAxios.post("/my-profile/send-mail", {
+                email: mailAddress
+            },).then(res => {
+                document.getElementById("auth_key_area").style.display = "flex";
+                setTimerOps(true);
+                input_email.readOnly = true;
+                setMinutes(5);
+                setSeconds(0);
+            }).catch(err => {
+                handleError(err)
+            });
+        } else {
+            alert("입력하신 이메일이 올바른 형식인지 체크해주세요")
+        }
+
+
     }
 
     function verifyCodeAndChangeMail() {
@@ -147,23 +161,22 @@ export default function ModalButton({mode, changeState}) {
         tokenAxios.patch("/my-profile/verify-code", {
             email: mailAddress,
             code: code
-        }, ).then((res) => {
+        },).then((res) => {
             changeState(mailAddress);
             setTimerOps(false);
             alert("인증 메일이 등록되었습니다.");
             handleCloseMailBtn();
 
         }).catch(err => {
+
             let status = err.response.status;
-            const tooltip = document.querySelector(".tooltip-inner");
-            console.log(tooltip)
             setTooltipShow(true)
-            if (status == 409) {
+            if (status === 409) {
                 // 다시 입력해주세요 말해주기.
                 setErrorMessage("인증 코드를 다시 입력해 주세요");
                 return;
             }
-            if (status == 404) {
+            if (status === 404) {
                 // 메일을 재전송 해주기
                 setErrorMessage("코드가 만료됐습니다. 메일을 재전송 했습니다.");
                 setMinutes(5);
@@ -172,7 +185,10 @@ export default function ModalButton({mode, changeState}) {
                 sendMail()
                 return;
             }
-
+            if (status === 0) {
+                setTooltipShow(false);
+                handleConnectionError(err);
+            }
         })
     }
 
@@ -210,13 +226,13 @@ export default function ModalButton({mode, changeState}) {
         setChangeNicknameDisabled(true);
     }
 
-    const handleNicknameValidate = (event)=>{
+    const handleNicknameValidate = (event) => {
         const value = event.target.value;
         if (!validateNickname(value)) {
             setShowNickname(true);
-            setTimeout(() => setShowNickname(false),1000);
+            setTimeout(() => setShowNickname(false), 1000);
         }
-        }
+    }
 
 
     const checkPasswordBtnUsable = (event) => {
@@ -230,27 +246,28 @@ export default function ModalButton({mode, changeState}) {
         const input = event.target;
         if (input == current) {
             setCurrentPwdShow(!validatePassword(currentPwd));
-            if(!validatePassword(event.target.value)){
-                setTimeout(() => setCurrentPwdShow(false),1000);
+            if (!validatePassword(event.target.value)) {
+                setTimeout(() => setCurrentPwdShow(false), 1000);
             }
         }
         if (input == newPwdInput) {
             setNewPwdShow(!validatePassword(newPwd));
-            if(!validatePassword(event.target.value)){
-                setTimeout(() => setNewPwdShow(false),1000);
+            if (!validatePassword(event.target.value)) {
+                setTimeout(() => setNewPwdShow(false), 1000);
             }
         }
 
-        if(input == checked) {
+        if (input == checked) {
             setCheckPwdShow(!validatePassword(checkPwd));
-            if(!validatePassword(event.target.value)){
-                setTimeout(() => setCheckPwdShow(false),1000);
+            if (!validatePassword(event.target.value)) {
+                setTimeout(() => setCheckPwdShow(false), 1000);
             }
         }
-        if (currentPwd === "" || newPwd === "" || checkPwd === "") {
-            return;
-        } else {
+
+        if (validatePassword(currentPwd) && validatePassword(newPwd) && validatePassword(checkPwd)) {
             setChangePasswordDisabled(false);
+        } else {
+            setChangePasswordDisabled(true);
         }
     }
 
@@ -264,13 +281,13 @@ export default function ModalButton({mode, changeState}) {
 
     const [show, setShow] = useState(false);
     const [tooltipShow, setTooltipShow] = useState(false)
-    const isValidateMailInput = (event) =>{
+    const isValidateMailInput = (event) => {
         const value = event.target.value
-        if(!validateEmail(value)) {
+        if (!validateEmail(value)) {
             setCheckMailShow(true);
-            setTimeout(() => setCheckMailShow(false),1000);
+            setTimeout(() => setCheckMailShow(false), 1000);
         }
-}
+    }
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -302,7 +319,8 @@ export default function ModalButton({mode, changeState}) {
                                         ref={nicknameTarget}
                                         onKeyUp={handleNicknameValidate}
                                     />
-                                    <ErrorMessage show={showNickname} target={nicknameTarget} message={INVALID_NICKNAME_MESSAGE} />
+                                    <ErrorMessage show={showNickname} target={nicknameTarget}
+                                                  message={INVALID_NICKNAME_MESSAGE}/>
                                 </Col>
                                 <Col sm={4} className={"modal_mobile_btn"}>
                                     <Button ref={target} onClick={isNicknameDuplicate} variant={"warning"}>검사</Button>
@@ -335,7 +353,8 @@ export default function ModalButton({mode, changeState}) {
                             <Form.Label>인증 메일</Form.Label>
                             <Row>
                                 <Col sm={8} className={"modal_mobile_input"}>
-                                    <Form.Control type="email" placeholder="이메일 주소" id={"input_email"} onKeyUp={isValidateMailInput} ref = {mailTarget}/>
+                                    <Form.Control type="email" placeholder="이메일 주소" id={"input_email"}
+                                                  onKeyUp={isValidateMailInput} ref={mailTarget}/>
                                     <ErrorMessage show={checkMailShow} target={mailTarget} message={INVALID_MAIL_MESSAGE}/>
                                 </Col>
                                 <Col sm={4} className={"modal_mobile_btn"}>
