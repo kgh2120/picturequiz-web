@@ -5,3 +5,9 @@ export const SERVER_CONNECTION_ERROR = {
         alert(this.responseMessage)
     }
 }
+export const FILE_NOT_FOUND_ERROR = {
+    responseMessage : "업로드 한 이미지 파일을 찾을 수 없습니다.",
+    response() {
+        alert(this.responseMessage)
+    }
+}

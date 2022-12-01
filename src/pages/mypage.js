@@ -5,6 +5,7 @@ import {Button, Card, ListGroup, Modal} from "react-bootstrap";
 import ModalButton from "../component/mypage/modalButton";
 import {useNavigate} from "react-router-dom";
 import {deleteToken} from "../utils/global/token";
+import {handleError} from "../utils/global/exception/global-exception-handler";
 
 export default function MyPage({mode}) {
 
@@ -17,36 +18,34 @@ export default function MyPage({mode}) {
     const [show, setShow] = useState(false);
     const navigate = useNavigate()
     useEffect(() => {
-        loading().then(res => {
-            console.log(res.data)
+        tokenAxios.get("/my-profile").then(res => {
             setId(res.data.loginId);
             setNickname(res.data.nickname);
             setMail(res.data.authEmail);
+        }).catch(err =>{
+            console.log(err)
+            handleError(err)
         })
-    },[])
-
-    async function loading() {
-        return await tokenAxios.get("/my-profile")
+    }, [])
+    const moveToHome = () => {
+        navigate("/", {replace: true})
     }
 
-
-    const moveToHome = () =>{
-        navigate("/",{replace:true})
-    }
-
-    const showDeleteModal = () =>{
+    const showDeleteModal = () => {
         setShow(true)
     }
-    const deleteAccount = () =>{
+    const deleteAccount = () => {
         tokenAxios.delete("/my-profile")
             .then(res => {
                 alert("계정이 안전하게 삭제되었습니다.")
                 deleteToken();
                 moveToHome();
-            })
+            }).catch(err => {
+            handleError(err)
+        })
     }
 
-    const handleClose = ()=>{
+    const handleClose = () => {
         setShow(false)
     }
 

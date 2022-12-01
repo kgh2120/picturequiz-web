@@ -6,10 +6,11 @@ import My_Navbar from "../../navbar/my_Navbar";
 
 import SearchTagList from "../quiz-list/search_tag_list";
 import {searchCharacter, searchTag} from "../../../utils/fn_search";
-import {baseAxios} from "../../../utils/global/axios-config";
+import {baseAxios, healthCheck} from "../../../utils/global/axios-config";
 import CharacterSearchForm from "./character_search_form";
 import TagSearchForm from "./tag_search_form";
 import {getAccessToken} from "../../../utils/global/token";
+import {handleConnectionError, handleFileNotFoundError} from "../../../utils/global/exception/global-exception-handler";
 
 
 export default function QuizAdd() {
@@ -25,7 +26,7 @@ export default function QuizAdd() {
     }
 
     const searchTagEvent = (event) => {
-        searchTag(event, setTags, setTagName, tags,setTagErrorShow,setTagErrorMessage);
+        searchTag(event, setTags, setTagName, tags, setTagErrorShow, setTagErrorMessage);
     }
 
 
@@ -36,23 +37,18 @@ export default function QuizAdd() {
         let fileInput = document.getElementById("input_upload");
         const file = fileInput.files[0];
 
-
         if (file === undefined || characterName === "") {
             alert("업로드 할 사진과, 캐릭터를 선택해주세요");
             return;
         }
-
-
         const body = {
             characterName,
             tagNames: tags.map(t => t.name)
         };
-
         let formData = new FormData();
         formData.append("image", file);
         const blob = new Blob([JSON.stringify(body)], {type: "application/json"});
         formData.append("quiz", blob);
-
 
         baseAxios.post("/quiz/add",
             formData
@@ -62,9 +58,18 @@ export default function QuizAdd() {
                     "Authorization": `Bearer ${getAccessToken()}`
                 }
             }
-        ).then(response => {
+        ).then(() => {
             moveToMain();
-        })
+        }).catch(() => {
+                healthCheck()
+                    .catch(error => {
+                        if(error.response.status === 0)
+                            handleConnectionError(error);
+                        else
+                            handleFileNotFoundError()
+                    })
+            }
+        )
     }
 
     const uploadImage = () => {
@@ -73,23 +78,29 @@ export default function QuizAdd() {
     }
 
     const changeUploadBoxImage = (e) => {
+
+
+        let beforeImg = document.querySelector(".uploader img");
+        let box = document.querySelector("div.uploader");
+
         const reader = new FileReader();
         reader.onload = (e) => {
             const img = document.createElement("img");
             img.setAttribute("src", e.target.result);
             img.setAttribute("class", "thumnail");
             document.getElementById("upload_icon").setAttribute("style", "display : none");
-            let beforeImg = document.querySelector(".uploader img");
-
-            let box = document.querySelector("div.uploader");
             try {
                 box.removeChild(beforeImg);
             } catch (err) {
             }
             box.appendChild(img);
         }
-
-        reader.readAsDataURL(e.target.files[0]);
+        if(e.target.files[0] !== undefined)
+            reader.readAsDataURL(e.target.files[0]);
+        else {
+            box.removeChild(beforeImg);
+            document.getElementById("upload_icon").setAttribute("style", "display : block");
+        }
     }
 
     const moveToMain = () => {

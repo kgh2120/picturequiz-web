@@ -10,10 +10,16 @@ import {handleError} from "../../../utils/global/exception/global-exception-hand
 
 export default function Main_quiz_list() {
 
-    const [nextPageNum, setnextPageNum] = useState(0)
+    const [nextPageNum, setNextPageNum] = useState(0)
     const [hasNext, setHasNext] = useState();
     const [ref, inView] = useInView()
     const [loading, setLoading] = useState(false);
+    const [searchConditionBackUp, setSearchConditionBackUp] = useState({
+        pageNum: 0,
+        answerName: "",
+        orderCondition: "POPULAR",
+        tagNames: []
+    });
     const [searchCondition, setSearchCondition] = useState({
         pageNum: 0,
         answerName: "",
@@ -27,26 +33,21 @@ export default function Main_quiz_list() {
         setLoading(true)
         baseAxios.post("/quiz", searchCondition)
             .then(response => {
+                setSearchConditionBackUp(searchCondition);
                 if(response.data.hasNext)
                     response.data.quizzes.pop();
                 setQuiz(prev => [response.data.quizzes]);
-                setnextPageNum(response.data.nextPageNum);
+                setNextPageNum(response.data.nextPageNum);
                 setHasNext(response.data.hasNext);
             }).catch(err => {
-                console.error(err)
                 handleError(err)
+                if(err.response.status!==0)
+                    setSearchCondition(searchConditionBackUp)
         })
         setLoading(false)
     }
 
-    useEffect(() => {
-        if (!getAccessToken() && getRefreshToken()) {
-            autoLogin();
-        }
-    }, [])
-    useEffect(() => {
-        searchQuiz()
-    }, [searchCondition])
+
 
     const searchMore = () => {
         setLoading(true)
@@ -61,10 +62,10 @@ export default function Main_quiz_list() {
                 if(response.data.hasNext)
                     response.data.quizzes.pop();
                 setQuiz(prev => [...prev, response.data.quizzes]);
-                setnextPageNum(response.data.nextPageNum);
+                setNextPageNum(response.data.nextPageNum);
                 setHasNext(response.data.hasNext);
             }).catch(err => {
-            alert("검색 결과가 없습니다.");
+                handleError(err)
         })
         setLoading(false)
     }
@@ -74,6 +75,14 @@ export default function Main_quiz_list() {
             searchMore()
         }
     }, [inView])
+    useEffect(() => {
+        if (!getAccessToken() && getRefreshToken()) {
+            autoLogin();
+        }
+    }, [])
+    useEffect(() => {
+        searchQuiz()
+    }, [searchCondition])
 
     return <>
         <My_Navbar></My_Navbar>

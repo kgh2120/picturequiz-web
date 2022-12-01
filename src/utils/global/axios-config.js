@@ -16,3 +16,7 @@ export const tokenAxios = axios.create({
         "Authorization" : `Bearer ${sessionStorage.getItem("access-token")}`
     }
 })
+
+export const healthCheck = async () => {
+    return await baseAxios.get(`/healthCheck`)
+}
