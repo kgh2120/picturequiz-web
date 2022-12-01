@@ -1,0 +1,11 @@
+.search_container{
+    margin-top: 20px;
+}
+
+
+@media (max-width: 576px){
+    .small-font-btn{
+        font-size: 15px;
+    }
+}
+

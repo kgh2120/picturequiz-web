@@ -1,0 +1,22 @@
+.nav_area{
+    background-color: var(--sub);
+    color: #FFFFFF;
+}
+.nav_logo{
+    font-family: 'Nabla', cursive;
+}
+.nav_userform_icon{
+
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+.nav_text_korean{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.cus-nav{
+    color: #FFFFFF;
+}
+.cus-nav:hover{
+    color: var(--main);
+}

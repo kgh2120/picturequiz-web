@@ -1,0 +1,19 @@
+.tag_area{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.tag{
+    display: flex;
+    border-radius: 5px;
+    align-items: center;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    height: 20px;
+}
+.tag:hover{
+    cursor: pointer;
+}
+.tag_icon{
+    margin-left: 5px;
+}
