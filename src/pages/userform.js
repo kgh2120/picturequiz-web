@@ -76,18 +76,21 @@ export default function Userform({_mode}) {
 
     async function signIn() {
         if(validatePassword(pwd) && validateId(id)){
-            const response = await baseAxios.post("/signUp",
-                {
-                    loginId: id,
-                    password: pwd
-                }).then(() => {
-                clearInput();
-                alert("회원가입이 완료되었습니다.")
 
-                navigate("/")
-            }).catch(error => {
-                handleError(error);
-            })
+            baseAxios.get(`/user/id?id=${id}`)
+                .then(() => {
+                    baseAxios.post("/signUp",
+                        {
+                            loginId: id,
+                            password: pwd
+                        }).then(() => {
+                        clearInput();
+                        alert("회원가입이 완료되었습니다.")
+                        navigate("/")
+                    }).catch(error => {
+                        handleError(error);
+                    })
+                }).catch(err => {handleError(err)})
         }else{
             alert("입력하신 ID, 비밀번호를 확인해주세요")
         }
