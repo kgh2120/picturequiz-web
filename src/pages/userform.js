@@ -10,6 +10,7 @@ import {saveTokens} from "../utils/global/token";
 import FindIdModal from "../component/form/find-id-modal";
 import TemporaryPasswordModal from "../component/form/temporary-password-modal";
 import {handleError} from "../utils/global/exception/global-exception-handler";
+import {nav_home, nav_signup} from "../utils/global/url";
 
 
 export default function Userform({_mode}) {
@@ -63,10 +64,10 @@ export default function Userform({_mode}) {
                 })
                 .then((res) => {
                     saveTokens(res.headers["access-token"], res.headers["refresh-token"])
-                    navigate("/")
+                    navigate("/",{replace: true})
                 })
                 .catch(error => {
-                    console.log(error)
+
                     handleError(error);
                 })
         }else{
@@ -86,7 +87,7 @@ export default function Userform({_mode}) {
                         }).then(() => {
                         clearInput();
                         alert("회원가입이 완료되었습니다.")
-                        navigate("/")
+                        navigate(nav_home(),{replace: true})
                     }).catch(error => {
                         handleError(error);
                     })
@@ -127,7 +128,7 @@ export default function Userform({_mode}) {
                         <button onClick={login} className={"userform_form_input userform_form_login_btn find_btn"}
                                 role={"button"}>로그인
                         </button>
-                        <Button variant={"warning"} size={"sm"} href={"/signUp"}
+                        <Button variant={"warning"} size={"sm"} href={nav_signup()}
                                 className={"userform_form_signup_move_btn"}>계정 생성</Button>
                         <div className={"userform_form_input flex-box justify-content-center userform_find_area"}>
                             <div className={" find_id_area find_btn"} onClick={handleFindIdModal}>아이디 찾기</div>
