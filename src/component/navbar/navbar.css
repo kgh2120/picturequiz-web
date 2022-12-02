@@ -5,6 +5,9 @@
 .nav_logo{
     font-family: 'Nabla', cursive;
 }
+.nav_logo{
+    cursor: pointer;
+}
 .nav_userform_icon{
 
     margin-left: 15px;

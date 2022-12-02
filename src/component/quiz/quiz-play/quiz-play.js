@@ -1,10 +1,10 @@
 import My_Navbar from "../../navbar/my_Navbar";
 import {useLocation} from "react-router";
 import {useEffect, useState} from "react";
-import {baseAxios, tokenAxios} from "../../../utils/global/axios-config";
+import {baseAxios} from "../../../utils/global/axios-config";
 import AnswerModal from "./answer-modal";
-import Container from "react-bootstrap/Container";
 import {handleError} from "../../../utils/global/exception/global-exception-handler";
+
 export default function QuizPlay() {
 
     const [id, setId] = useState()
@@ -15,7 +15,6 @@ export default function QuizPlay() {
 
 
     useEffect(() => {
-        console.log(location);
         if (location.state !== null) {
             setId(location.state.id);
             loadImage(location.state.id);
@@ -25,7 +24,6 @@ export default function QuizPlay() {
     const loadImage = (stateId) =>{
         baseAxios.post(`/quiz/${stateId}`)
             .then(response =>{
-                console.log(response.data)
                 setUrl(response.data.url);
                 setCharacterName(response.data.characterName);
             }).catch(err => {

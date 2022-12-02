@@ -10,7 +10,7 @@ import PrivateRoute from "./component/route/private-route";
 function App() {
   return (
     <div >
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path={"/"} element={<Main_quiz_list/>}/>
             <Route path={"/login"} element={<Userform _mode={"login"}/>}></Route>
