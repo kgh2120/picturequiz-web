@@ -31,6 +31,9 @@ input[type="file"] {
     display: flex;
 
 }
+.flex-end{
+    justify-content: end;
+}
 .thumnail{
     width: 100%;
     height: 100%;

@@ -4,7 +4,7 @@ import Tag from "../tag/tag";
 import {useNavigate} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faComment, faPlay, faTrashCan, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
-export default function QuizBlock({characterName, tags, quiz_id, img_url, mine}) {
+export default function QuizBlock({characterName, tags, quiz_id, img_url, mine, createModal}) {
 
     const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ export default function QuizBlock({characterName, tags, quiz_id, img_url, mine})
 
         if(mine)
             return <Button variant={"danger"} href="#" className="block_btn_area w-30"><FontAwesomeIcon icon={faTrashCan}/></Button>;
-        return <Button variant={"danger"} href="#" className="block_btn_area w-30"><FontAwesomeIcon icon={faTriangleExclamation}/></Button>
+        return <Button onClick={createModal} variant={"danger"} href="#" className="block_btn_area w-30"><FontAwesomeIcon icon={faTriangleExclamation}/></Button>
 
 
     }
