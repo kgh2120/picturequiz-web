@@ -87,7 +87,7 @@ export default function Main_quiz_list() {
     return <>
         <My_Navbar></My_Navbar>
         <QuizSearchBlock _setSearchCondition={setSearchCondition}></QuizSearchBlock>
-        <QuizList _ref={ref} _quiz={quiz}></QuizList>
+        <QuizList _ref={ref} _quiz={quiz} _mine={false}></QuizList>
 
     </>
 }

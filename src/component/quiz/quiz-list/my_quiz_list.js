@@ -50,6 +50,6 @@ export default function MyQuizList() {
         <Container className={"mt-3"}>
             <h4>내가 만든 퀴즈</h4>
         </Container>
-        <QuizList _ref={ref} _quiz={quiz}></QuizList>
+        <QuizList _ref={ref} _quiz={quiz} _mine={true}></QuizList>
     </>
 }
