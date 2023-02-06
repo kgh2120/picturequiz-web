@@ -2,7 +2,9 @@
 import {Card, Button} from "react-bootstrap";
 import Tag from "../tag/tag";
 import {useNavigate} from "react-router-dom";
-export default function QuizBlock({characterName, tags, quiz_id, img_url}) {
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faComment, faPlay, faTrashCan, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
+export default function QuizBlock({characterName, tags, quiz_id, img_url, mine}) {
 
     const navigate = useNavigate();
 
@@ -15,6 +17,14 @@ export default function QuizBlock({characterName, tags, quiz_id, img_url}) {
         })
     }
 
+    const lastButton = () => {
+
+        if(mine)
+            return <Button variant={"danger"} href="#" className="block_btn_area w-30"><FontAwesomeIcon icon={faTrashCan}/></Button>;
+        return <Button variant={"danger"} href="#" className="block_btn_area w-30"><FontAwesomeIcon icon={faTriangleExclamation}/></Button>
+
+
+    }
 
     return <>
 
@@ -37,8 +47,9 @@ export default function QuizBlock({characterName, tags, quiz_id, img_url}) {
                     })}
                 </div>
                 <div className="block_btn_area row-cus">
-                    <Button onClick={play_quiz} variant={"success"} href="#" className="block_btn_area w-45 ">시작하기</Button>
-                    <Button variant={"warning"} href="#" className="block_btn_area w-45">커뮤니티</Button>
+                    <Button onClick={play_quiz} variant={"success"} href="#" className="block_btn_area w-30 "><FontAwesomeIcon icon={faPlay}/></Button>
+                    <Button variant={"warning"} href="#" className="block_btn_area w-30"><FontAwesomeIcon icon={faComment}/></Button>
+                    {lastButton()}
                 </div>
             </Card.Body>
         </Card>
