@@ -37,3 +37,12 @@ export const GRAPH_TYPE = {
         kor : "신고"
     }
 }
+
+export const ADMIN_MODE = {
+    DASH_BOARD : "DASH_BOARD",
+    ADMIN_LIST : "ADMIN_LIST",
+    ADMIN_CREATE : "ADMIN_CREATE",
+    REPORT_LIST : "REPORT_LIST",
+    REPORT_TARGET_LIST : "REPORT_TARGET_LIST",
+    MEMBER_LIST : "MEMBER_LIST"
+}

@@ -2,7 +2,7 @@
     width: 225px;
     background : #456BD8;
     height: 100vh;
-    padding: 20px;
+    padding: 30px;
     font-family: 'Noto Sans KR','Ubuntu', sans-serif;
 }
 .admin-logo-area{
@@ -30,7 +30,7 @@
     margin: 50px auto;
 }
 .top-space{
-    padding-top: 50px;
+    padding-top: 20px;
     font-family: 'Noto Sans KR','Ubuntu', sans-serif;
 }
 .w-90{
@@ -38,4 +38,11 @@
 }
 .insite-title{
     font-size: 28px;
+}
+th, td{
+    text-align: center;
+
+}
+td{
+    valign: center;
 }

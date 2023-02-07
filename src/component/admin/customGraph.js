@@ -18,6 +18,9 @@ export default function CustomGraph({type,date}){
 
     useEffect(() => {
 
+        if(date === undefined)
+            return;
+
         tokenAxios.get(`/admin/${type.eng}?date=${date}`)
             .then(res => {
                 const keys = Object.keys(res.data.createCount);
@@ -26,10 +29,8 @@ export default function CustomGraph({type,date}){
                 let i = 0;
                 for (const key of keys) {
                     array[i++]=res.data.createCount[key];
-
                 }
                 setCount(array);
-
             })
 
     },[date])
