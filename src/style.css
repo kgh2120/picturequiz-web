@@ -1,7 +1,6 @@
 /*@import "reset.css";*/
 @import "variable.css";
 @import url('https://fonts.googleapis.com/css2?family=Nabla&family=Noto+Sans+KR&family=Permanent+Marker&family=Ubuntu:wght@400;500&display=swap');
-
 @import "component/navbar/navbar.css";
 @import "component/form/userform.css";
 @import "pages/mypage.css";
@@ -12,3 +11,4 @@
 @import "component/quiz/quiz-list/searchBlock.css";
 @import "component/quiz/quiz-list/quiz-list.css";
 @import "component/quiz/quiz-list/quiz_block.css";
+@import "component/admin/admin.css";

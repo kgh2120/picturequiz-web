@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import "./utils/sb-admin-2.min.css"
 import 'bootstrap/dist/css/bootstrap.css'
 import "./style.css"
 import axios from "axios";
