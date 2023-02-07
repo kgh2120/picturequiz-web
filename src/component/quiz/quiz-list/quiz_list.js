@@ -32,6 +32,5 @@ export default function QuizList({_quiz , _setQuiz, _ref, _mine}) {
             <p ref={_ref}></p>
         </Container>
         <ReportModal _show={show} _setShow={setShow} _targetType={TARGET_TYPE.QUIZ} _targetId={targetId} />
-
     </>
 }

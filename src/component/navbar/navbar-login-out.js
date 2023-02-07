@@ -18,7 +18,7 @@ export default function NavbarLoginOut({_mode, _setMode}) {
             <>
             <div className={"navbar_user_area"} >
                 <FontAwesomeIcon icon={faCircleInfo} />
-                <Link to={"/my-page"}><span className={"navbar_user_area_info"}>내 정보</span></Link>
+                <Link to={"/my-pagenum"}><span className={"navbar_user_area_info"}>내 정보</span></Link>
             </div>
             <div className={"navbar_user_area"}>
                 <FontAwesomeIcon icon={faSignIn} />

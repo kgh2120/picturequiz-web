@@ -8,9 +8,18 @@ export default function QuizBlock({characterName, tags, quiz_id, img_url, mine, 
 
     const navigate = useNavigate();
 
-    const play_quiz = () => {
 
+
+    const play_quiz = () => {
         navigate('/quiz/play',{
+            state : {
+                id : quiz_id
+            }
+        })
+    }
+
+    const move_community = () => {
+        navigate('/community',{
             state : {
                 id : quiz_id
             }
@@ -48,7 +57,7 @@ export default function QuizBlock({characterName, tags, quiz_id, img_url, mine, 
                 </div>
                 <div className="block_btn_area row-cus">
                     <Button onClick={play_quiz} variant={"success"} href="#" className="block_btn_area w-30 "><FontAwesomeIcon icon={faPlay}/></Button>
-                    <Button variant={"warning"} href="#" className="block_btn_area w-30"><FontAwesomeIcon icon={faComment}/></Button>
+                    <Button variant={"warning"} onClick={move_community} className="block_btn_area w-30"><FontAwesomeIcon icon={faComment}/></Button>
                     {lastButton()}
                 </div>
             </Card.Body>
