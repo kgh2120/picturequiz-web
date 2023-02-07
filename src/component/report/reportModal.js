@@ -43,7 +43,7 @@ export default function ReportModal({_show, _setShow,_targetId, _targetType}){
                    keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>퀴즈 신고</Modal.Title>
+                    <Modal.Title>{_targetType === TARGET_TYPE.QUIZ ? "퀴즈 신고" : "댓글 신고"}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={sendReport}>

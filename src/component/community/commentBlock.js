@@ -5,7 +5,7 @@ import CommentContent from "./commentContent";
 import CommentForm from "./commentForm";
 import {useState} from "react";
 
-export default function CommentBlock({reload, quizId, comment, _setFormId, _formId}){
+export default function CommentBlock({reportAction,reload, quizId, comment, _setFormId, _formId}){
 
     const isParent = comment.parentId === null;
     const showCommentForm = () => {
@@ -18,7 +18,7 @@ export default function CommentBlock({reload, quizId, comment, _setFormId, _form
     function createBlock(){
         if (isParent) {
             return    <div>
-                <CommentContent isParent={true} onClick ={showCommentForm} comment={comment}/>
+                <CommentContent reportAction={reportAction} isParent={true} onClick ={showCommentForm} comment={comment}/>
                 {
                     _formId === comment.commentId ?
                         <CommentForm _setFormId={_setFormId} reload={reload} quizId={quizId} parentId={comment.commentId}/>
@@ -30,7 +30,7 @@ export default function CommentBlock({reload, quizId, comment, _setFormId, _form
             return <>
                 <div className={"flex-box align-items-center"}>
                     <div className={"child_angle_area"}><FontAwesomeIcon icon={faAnglesRight} className={"child_angle"}/></div>
-                    <div className={"child_block mt-2"}><CommentContent isParnet={false} comment={comment}/></div>
+                    <div className={"child_block mt-2"}><CommentContent  reportAction={reportAction} isParnet={false} comment={comment}/></div>
                 </div>
                 <hr/>
             </>;

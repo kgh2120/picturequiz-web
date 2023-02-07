@@ -5,6 +5,8 @@ import CommentBlock from "./commentBlock";
 import {getAccessToken} from "../../utils/global/token";
 import PageNum from "./pageNum";
 import CommentForm from "./commentForm";
+import {TARGET_TYPE} from "../../utils/constants";
+import ReportModal from "../report/reportModal";
 
 export default function CommunityCommentBlock({id}) {
 
@@ -63,11 +65,18 @@ export default function CommunityCommentBlock({id}) {
         retrieveComments(contents.nextPage);
     }
 
+    const [show,setShow] = useState(false);
+    const [targetId, setTargetId] = useState("");
+    const createModal = (targetId) =>{
+        setTargetId(targetId);
+        setShow(true);
+    }
+
     return (
         <>
             <div>
                 {contents.comments.map(c => {
-                    return <CommentBlock reload={reloadCurrentPage} quizId={id} _formId={formId} _setFormId={setFormId} comment={c}/>
+                    return <CommentBlock reportAction={() => createModal(c.commentId)} reload={reloadCurrentPage} quizId={id} _formId={formId} _setFormId={setFormId} comment={c}/>
                 })}
                 <PageNum currentPage={contents.currentPage + 1} lastPage={contents.lastPage + 1}
                          retrievePrevPage={retrievePrevPage} retrieveNextPage={retrieveNextPage}/>
@@ -75,6 +84,7 @@ export default function CommunityCommentBlock({id}) {
                     <CommentForm reload={reloadCurrentPage} quizId={id}/>
                 </div>
             </div>
+            <ReportModal _show={show} _setShow={setShow} _targetType={TARGET_TYPE.COMMENT} _targetId={targetId} />
         </>
     )
 

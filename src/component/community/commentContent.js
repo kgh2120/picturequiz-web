@@ -1,11 +1,11 @@
 import {Col, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faRectangleXmark, faThumbsDown, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
+import {faRectangleXmark, faThumbsDown, faThumbsUp, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 import {useEffect, useState} from "react";
 import {tokenAxios} from "../../utils/global/axios-config";
 import {handleError} from "../../utils/global/exception/global-exception-handler";
 
-export default function CommentContent({isParent, comment, onClick}){
+export default function CommentContent({reportAction, isParent, comment, onClick}){
 
     const [recommended, setRecommended] = useState();
     const [notRecommended, setNotRecommended] = useState();
@@ -58,7 +58,8 @@ export default function CommentContent({isParent, comment, onClick}){
 
     const deleteComment = () => {
 
-        if(!confirm("정말 댓글을 삭제하시겠습니까?"))
+
+        if(!window.confirm("정말 댓글을 삭제하시겠습니까?"))
             return;
         tokenAxios.delete(`/comments/${comment.commentId}`)
             .catch((err) => handleError(err));
@@ -68,7 +69,11 @@ export default function CommentContent({isParent, comment, onClick}){
             <Row key={comment.commentId} className={"mt-2 align-items-center"}>
                 <div className={"flex-box justify-content-between"}>
                     <span>{comment.authorNickname}</span>
-                    <span><span className={"m-2"}>{comment.createdDateTime}</span><FontAwesomeIcon onClick={deleteComment} className={"comment_delete pointer"} icon={faRectangleXmark}/> </span>
+                    <span>
+                        <span className={"m-2"}>{comment.createdDateTime}</span>
+                        <FontAwesomeIcon onClick={deleteComment} className={"comment_delete pointer"} icon={faRectangleXmark}/>
+                        <FontAwesomeIcon onClick={reportAction} className={"pointer"} icon={faTriangleExclamation}/>
+                    </span>
                 </div>
                 <Col>
                     {isParent ? <div className={"pointer"} onClick={onClick}>{comment.content}</div> :
