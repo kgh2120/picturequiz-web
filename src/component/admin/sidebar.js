@@ -1,12 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {
-    faBullhorn,
-    faCamera,
-    faChevronRight,
-    faClipboard,
-    faUser,
-    faUserSecret
-} from "@fortawesome/free-solid-svg-icons";
+import {faBullhorn, faClipboard, faUser, faUserSecret} from "@fortawesome/free-solid-svg-icons";
 import {Dropdown} from "react-bootstrap";
 
 export default function SideBar(){
@@ -16,7 +9,7 @@ export default function SideBar(){
 
             {/* Logo Area*/}
             <div className={"admin-logo-area"}>
-                <div className={'admin-logo-text'}>Picture-Quiz Admin</div>
+                <div className={'admin-logo-text'}>Admin Page</div>
             </div>
             <hr className={"admin-hr"}/>
 
