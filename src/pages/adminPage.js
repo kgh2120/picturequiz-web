@@ -4,6 +4,7 @@ import {Col, Row} from "react-bootstrap";
 import {useState} from "react";
 import {ADMIN_MODE} from "../utils/constants";
 import AdminList from "../component/admin/adminList";
+import AdminCreate from "../component/admin/adminCreate";
 
 export default function AdminPage() {
 
@@ -16,7 +17,7 @@ export default function AdminPage() {
             case ADMIN_MODE.ADMIN_LIST:
                 return <AdminList/>;
             case ADMIN_MODE.ADMIN_CREATE:
-                return null;
+                return <AdminCreate _setMode={setMode}/>;
             case ADMIN_MODE.REPORT_LIST:
                 return null;
             case ADMIN_MODE.REPORT_TARGET_LIST:
@@ -28,18 +29,12 @@ export default function AdminPage() {
 
     return (
         <>
-
         <Row>
-
             <SideBar _setMode={setMode}/>
-
             <Col >
                 {createContent()}
             </Col>
         </Row>
-
-
-
         </>
 )
 }

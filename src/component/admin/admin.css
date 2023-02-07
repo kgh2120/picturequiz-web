@@ -46,3 +46,13 @@ th, td{
 td{
     valign: center;
 }
+.admin_create_btn{
+    background-color: #6193DB;
+}
+.admin_create_title{
+    font-size: 32px;
+    font-family: 'Noto Sans KR','Ubuntu', sans-serif;
+}
+.font{
+    font-family: 'Noto Sans KR','Ubuntu', sans-serif;
+}

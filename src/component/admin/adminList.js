@@ -44,7 +44,7 @@ export default function AdminList(){
             <tbody>
             {admins.map(a => {
                 return <tr>
-                    <td>#</td>
+                    <td>{a.nickName.charAt(a.nickName.length -1)}</td>
                     <td>{a.loginId}</td>
                     <td>{a.nickName}</td>
                     <td>{a.createdAt}</td>
@@ -52,7 +52,6 @@ export default function AdminList(){
                 </tr>
             })}
             </tbody>
-
         </Table>
         </div>
         </>
