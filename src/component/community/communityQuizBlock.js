@@ -55,13 +55,13 @@ export default function CommunityQuizBlock({id}){
         <>
         <div>
             <div className={"card_block"}>
-                {tag_field}
                 <img className={"card_img"} src={quiz.pictureUrl}/>
             </div>
             <Form.Control
                 readOnly={true}
                 value={quiz.characterName}
             />
+            {tag_field()}
             <div>
                 <Button onClick={play_quiz} variant={"success"} href="#" className="block_btn_area w-100 "><FontAwesomeIcon icon={faPlay}/></Button>
             </div>
