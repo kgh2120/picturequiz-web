@@ -21,7 +21,7 @@ export const TARGET_TYPE = {
 
 export const GRAPH_TYPE = {
     MEMBER : {
-        eng : "member",
+        eng : "members",
         kor : "회원"
     },
     QUIZ : {
@@ -29,11 +29,11 @@ export const GRAPH_TYPE = {
         kor : "퀴즈"
     },
     COMMENT : {
-        eng : "comment",
+        eng : "comments",
         kor : "댓글"
     },
     REPORT : {
-        eng : "report",
+        eng : "reports",
         kor : "신고"
     }
 }
