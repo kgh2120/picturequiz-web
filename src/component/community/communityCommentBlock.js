@@ -5,7 +5,7 @@ import CommentBlock from "./commentBlock";
 import {getAccessToken} from "../../utils/global/token";
 import PageNum from "./pageNum";
 import CommentForm from "./commentForm";
-import {MEMBER_ORDER, TARGET_TYPE} from "../../utils/constants";
+import {ORDER_COND, TARGET_TYPE} from "../../utils/constants";
 import ReportModal from "../report/reportModal";
 
 export default function CommunityCommentBlock({id}) {

@@ -1,30 +1,28 @@
+import {Form, Table} from "react-bootstrap";
+import {ORDER_COND, QUIZ_REPORT_TYPE, TARGET_TYPE} from "../../utils/constants";
+import PageNum from "../community/pageNum";
 import {useEffect, useState} from "react";
 import {tokenAxios} from "../../utils/global/axios-config";
 import {handleError} from "../../utils/global/exception/global-exception-handler";
-import {Form, Table} from "react-bootstrap";
-import {ORDER_COND} from "../../utils/constants";
-import PageNum from "../community/pageNum";
 
-export default function MemberList(){
+export default function ReportList(){
 
     const [paging,setPaging] = useState({
-        members: [],
+        reports: [],
         currentPage : 0,
         nextPage : 0,
         lastPage : 0,
     });
     const[order,setOrder] = useState(ORDER_COND.RECENT);
+    const[filter,setFilter] = useState(TARGET_TYPE.ALL);
 
 
-    function retrieveMembers(num) {
-        tokenAxios.post("/admin/members",
-            {
-                pageNum: num,
-                orderCondition: order
-            })
+    function retrieveReports(num) {
+        tokenAxios.get(`/admin/reports/${filter}?pageNum=${num}&order=${order}`,
+)
             .then(res => {
                 setPaging({
-                    members: res.data.members,
+                    reports: res.data.reports,
                     currentPage: res.data.currentPage,
                     nextPage: res.data.nextPage,
                     lastPage: res.data.lastPage
@@ -34,7 +32,7 @@ export default function MemberList(){
 
     useEffect(()=>{
 
-        retrieveMembers(0);
+        retrieveReports(0);
     },[order])
 
     const orderCondChanged = (e) =>{
@@ -44,54 +42,46 @@ export default function MemberList(){
     const retrievePrevPage = () => {
         if(paging.currentPage - 1 < 0)
             return;
-        retrieveMembers(paging.currentPage - 1);
+        retrieveReports(paging.currentPage - 1);
     }
 
     const reloadCurrentPage = () => {
-        retrieveMembers(paging.currentPage);
+        retrieveReports(paging.currentPage);
     }
 
     const retrieveNextPage = () => {
         if (paging.lastPage < paging.nextPage)
             return;
-        retrieveMembers(paging.nextPage);
+        retrieveReports(paging.nextPage);
     }
 
     return (
         <>
             <div className={"top-space"}>
                 <div className={"insite-title flex-box justify-content-center align-items-center mb-3 "}>
-                    <span className={"mr-5"}>회원 목록</span>
+                    <span className={"mr-5"}>신고 목록</span>
                     <Form.Select onChange={orderCondChanged} className={"col-2"}>
                         <option value={ORDER_COND.RECENT}>최신순</option>
                         <option value={ORDER_COND.OLDER}>오래된순</option>
-                        <option value={ORDER_COND.QUIZ_DESC}>퀴즈 많은 순</option>
-                        <option value={ORDER_COND.QUIZ_ASC}>퀴즈 적은 순</option>
-                        <option value={ORDER_COND.COMMENT_DESC}>댓글 많은 순</option>
-                        <option value={ORDER_COND.COMMENT_ASC}>댓글 적은 순</option>
                     </Form.Select>
                 </div>
 
-                <Table striped bordered hover>
+                <Table  striped bordered hover>
                     <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>닉네임</th>
-                            <th>이메일</th>
-                            <th>퀴즈(개)</th>
-                            <th>댓글(개)</th>
-                            <th>생성일</th>
-                        </tr>
+                    <tr>
+                        <th>신고자</th>
+                        <th>종류</th>
+                        <th>신고 타입</th>
+                        <th>내용</th>
+                    </tr>
                     </thead>
                     <tbody>
-                    {paging.members.map(m => {
+                    {paging.reports.map(r => {
                         return <tr>
-                            <td>{m.memberId}</td>
-                            <td>{m.nickname === null ? "익명" : m.nickname}</td>
-                            <td>{m.mail === null?  "미등록" : m.mail}</td>
-                            <td>{m.nofQuiz}개</td>
-                            <td>{m.nofComment}개</td>
-                            <td>{m.createdDate}</td>
+                            <td>{r.reporterNickname === null ? "익명" : r.reporterNickname}</td>
+                            <td>{r.targetType}</td>
+                            <td>{r.reportType}</td>
+                            <td>{r.desc === "" ? "[없음]" : r.desc}</td>
                         </tr>
                     })}
                     </tbody>
@@ -99,6 +89,8 @@ export default function MemberList(){
                 <PageNum currentPage={paging.currentPage + 1} lastPage={paging.lastPage + 1}
                          retrievePrevPage={retrievePrevPage} retrieveNextPage={retrieveNextPage}/>
             </div>
+
         </>
     )
+
 }

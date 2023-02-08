@@ -16,7 +16,7 @@ export const COMMENT_REPORT_TYPE = [
 ]
 
 export const TARGET_TYPE = {
-    QUIZ: "QUIZ", COMMENT: "COMMENT"
+    QUIZ: "QUIZ", COMMENT: "COMMENT", ALL: "ALL"
 }
 
 export const GRAPH_TYPE = {
@@ -47,7 +47,7 @@ export const ADMIN_MODE = {
     MEMBER_LIST: "MEMBER_LIST"
 }
 
-export const MEMBER_ORDER = {
+export const ORDER_COND = {
     OLDER: "OLDER",
     RECENT: "RECENT",
     QUIZ_DESC: "QUIZ_DESC",
