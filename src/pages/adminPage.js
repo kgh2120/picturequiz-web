@@ -5,6 +5,7 @@ import {useState} from "react";
 import {ADMIN_MODE} from "../utils/constants";
 import AdminList from "../component/admin/adminList";
 import AdminCreate from "../component/admin/adminCreate";
+import MemberList from "../component/admin/memberList";
 
 export default function AdminPage() {
 
@@ -23,7 +24,7 @@ export default function AdminPage() {
             case ADMIN_MODE.REPORT_TARGET_LIST:
                 return null;
             case ADMIN_MODE.MEMBER_LIST:
-                return null;
+                return <MemberList/>;
         }
     }
 

@@ -5,12 +5,13 @@ import CommentBlock from "./commentBlock";
 import {getAccessToken} from "../../utils/global/token";
 import PageNum from "./pageNum";
 import CommentForm from "./commentForm";
-import {TARGET_TYPE} from "../../utils/constants";
+import {MEMBER_ORDER, TARGET_TYPE} from "../../utils/constants";
 import ReportModal from "../report/reportModal";
 
 export default function CommunityCommentBlock({id}) {
 
     const [formId,setFormId] = useState("");
+
 
     const [contents, setContents] = useState(
         {
