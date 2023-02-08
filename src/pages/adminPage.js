@@ -7,6 +7,7 @@ import AdminList from "../component/admin/adminList";
 import AdminCreate from "../component/admin/adminCreate";
 import MemberList from "../component/admin/memberList";
 import ReportList from "../component/admin/reportList";
+import ReportTargetList from "../component/admin/reportTargetList";
 
 export default function AdminPage() {
 
@@ -23,7 +24,7 @@ export default function AdminPage() {
             case ADMIN_MODE.REPORT_LIST:
                 return <ReportList/>;
             case ADMIN_MODE.REPORT_TARGET_LIST:
-                return null;
+                return <ReportTargetList/>;
             case ADMIN_MODE.MEMBER_LIST:
                 return <MemberList/>;
         }

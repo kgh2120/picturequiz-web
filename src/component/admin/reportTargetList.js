@@ -1,28 +1,29 @@
-import {Form, Table} from "react-bootstrap";
-import {ORDER_COND, QUIZ_REPORT_TYPE, TARGET_TYPE} from "../../utils/constants";
-import PageNum from "../community/pageNum";
 import {useEffect, useState} from "react";
+import {ORDER_COND, TARGET_TYPE} from "../../utils/constants";
 import {tokenAxios} from "../../utils/global/axios-config";
 import {handleError} from "../../utils/global/exception/global-exception-handler";
+import {Button, Form, Table} from "react-bootstrap";
+import PageNum from "../community/pageNum";
 
-export default function ReportList(){
-
+export default function ReportTargetList(){
     const [paging,setPaging] = useState({
-        reports: [],
+        targets: [],
         currentPage : 0,
         nextPage : 0,
         lastPage : 0,
     });
     const[order,setOrder] = useState(ORDER_COND.RECENT);
     const[filter,setFilter] = useState(TARGET_TYPE.ALL);
+    const[min, setMin] = useState(0);
 
 
     function retrieveReports(num) {
-        tokenAxios.get(`/admin/reports/${filter}?pageNum=${num}&order=${order}`,
-)
+        tokenAxios.get(`/admin/reports/target/${filter}?pageNum=${num}&order=${order}
+        &min=${min}`,
+        )
             .then(res => {
                 setPaging({
-                    reports: res.data.reports,
+                    targets: res.data.targets,
                     currentPage: res.data.currentPage,
                     nextPage: res.data.nextPage,
                     lastPage: res.data.lastPage
@@ -33,7 +34,7 @@ export default function ReportList(){
     useEffect(()=>{
 
         retrieveReports(0);
-    },[order, filter])
+    },[order,filter,min])
 
     const orderCondChanged = (e) =>{
         setOrder(e.target.value);
@@ -62,7 +63,7 @@ export default function ReportList(){
         <>
             <div className={"top-space"}>
                 <div className={"insite-title flex-box justify-content-center align-items-center mb-3 "}>
-                    <span className={"mr-5"}>신고 목록</span>
+                    <span className={"mr-5"}>신고 게시글 목록</span>
                     <Form.Select onChange={orderCondChanged} className={"col-1"}>
                         <option value={ORDER_COND.RECENT}>최신순</option>
                         <option value={ORDER_COND.OLDER}>오래된순</option>
@@ -72,24 +73,23 @@ export default function ReportList(){
                         <option value={TARGET_TYPE.QUIZ}>퀴즈</option>
                         <option value={TARGET_TYPE.COMMENT}>댓글</option>
                     </Form.Select>
+                    <Form.Control min={0} value={min} onChange={(e) => setMin(e.target.value)} className={"col-1"} type={"number"}/>
                 </div>
 
                 <Table  striped bordered hover>
                     <thead>
                     <tr>
-                        <th>신고자</th>
                         <th>종류</th>
-                        <th>신고 타입</th>
-                        <th>내용</th>
+                        <th>신고 수(개)</th>
+                        <th>조회</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {paging.reports.map(r => {
+                    {paging.targets.map(r => {
                         return <tr>
-                            <td>{r.reporterNickname === null ? "익명" : r.reporterNickname}</td>
                             <td>{r.targetType}</td>
-                            <td>{r.reportType}</td>
-                            <td>{r.desc === "" ? "[없음]" : r.desc}</td>
+                            <td>{r.nofReports}</td>
+                            <td><Button size={"sm"} onClick={() => alert(r.targetId)}>조회</Button></td>
                         </tr>
                     })}
                     </tbody>
@@ -100,5 +100,4 @@ export default function ReportList(){
 
         </>
     )
-
 }
