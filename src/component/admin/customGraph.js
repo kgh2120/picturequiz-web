@@ -1,6 +1,7 @@
 import {CategoryScale, Chart, Legend, LinearScale, LineElement, PointElement, Title, Tooltip} from "chart.js";
 import {Line} from "react-chartjs-2";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import {tokenAxios} from "../../utils/global/axios-config";
 
 Chart.register( CategoryScale,
     LinearScale,
@@ -12,17 +13,37 @@ Chart.register( CategoryScale,
 
 export default function CustomGraph({type,date}){
 
+    const [label, setLabel] = useState();
+    const [count,setCount] = useState();
 
+    useEffect(() => {
+
+        if(date === undefined)
+            return;
+
+        tokenAxios.get(`/admin/${type.eng}?date=${date}`)
+            .then(res => {
+                const keys = Object.keys(res.data.createCount);
+                setLabel(keys);
+                let array = [];
+                let i = 0;
+                for (const key of keys) {
+                    array[i++]=res.data.createCount[key];
+                }
+                setCount(array);
+            })
+
+    },[date])
 
 
 
     const data = {
-        labels : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels :label,
         datasets: [
             {
                 label: `신규 ${type.kor} 수`,
                 borderColor: 'rgb(54, 162, 235)',
-                data: [10, 90, 20, 3, 5 ,9 ,52],
+                data: count,
             }
         ],
     };
@@ -36,8 +57,6 @@ export default function CustomGraph({type,date}){
             },
         },
     };
-
-
     return(
         <>
             <Line data={data} options={options}/>

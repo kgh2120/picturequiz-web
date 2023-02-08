@@ -1,12 +1,19 @@
 import {Col, Form, Row} from "react-bootstrap";
 import CustomGraph from "./customGraph";
 import {GRAPH_TYPE} from "../../utils/constants";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 export default function Dashboard() {
 
     const [date,setDate] = useState();
+    useEffect(() => {
+        let now = new Date();
+        let year = now.getFullYear(); // 년도
+        let month = now.getMonth() + 1 < 10 ? "0" + (now.getMonth() + 1) : now.getMonth() + 1;  // 월
+        let days = now.getDate() < 10 ? "0" + now.getDate() : now.getDate();
+        setDate(year + '-' + month + '-' + days);
+    },[])
 
 
     const changed = (event) => {
@@ -18,8 +25,8 @@ export default function Dashboard() {
 
             <div className={"top-space"}>
                 <div className={"insite-title flex-box justify-content-center align-items-center"}>
-                    <span>기간 별 생성 수</span>
-                    <Form.Control value={date} onChange={changed} type={"date"} className={"col-2"}/>
+                    <span className={"mr-5"}>기간 별 생성 수</span>
+                    <Form.Control  value={date} onChange={changed} type={"date"} className={"col-2"}/>
                 </div>
                 <Row className={"w-90 m-0 m-auto justify-content-between"}>
                     <Col lg={6}>
@@ -28,7 +35,7 @@ export default function Dashboard() {
                         </div>
                     </Col>
                     <Col lg={6}>
-                        <CustomGraph type={GRAPH_TYPE.QUIZ}/>
+                        <CustomGraph date={date} type={GRAPH_TYPE.QUIZ}/>
                     </Col>
                 </Row>
 
@@ -36,11 +43,11 @@ export default function Dashboard() {
                 <Row className={"w-90 m-0 m-auto justify-content-between"}>
                     <Col lg={6}>
                         <div>
-                            <CustomGraph type={GRAPH_TYPE.COMMENT}/>
+                            <CustomGraph date={date} type={GRAPH_TYPE.COMMENT}/>
                         </div>
                     </Col>
                     <Col lg={6}>
-                        <CustomGraph type={GRAPH_TYPE.REPORT}/>
+                        <CustomGraph date={date} type={GRAPH_TYPE.REPORT}/>
                     </Col>
                 </Row>
             </div>

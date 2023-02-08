@@ -16,24 +16,42 @@ export const COMMENT_REPORT_TYPE = [
 ]
 
 export const TARGET_TYPE = {
-    QUIZ : "QUIZ", COMMENT : "COMMENT"
+    QUIZ: "QUIZ", COMMENT: "COMMENT", ALL: "ALL"
 }
 
 export const GRAPH_TYPE = {
-    MEMBER : {
-        eng : "member",
-        kor : "회원"
+    MEMBER: {
+        eng: "members",
+        kor: "회원"
     },
-    QUIZ : {
-        eng : "quiz",
-        kor : "퀴즈"
+    QUIZ: {
+        eng: "quiz",
+        kor: "퀴즈"
     },
-    COMMENT : {
-        eng : "comment",
-        kor : "댓글"
+    COMMENT: {
+        eng: "comments",
+        kor: "댓글"
     },
-    REPORT : {
-        eng : "report",
-        kor : "신고"
+    REPORT: {
+        eng: "reports",
+        kor: "신고"
     }
+}
+
+export const ADMIN_MODE = {
+    DASH_BOARD: "DASH_BOARD",
+    ADMIN_LIST: "ADMIN_LIST",
+    ADMIN_CREATE: "ADMIN_CREATE",
+    REPORT_LIST: "REPORT_LIST",
+    REPORT_TARGET_LIST: "REPORT_TARGET_LIST",
+    MEMBER_LIST: "MEMBER_LIST"
+}
+
+export const ORDER_COND = {
+    OLDER: "OLDER",
+    RECENT: "RECENT",
+    QUIZ_DESC: "QUIZ_DESC",
+    QUIZ_ASC: "QUIZ_ASC",
+    COMMENT_DESC:"COMMENT_DESC",
+    COMMENT_ASC:"COMMENT_ASC"
 }
