@@ -4,6 +4,8 @@ import {tokenAxios} from "../../utils/global/axios-config";
 import {handleError} from "../../utils/global/exception/global-exception-handler";
 import {Button, Form, Table} from "react-bootstrap";
 import PageNum from "../community/pageNum";
+import CommentReportModal from "./commentReportModal";
+import QuizReportModal from "./quizReportModal";
 
 export default function ReportTargetList(){
     const [paging,setPaging] = useState({
@@ -15,6 +17,10 @@ export default function ReportTargetList(){
     const[order,setOrder] = useState(ORDER_COND.RECENT);
     const[filter,setFilter] = useState(TARGET_TYPE.ALL);
     const[min, setMin] = useState(0);
+    const [commentId,setCommentId] = useState();
+    const [quizId,setQuizId] = useState();
+    const [showCommentModal, setShowCommentModal] = useState(false);
+    const [showQuizModal, setShowQuizModal] = useState(false);
 
 
     function retrieveReports(num) {
@@ -59,6 +65,18 @@ export default function ReportTargetList(){
         retrieveReports(paging.nextPage);
     }
 
+    const showModal = (id, type) => {
+        if (type === '댓글') {
+            setShowCommentModal(true);
+            setCommentId(id);
+            return;
+        }
+        setShowQuizModal(true);
+        setQuizId(id);
+
+
+    }
+
     return (
         <>
             <div className={"top-space"}>
@@ -89,7 +107,7 @@ export default function ReportTargetList(){
                         return <tr>
                             <td>{r.targetType}</td>
                             <td>{r.nofReports}</td>
-                            <td><Button size={"sm"} onClick={() => alert(r.targetId)}>조회</Button></td>
+                            <td><Button size={"sm"} onClick={() => showModal(r.targetId, r.targetType)}>조회</Button></td>
                         </tr>
                     })}
                     </tbody>
@@ -97,7 +115,8 @@ export default function ReportTargetList(){
                 <PageNum currentPage={paging.currentPage + 1} lastPage={paging.lastPage + 1}
                          retrievePrevPage={retrievePrevPage} retrieveNextPage={retrieveNextPage}/>
             </div>
-
+            <CommentReportModal commentId={commentId} _setShow={setShowCommentModal} _show={showCommentModal}/>
+            <QuizReportModal quizId={quizId} _setShow={setShowQuizModal} _show={showQuizModal} />
         </>
     )
 }
