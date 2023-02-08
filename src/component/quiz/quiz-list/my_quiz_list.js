@@ -4,33 +4,45 @@ import {useEffect, useState} from "react";
 import My_Navbar from "../../navbar/my_Navbar";
 import Container from "react-bootstrap/Container";
 import {useNavigate} from "react-router-dom";
+import {handleError} from "../../../utils/global/exception/global-exception-handler";
+import {useInView} from "react-intersection-observer";
 
 export default function MyQuizList() {
 
     const navigate = useNavigate();
+    const [ref, inView] = useInView()
+    const [hasNext, setHasNext] = useState();
     const [pageNum,setPageNum] = useState(0);
-    const [quiz, setQuiz] = useState({
-        quizzes : [],
-        nextPageNum : 0,
-        hasNext : true
-    })
+    const [loading, setLoading] = useState(false);
+    const [quiz, setQuiz] = useState([])
 
-    useEffect(() => {
+    function searchMyQuiz() {
+        setLoading(true)
         tokenAxios.get(`/quiz/my?pageNum=${pageNum}`)
             .then((response) => {
-                const result = {
-                    quizzes: response.data.quizzes,
-                    nextPageNum: response.data.nextPageNum,
-                    hasNext: response.data.hasNext
-                }
-                setQuiz(result);
+                if (response.data.hasNext)
+                    response.data.quizzes.pop();
+                setQuiz(prev => [...prev, response.data.quizzes]);
+                setPageNum(response.data.nextPageNum);
+                setHasNext(response.data.hasNext);
             }).catch(err => {
-                if(err.response.status===404) {
-                    alert("내가 업로드한 퀴즈가 없습니다. 메인 화면으로 이동합니다.")
-                    navigate("/",{replace: true});
-                }
+            handleError(err)
+            if (err.response.status === 404) {
+                navigate("/", {replace: true});
+            }
         })
+        setLoading(false)
+    }
+
+    useEffect(() => {
+        searchMyQuiz();
     }, []);
+
+    useEffect(() => {
+        if (inView && !loading && hasNext) {
+            searchMyQuiz()
+        }
+    }, [inView])
 
 
     return <>
@@ -38,6 +50,6 @@ export default function MyQuizList() {
         <Container className={"mt-3"}>
             <h4>내가 만든 퀴즈</h4>
         </Container>
-        <QuizList _quiz={quiz}></QuizList>
+        <QuizList _ref={ref} _quiz={quiz} _mine={true}></QuizList>
     </>
 }

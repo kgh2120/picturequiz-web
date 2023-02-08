@@ -11,10 +11,13 @@ import CharacterSearchForm from "./character_search_form";
 import TagSearchForm from "./tag_search_form";
 import {getAccessToken} from "../../../utils/global/token";
 import {handleConnectionError, handleFileNotFoundError} from "../../../utils/global/exception/global-exception-handler";
+import {useNavigate} from "react-router-dom";
+import {nav_home} from "../../../utils/global/url";
 
 
 export default function QuizAdd() {
 
+    const navigate = useNavigate();
     const [characterName, setCharacterName] = useState("");
     const [tags, setTags] = useState([]);
     const [tagName, setTagName] = useState("");
@@ -41,6 +44,11 @@ export default function QuizAdd() {
             alert("업로드 할 사진과, 캐릭터를 선택해주세요");
             return;
         }
+        if (file.size > 10485760) {
+            alert("업로드 할 파일은 10MB 이하로 설정해주세요");
+            return;
+        }
+        
         const body = {
             characterName,
             tagNames: tags.map(t => t.name)
@@ -60,14 +68,21 @@ export default function QuizAdd() {
             }
         ).then(() => {
             moveToMain();
-        }).catch(() => {
-                healthCheck()
-                    .catch(error => {
-                        if(error.response.status === 0)
-                            handleConnectionError(error);
-                        else
-                            handleFileNotFoundError()
-                    })
+        }).catch((err) => {
+                if (err?.response?.data?.errorMessage !== undefined) {
+                    alert(err?.response?.data?.errorMessage)
+                } else {
+                    console.log(err)
+                    healthCheck()
+                        .catch(error => {
+                            console.log(error)
+                            if (error.response.status === 0)
+                                handleConnectionError(error);
+                            else {
+                                handleFileNotFoundError();
+                            }
+                        });
+                }
             }
         )
     }
@@ -75,6 +90,11 @@ export default function QuizAdd() {
     const uploadImage = () => {
         let file = document.getElementById("input_upload");
         file.click();
+    }
+
+    function clearBox(box, beforeImg) {
+        box.removeChild(beforeImg);
+        document.getElementById("upload_icon").setAttribute("style", "display : block");
     }
 
     const changeUploadBoxImage = (e) => {
@@ -95,16 +115,25 @@ export default function QuizAdd() {
             }
             box.appendChild(img);
         }
-        if(e.target.files[0] !== undefined)
+        if (e.target.files[0] !== undefined) {
+            if(e.target.files[0].size >10485760 ){
+                const dataTranster = new DataTransfer();
+                e.target.files = dataTranster.files;
+                alert("업로드 할 파일은 10MB 이하로 설정해주세요");
+                if (beforeImg !== undefined && beforeImg !== null) {
+                    clearBox(box, beforeImg);
+                }
+                return;
+            }
             reader.readAsDataURL(e.target.files[0]);
+        }
         else {
-            box.removeChild(beforeImg);
-            document.getElementById("upload_icon").setAttribute("style", "display : block");
+            clearBox(box, beforeImg);
         }
     }
 
     const moveToMain = () => {
-        window.location.replace("/");
+        navigate(nav_home(), {replace: true});
     }
 
     return <>

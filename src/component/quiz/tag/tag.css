@@ -1,7 +1,7 @@
 .tag_area{
     display: flex;
     flex-wrap: wrap;
-
+    margin-bottom: 5px;
 }
 .tag{
     display: flex;
@@ -10,10 +10,17 @@
     margin-right: 5px;
     margin-bottom: 5px;
     height: 20px;
+    padding: 0px 5px;
 }
 .tag:hover{
     cursor: pointer;
 }
 .tag_icon{
     margin-left: 5px;
+}
+
+.comu_tag{
+    margin-right: 5px;
+    border-radius: 5px;
+    padding: 0px 5px;
 }

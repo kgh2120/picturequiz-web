@@ -5,6 +5,9 @@
 .w-45{
     width: 45%;
 }
+.w-30{
+    width: 30%;
+}
 .card_area{
     margin-top: 20px;
     margin-right: 5px;
@@ -21,8 +24,50 @@
 }
 
 
+.comment_block{
+    border-bottom: 1px solid rgba(0,0,0, 0.4);
+}
+.child_block{
+    background-color: rgba(0,0,0,0.1);
+
+    width: 100%;
+}
+.recommend_area{
+    margin-bottom: 5px;
+}
+.comment_delete{
+    margin-right : 5px;
+    color: rgba(0,0,0,0.4);
+}
+.pointer:hover{
+    cursor: pointer;
+}
+.black{
+    color : rgba(0,0,0);
+}
+.white{
+    color : rgba(0,0,0, 0.3);
+}
+.child_angle{
+    font-size: 20px;
+}
+.child_angle_area{
+    margin: 0px 20px;
+}
+.currentPageNum{
+    margin-left: 10px;
+}
+.lastPageNum{
+    margin-right: 10px;
+}
+.slash{
+    margin: 0px 5px;
+}
 
 
+.cus-font{
+    font-family: 'Noto Sans KR', sans-serif;
+}
 /*sm*/
 @media (min-width: 576px){
     .block_btn_area {
@@ -56,6 +101,10 @@
         margin: 0px 3px;
         margin-top: 20px;
         width: calc(25% - 6px);
+    }
+    .card_block{
+        height: 450px;
+        background-color: rgba(0,0,0,0.2);
     }
 }
 @media (max-width: 576px){

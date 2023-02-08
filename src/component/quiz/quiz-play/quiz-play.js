@@ -1,9 +1,10 @@
 import My_Navbar from "../../navbar/my_Navbar";
 import {useLocation} from "react-router";
 import {useEffect, useState} from "react";
-import {baseAxios, tokenAxios} from "../../../utils/global/axios-config";
+import {baseAxios} from "../../../utils/global/axios-config";
 import AnswerModal from "./answer-modal";
-import Container from "react-bootstrap/Container";
+import {handleError} from "../../../utils/global/exception/global-exception-handler";
+
 export default function QuizPlay() {
 
     const [id, setId] = useState()
@@ -14,7 +15,6 @@ export default function QuizPlay() {
 
 
     useEffect(() => {
-        console.log(location);
         if (location.state !== null) {
             setId(location.state.id);
             loadImage(location.state.id);
@@ -22,24 +22,35 @@ export default function QuizPlay() {
     }, [ location ])
 
     const loadImage = (stateId) =>{
-        tokenAxios.post(`/quiz/${stateId}`)
+        baseAxios.post(`/quiz/${stateId}`)
             .then(response =>{
-                console.log(response.data)
                 setUrl(response.data.url);
                 setCharacterName(response.data.characterName);
-            })
+            }).catch(err => {
+                handleError(err)
+        })
     }
 
     const showAnswer = () => {
         setShow(true);
     };
 
-    //src는 mockup용으로 세워둠.
+    const loadingImage = () => {
+        const img = document.querySelector('.quiz_img');
+        const spinner = document.querySelector('.loading_spinner');
+        img.style.display = 'block';
+        spinner.style.display = 'none';
+    }
+
+
     return<>
     <My_Navbar></My_Navbar>
     <div className="quiz_background" onClick={showAnswer}>
-        <img className="quiz_img m-0 m-auto" src={url}
+        <img onLoad={loadingImage} className="quiz_img m-0 m-auto" src={url}
              alt="..."/>
+        <div className="loading_spinner spinner-border text-light m-0 m-auto" role="status">
+            <span className="visually-hidden">Loading...</span>
+        </div>
     </div>
         <AnswerModal _show={show} _setShow={setShow} _name={characterName}></AnswerModal>
     </>

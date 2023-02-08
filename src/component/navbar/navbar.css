@@ -1,22 +1,26 @@
-.nav_area{
-    background-color: var(--sub);
-    color: #FFFFFF;
-}
-.nav_logo{
-    font-family: 'Nabla', cursive;
-}
-.nav_userform_icon{
 
-    margin-left: 15px;
-    margin-right: 10px;
-}
+    .nav_area{
+        background-color: var(--sub) !important;
+        color: #FFFFFF !important;
+    }
+    .nav_logo{
+        font-family: 'Nabla', cursive !important;
+    }
+    .nav_logo{
+        cursor: pointer !important;
+    }
+    .nav_userform_icon{
 
-.nav_text_korean{
-    font-family: 'Noto Sans KR', sans-serif;
-}
-.cus-nav{
-    color: #FFFFFF;
-}
-.cus-nav:hover{
-    color: var(--main);
-}
+        margin-left: 15px !important;
+        margin-right: 10px !important;
+    }
+
+    .nav_text_korean{
+        font-family: 'Noto Sans KR', sans-serif !important;
+    }
+    .cus-nav{
+        color: #FFFFFF !important;
+    }
+    .cus-nav:hover{
+        color: var(--main) !important;
+    }
